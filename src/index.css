@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Oswald:wght@200..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2d7fff;
+  --color-secondary: #6062ff;
+
+  --color-bg: #ffffff;
+  --color-text: #111827;
+
+  --color-dark-bg: #121212;
+  --color-dark-card: #111827;
+  --color-dark-text: #E5E7EB;
+
+  --font-cinzel: "Cinzel", serif;
+  --font-oswald: "Oswald", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+}
+
+body{
+    background: #000000;
+    color: #fff;
+    font-family: "Roboto Mono", monospace;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
