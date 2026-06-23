@@ -1,231 +1,205 @@
-import React, { useRef } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 import { ArrowRight, Play } from "lucide-react";
+import { Link } from "react-router";
 
-// ── IMAGE POOLS ──────────────────────────────────────────────────────────────
-// Replace these with your actual project screenshots
+// ── IMAGE POOLS ───────────────────────────────────────────────────────────────
+// Desktop: 4 cols (all arrays used) | Mobile: 2 cols (col1 + col2 only)
 const col1Images = [
-  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&q=80",
-  "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?w=500&q=80",
-  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80",
-  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&q=80",
-];
-const col2Images = [
-  "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=500&q=80",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80",
-  "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=500&q=80",
-  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80",
-];
-const col3Images = [
-  "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=500&q=80",
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&q=80",
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80",
-  "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=500&q=80",
-];
-const col4Images = [
-  "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=500&q=80",
-  "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=500&q=80",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=80",
-  "https://images.unsplash.com/photo-1547658719-da2b51169166?w=500&q=80",
+  "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&q=70", // Website Design
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=70", // Coding
+  "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=70", // Web Development
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=70", // Responsive Design
 ];
 
-// ── SINGLE SCROLLING COLUMN ──────────────────────────────────────────────────
-const ImageColumn = ({ images, duration = 28, direction = "down" }) => {
+const col2Images = [
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=70", // Dashboard UI
+  "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=400&q=70", // Website Mockup
+  "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=400&q=70", // Laptop Website
+  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&q=70", // Web Project
+];
+
+const col3Images = [
+  "https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&q=70", // UI Design
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&q=70", // Code Editor
+  "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400&q=70", // Programming
+  "https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?w=400&q=70", // Macbook Website
+];
+
+const col4Images = [
+  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=70", // Frontend Dev
+  "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=400&q=70", // Modern Website
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=70", // Team Project
+  "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&q=70", // Web Agency
+];
+
+// ── STATS DATA ─────────────────────────────────────────────────────────────────
+const STATS = [
+  { value: "50+", label: "Projects Done" },
+  { value: "4+", label: "Years Experience" },
+  { value: "100%", label: "Client Satisfaction" },
+];
+
+// ── IMAGE COLUMN ───────────────────────────────────────────────────────────────
+// Each column renders images × 3 for a seamless infinite scroll loop.
+const ImageColumn = ({ images, duration, direction }) => {
   const repeated = [...images, ...images, ...images];
+  const animClass = direction === "down" ? "col-scroll-down" : "col-scroll-up";
 
   return (
-    <div className="relative overflow-hidden flex-1 min-h-[100vh]">
-      <motion.div
-        className="flex flex-col gap-4"
-        animate={
-          direction === "down"
-            ? { y: ["0%", "-33.33%"] }
-            : { y: ["-33.33%", "0%"] }
-        }
-        transition={{
-          ease: "linear",
-          duration,
-          repeat: Infinity,
-        }}
+    <div className="flex-1 overflow-hidden">
+      <div
+        className={`flex flex-col gap-3 ${animClass}`}
+        style={{ animationDuration: `${duration}s` }}
       >
         {repeated.map((src, i) => (
           <div
             key={i}
-            className="w-full rounded-xl overflow-hidden border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.6)] flex-shrink-0"
-            style={{ aspectRatio: "9/6" }}
+            className="w-full flex-shrink-0 rounded-lg overflow-hidden border border-white/5"
+            style={{ aspectRatio: "3/2" }}
           >
             <img
               src={src}
               alt=""
               loading="lazy"
-              className="w-full h-full object-cover brightness-[0.6] contrast-[1.1] saturate-[0.7]"
+              decoding="async"
+              fetchpriority="low"
+              className="w-full h-full object-cover brightness-50 contrast-[1.1] saturate-75"
             />
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };
 
-// ── STATS ────────────────────────────────────────────────────────────────────
-const stats = [
-  { value: "50+", label: "Projects Done" },
-  { value: "3+", label: "Years Experience" },
-  { value: "100%", label: "Client Satisfaction" },
-];
+// ── HERO SECTION ───────────────────────────────────────────────────────────────
+const HeroSection = () => (
+  <section
+    className="relative min-h-screen w-full flex items-center justify-center text-white overflow-hidden"
+    aria-label="Hero — Shahbaz Ansari, Professional Web Developer"
+  >
 
-// ── HERO SECTION ─────────────────────────────────────────────────────────────
-const HeroSection = () => {
-  return (
-    <section className="relative min-h-screen w-full flex items-center justify-center  text-white overflow-hidden">
-      {/* ── ANIMATED 4-COLUMN GRID BACKGROUND ── */}
-      <div
-        className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-40"
-        style={{
-          transform: "rotate(10deg) scale(1.5)",
-          transformOrigin: "center center",
-        }}
-      >
-        <div className="flex gap-4 w-full h-full" style={{ height: "130vh" }}>
-          <ImageColumn images={col1Images} duration={30} direction="down" />
-          <ImageColumn images={col2Images} duration={24} direction="up" />
+    {/* ── BG: Scrolling image grid ────────────────────────────────────────── */}
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 z-0 pointer-events-none opacity-40"
+      style={{
+        transform: "rotate(10deg) scale(1.6)",
+        transformOrigin: "center center",
+      }}
+    >
+      <div className="flex gap-3 w-full h-full">
+        {/* Always visible (mobile + desktop) */}
+        <ImageColumn images={col1Images} duration={30} direction="down" />
+        <ImageColumn images={col2Images} duration={24} direction="up" />
+
+        {/* Desktop only — hidden on mobile to save render cost */}
+        <div className="hidden md:contents">
           <ImageColumn images={col3Images} duration={34} direction="down" />
           <ImageColumn images={col4Images} duration={27} direction="up" />
         </div>
       </div>
+    </div>
 
-      {/* ── OVERLAY GRADIENTS ── */}
-      {/* Top & bottom fade */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#03040aa1] via-transparent to-[#03040a79] z-10 pointer-events-none" />
-      {/* Side fades */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#03040aa1] via-transparent to-[#03040a79] z-10 pointer-events-none" />
-      {/* Center darkening vignette for text area */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 65% 70% at 50% 50%, rgba(3, 4, 10, 0) 0%, transparent 100%)",
-        }}
-      />
+    {/* ── Overlay: edge fades (top/bottom + left/right) ───────────────────── */}
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 z-10 pointer-events-none"
+      style={{
+        background:
+          "linear-gradient(to bottom, rgba(3, 4, 10, 0.301) 0%, transparent 35%, rgba(3, 4, 10, 0.295) 100%)," +
+          "linear-gradient(to right,  rgba(3, 4, 10, 0.342) 0%, transparent 35%, rgba(3, 4, 10, 0.342) 100%)",
+      }}
+    />
 
-      {/* ── BLUE AMBIENT GLOW ── */}
-      <div className="absolute z-10 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-black/10 blur-[120px]" />
-      <div className="absolute z-10 pointer-events-none top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-black/80 blur-[80px]" />
+    {/* ── Ambient dark glow behind text ───────────────────────────────────── */}
+    <div
+      aria-hidden="true"
+      className="absolute z-10 pointer-events-none top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-black/75 blur-[90px]"
+    />
 
-      {/* ── FOREGROUND CONTENT ── */}
-      <div className="relative z-20 text-center max-w-5xl mx-auto px-6 flex flex-col items-center">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2.5 mb-7 px-5 py-2 rounded-full bg-primary/8 border border-primary/20 backdrop-blur-md"
-        >
-          <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_2px_#2d7dffbc] animate-pulse" />
-          <span className="text-primary/60 text-xs font-semibold tracking-[0.2em] uppercase">
-            Professional Web Developer
-          </span>
-        </motion.div>
-
-        {/* Main Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-black uppercase leading-[1.0] tracking-tight"
-          style={{
-
-            letterSpacing: "0.02em",
-          }}
-        >
-          Shahbaz{" "}
-          <span className="relative">
-            <span className="bg-gradient-to-r from-primary via-blue-400 to-secondary bg-clip-text text-transparent block">
-              Ansari
-            </span>
-          </span>
-        </motion.h1>
-
-        {/* Divider */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-8 flex items-center gap-3"
-        >
-          <div className="h-[1px] w-16 bg-gradient-to-r from-transparent to-blue-500/60" />
-          <div className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_6px_2px_rgba(96,165,250,0.7)]" />
-          <div className="h-[1px] w-16 bg-gradient-to-l from-transparent to-blue-500/60" />
-        </motion.div>
-
-        {/* Paragraph */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-          className="mt-7 text-white/45 text-base md:text-lg max-w-xl leading-relaxed font-light"
-        >
-          I design and develop modern websites, web apps, and digital
-          experiences that help businesses grow, attract customers, and maximize
-          conversions.
-        </motion.p>
-
-        {/* Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
-        >
-          <a
-            href="#"
-            className="group px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold text-sm tracking-widest uppercase transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/45 hover:-translate-y-1 flex items-center justify-center gap-2.5"
-          >
-            Start Project
-            <ArrowRight
-              size={16}
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </a>
-
-          <a
-            href="#"
-            className="group px-8 py-4 rounded-full border border-white/12 bg-white/4 hover:bg-white/8 hover:border-white/20 text-white/70 hover:text-white transition-all duration-300 font-semibold text-sm tracking-widest uppercase hover:-translate-y-1 flex items-center justify-center gap-2.5 backdrop-blur-sm"
-          >
-            <Play size={14} className="text-blue-400" />
-            View Portfolio
-          </a>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
-          className="mt-16 flex items-center gap-8 md:gap-14"
-        >
-          {stats.map((s, i) => (
-            <React.Fragment key={i}>
-              <div className="text-center">
-                <div
-                  className="text-2xl md:text-3xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
-                  style={{ fontFamily: "'Bebas Neue', 'Anton', sans-serif" }}
-                >
-                  {s.value}
-                </div>
-                <div className="text-white/35 text-xs tracking-widest uppercase font-medium mt-0.5">
-                  {s.label}
-                </div>
-              </div>
-              {i < stats.length - 1 && (
-                <div className="w-[1px] h-10 bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" />
-              )}
-            </React.Fragment>
-          ))}
-        </motion.div>
+    {/* ── Foreground content ──────────────────────────────────────────────── */}
+    <div className="relative z-20 text-center max-w-5xl mx-auto px-6 flex flex-col items-center">
+      {/* ── "Available" badge ── */}
+      <div className="hero-badge inline-flex items-center gap-2.5 mt-6 mb-7 px-5 py-2 rounded-full bg-primary/8 border border-primary/20 backdrop-blur-md">
+        <span
+          className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"
+          style={{ boxShadow: "0 0 6px 2px #2d7dffbc" }}
+        />
+        <span className="text-primary/60 text-xs font-semibold tracking-[0.2em] uppercase">
+          Professional Web Developer
+        </span>
       </div>
-    </section>
-  );
-};
+
+      {/* ── Main heading — SEO: h1, clear name + role ── */}
+      <h1
+        className="hero-h1 text-7xl md:text-7xl lg:text-8xl font-black uppercase sm:leading-tight font-oswald"
+        style={{ letterSpacing: "0.02em" }}
+      >
+        Shahbaz{" "}
+        <span className="bg-gradient-to-r from-primary via-blue-400 to-secondary bg-clip-text text-transparent block">
+          Ansari
+        </span>
+      </h1>
+
+      {/* ── Decorative divider ── */}
+      <div className="hero-divider mt-8 flex items-center gap-3">
+        <div className="h-px w-16 bg-gradient-to-r from-transparent to-blue-500/60" />
+        <div
+          className="w-1.5 h-1.5 rounded-full bg-blue-400"
+          style={{ boxShadow: "0 0 6px 2px rgba(96,165,250,.7)" }}
+        />
+        <div className="h-px w-16 bg-gradient-to-l from-transparent to-blue-500/60" />
+      </div>
+
+      {/* ── Description — SEO: keyword-rich, descriptive ── */}
+      <p className="hero-para mt-7 text-white/45 text-base md:text-lg max-w-xl leading-relaxed font-light">
+        I design and develop modern websites and web applications that help
+        businesses grow, attract customers, and increase conversions.
+      </p>
+
+      {/* ── CTA Buttons ── */}
+      <div className="hero-btns mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="#contact"
+          className="group px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold text-sm tracking-widest uppercase shadow-lg shadow-blue-500/25 hover:shadow-blue-500/45 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2.5"
+        >
+          Start Project
+          <ArrowRight
+            size={16}
+            className="group-hover:translate-x-1 transition-transform duration-200"
+          />
+        </a>
+
+        <Link
+          to="/projects"
+          className="group px-8 py-4 rounded-full border border-white/12 bg-white/4 hover:bg-white/8 hover:border-white/20 text-white/70 hover:text-white hover:-translate-y-1 transition-all duration-300 font-semibold text-sm tracking-widest uppercase flex items-center justify-center gap-2.5 backdrop-blur-sm"
+        >
+          <Play size={14} className="text-blue-400" />
+          View Portfolio
+        </Link>
+      </div>
+
+      {/* ── Stats — desktop only ── */}
+      <div className="hero-stats mt-16 hidden lg:flex items-center gap-10 xl:gap-14">
+        {STATS.map((s, i) => (
+          <React.Fragment key={s.label}>
+            <div className="text-center">
+              <div className="text-3xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                {s.value}
+              </div>
+              <div className="text-white/35 text-xs tracking-widest uppercase font-medium mt-1">
+                {s.label}
+              </div>
+            </div>
+            {i < STATS.length - 1 && (
+              <div className="w-px h-10 bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" />
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 export default HeroSection;

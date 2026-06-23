@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" fill="none">
+  <defs>
+    <linearGradient id="crGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2d7fff"/>
+      <stop offset="100%" stop-color="#6062ff"/>
+    </linearGradient>
+  </defs>
+
+  <circle
+    cx="72"
+    cy="72"
+    r="68"
+    stroke="url(#crGrad)"
+    stroke-width="1.4"
+    stroke-dasharray="8 5"
+  />
+
+  <circle
+    cx="72"
+    cy="72"
+    r="46"
+    stroke="#2d7fff"
+    stroke-width="0.7"
+    stroke-opacity="0.35"
+  />
+
+  <circle cx="72" cy="4" r="4" fill="#2d7fff" />
+  <circle cx="140" cy="72" r="4" fill="#6062ff" />
+  <circle cx="72" cy="140" r="3" fill="#2d7fff" fill-opacity="0.5" />
+</svg>

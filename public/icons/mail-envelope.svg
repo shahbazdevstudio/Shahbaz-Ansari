@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="72" viewBox="0 0 96 72" fill="none">
+  <defs>
+    <linearGradient id="envGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2d7fff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#6062ff" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- envelope body -->
+  <rect
+    x="6"
+    y="10"
+    width="84"
+    height="52"
+    rx="10"
+    stroke="url(#envGrad)"
+    stroke-width="1.6"
+    fill="rgba(45,127,255,0.04)"
+  />
+
+  <!-- flap -->
+  <path
+    d="M6 10 L48 38 L90 10"
+    stroke="url(#envGrad)"
+    stroke-width="1.6"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

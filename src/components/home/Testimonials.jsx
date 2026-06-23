@@ -1,247 +1,565 @@
-// TestimonialsSection.jsx
+/**
+ * TestimonialsSection.jsx
+ *
+ * Dependencies:
+ *   npm install swiper
+ *
+ * Usage: import TestimonialsSection from "./TestimonialsSection";
+ *
+ * To fetch real reviews swap DEMO_REVIEWS with an API call:
+ *   axios.get("/api/reviews").then(res => setReviews(res.data))
+ */
 
-import { useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 
-const AVATAR_COLORS = [
-  { bg: "bg-blue-500/10", border: "border-blue-500/30", text: "text-blue-400" },
-  {
-    bg: "bg-indigo-500/10",
-    border: "border-indigo-500/30",
-    text: "text-indigo-400",
-  },
-  { bg: "bg-cyan-500/10", border: "border-cyan-500/30", text: "text-cyan-400" },
-  {
-    bg: "bg-violet-500/10",
-    border: "border-violet-500/30",
-    text: "text-violet-400",
-  },
-  { bg: "bg-pink-500/10", border: "border-pink-500/30", text: "text-pink-400" },
-];
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
 
-const getColorClass = (name = "") =>
-  AVATAR_COLORS[name.charCodeAt(0) % AVATAR_COLORS.length];
+// ─── Demo data (replace with API call) ────────────────────────────────────────
 
-const DUMMY_REVIEWS = [
+const DEMO_REVIEWS = [
   {
     _id: "1",
-    name: "Arjun Mehta",
-    createdAt: "2025-04-01",
+    name: "Sarah Mitchell",
+    profilePic: "https://i.pravatar.cc/150?img=47",
     rating: 5,
+    createdAt: "2025-11-10",
     message:
-      "Shahbaz delivered an absolutely stunning portfolio. The animations were silky smooth and the dark glassmorphism aesthetic was exactly what I wanted.",
+      "Shahbaz built our entire SaaS dashboard from scratch — clean code, pixel-perfect UI, delivered ahead of schedule. Genuinely one of the best developers I've hired.",
   },
   {
     _id: "2",
-    name: "Sara Khan",
-    createdAt: "2025-05-01",
+    name: "Arjun Mehta",
+    profilePic: "https://i.pravatar.cc/150?img=68",
     rating: 5,
+    createdAt: "2025-09-22",
     message:
-      "Working with Shahbaz was a fantastic experience. He understood my vision instantly and built a React dashboard that exceeded all my expectations. Clean code, great communication.",
+      "Outstanding attention to detail. The landing page he built converted at 3× our previous rate. He understood our brand immediately and translated it into a stunning UI.",
   },
   {
     _id: "3",
-    name: "Lucas Ferreira",
-    createdAt: "2025-03-01",
+    name: "Emily Torres",
+    profilePic: "https://i.pravatar.cc/150?img=32",
     rating: 5,
+    createdAt: "2025-08-05",
     message:
-      "The attention to detail in every component is remarkable. Framer Motion animations, responsive layout, everything pixel-perfect. Delivered ahead of schedule.",
+      "Responsive, professional, and incredibly fast. Shahbaz redesigned our marketplace in under two weeks and the result looks like it cost 10×. Highly recommended.",
   },
   {
     _id: "4",
-    name: "Amna Rizvi",
-    createdAt: "2025-05-20",
+    name: "Daniel Park",
+    profilePic: "",
     rating: 5,
+    createdAt: "2025-06-18",
     message:
-      "Professional, creative, and technically brilliant. My landing page conversion rate jumped 40% after Shahbaz rebuilt it. The UI is genuinely one of the best I've seen.",
+      "Top-tier full-stack work. He built our REST API, integrated payments, and polished the React frontend — all with zero major bugs at launch. Will hire again.",
   },
   {
     _id: "5",
-    name: "David Osei",
-    createdAt: "2025-01-10",
+    name: "Nadia Al-Hassan",
+    profilePic: "https://i.pravatar.cc/150?img=25",
     rating: 5,
+    createdAt: "2025-04-30",
     message:
-      "I've worked with many developers but Shahbaz stands out. His eye for design combined with solid React skills is rare. The dark theme he built for us is phenomenal.",
+      "Shahbaz has a rare combination of strong engineering skills and great design taste. Our app looks and feels premium now. Communication was excellent throughout.",
   },
   {
     _id: "6",
-    name: "Fatima Zahra",
-    createdAt: "2025-05-25",
+    name: "Lucas Brennan",
+    profilePic: "https://i.pravatar.cc/150?img=51",
     rating: 5,
+    createdAt: "2025-02-14",
     message:
-      "Incredible work on our e-commerce frontend. Every hover state, every transition perfectly crafted. Our users have been loving the new experience.",
-  },
-  {
-    _id: "7",
-    name: "Noah Williams",
-    createdAt: "2025-02-15",
-    rating: 5,
-    message:
-      "Shahbaz rebuilt our entire component library in Tailwind. The system is clean, consistent, and our team is now shipping features twice as fast.",
-  },
-  {
-    _id: "8",
-    name: "Priya Sharma",
-    createdAt: "2025-05-08",
-    rating: 5,
-    message:
-      "Exceptional frontend work. The scroll-triggered animations on my portfolio are getting so many compliments from recruiters and hiring managers.",
+      "Delivered a complex multi-step form flow with animations and mobile-first layout in record time. Code quality was excellent — well-structured and easy to maintain.",
   },
 ];
 
-function ReviewCard({ review }) {
-  const color = getColorClass(review.name);
-  const initial = review.name?.charAt(0).toUpperCase() || "?";
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
+const INIT_COLORS = [
+  "#2d7fff",
+  "#6062ff",
+  "#38bdf8",
+  "#a78bfa",
+  "#34d399",
+  "#fb923c",
+];
+const getInitColor = (name = "") =>
+  INIT_COLORS[name.charCodeAt(0) % INIT_COLORS.length];
+
+const timeAgo = (dateStr) => {
+  const days = Math.floor((Date.now() - new Date(dateStr)) / 86400000);
+  if (days < 30) return `${days || 1}d ago`;
+  const m = Math.floor(days / 30);
+  if (m < 12) return `${m}mo ago`;
+  return `${Math.floor(m / 12)}y ago`;
+};
+
+// ─── Floating Shapes (unique — star / sparkle motif) ─────────────────────────
+
+function FloatingShapes() {
   return (
     <div
-      className="
-      w-[300px] flex-shrink-0 rounded-2xl p-6
-      bg-white/[0.03] border border-white/[0.07]
-      hover:bg-[#2d7fff]/[0.06] hover:border-[#2d7fff]/25
-      hover:-translate-y-0.5 transition-all duration-300
-      relative overflow-hidden cursor-default
-    "
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
     >
-      {/* Top gradient line */}
-      <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-[#6062ff]/40 to-transparent" />
+      {/* Orbs */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-90px",
+          left: "-120px",
+          width: "500px",
+          height: "500px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle,rgba(45,127,255,0.11) 0%,transparent 62%)",
+          filter: "blur(55px)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-70px",
+          right: "-100px",
+          width: "460px",
+          height: "460px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle,rgba(96,98,255,0.11) 0%,transparent 62%)",
+          filter: "blur(50px)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: "42%",
+          left: "50%",
+          transform: "translate(-50%,-50%)",
+          width: "700px",
+          height: "230px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(ellipse,rgba(45,127,255,0.03) 0%,transparent 70%)",
+          filter: "blur(60px)",
+        }}
+      />
 
-      {/* Header */}
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-3">
-          <div
-            className={`
-            w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0
-            ${color.bg} border ${color.border}
-            font-cinzel font-semibold text-sm ${color.text}
-          `}
-          >
-            {initial}
-          </div>
-          <div>
-            <p className="font-oswald text-sm text-white tracking-wider leading-tight">
-              {review.name}
-            </p>
-            <p className="font-mono text-[10px] text-white/30 mt-0.5 tracking-wide">
-              2 months ago
-            </p>
-          </div>
-        </div>
+      {/* Grid */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `linear-gradient(rgba(45,127,255,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(45,127,255,0.022) 1px,transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
+      />
 
-        {/* Google Icon */}
-        <svg
-          className="w-5 h-5 opacity-70 flex-shrink-0"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M21.35 11.1H12v2.98h5.35C16.8 16.2 14.67 17.6 12 17.6c-3.09 0-5.6-2.51-5.6-5.6s2.51-5.6 5.6-5.6c1.47 0 2.8.56 3.81 1.48l2.11-2.11C16.38 4.38 14.32 3.5 12 3.5 7.31 3.5 3.5 7.31 3.5 12s3.81 8.5 8.5 8.5c4.9 0 8.15-3.44 8.15-8.28 0-.56-.06-1.09-.15-1.62z"
-            fill="#4285f4"
-          />
-        </svg>
-      </div>
+      {/* 4-point star — top-right */}
+      <img
+        src="/icons/star-cross.svg"
+        alt="star"
+        className="hidden lg:block absolute top-[48px] right-[5.5%] opacity-20 animate-floatA"
+      />
 
-      {/* Stars */}
-      <div className="flex items-center gap-0.5 mb-3">
-        {[...Array(5)].map((_, i) => (
-          <span
-            key={i}
-            className={`text-sm ${i < review.rating ? "text-[#2d7fff]" : "text-white/15"}`}
-          >
-            ★
-          </span>
-        ))}
-        <span className="ml-2 text-[#6062ff]">
-          <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3">
-            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7L6.4 13l1.5-1.5 2.2 2.2 4.8-4.8 1.5 1.5-6.3 6.3z" />
-          </svg>
-        </span>
-      </div>
+      {/* Quote mark — top-left */}
+      <img
+        src="/icons/abstract-duo.svg"
+        alt="quote-mark"
+        className="hidden lg:block absolute top-[52px] left-[5%] opacity-20 animate-floatB"
+      />
 
-      {/* Text */}
-      <p className="font-mono text-[11px] text-white/50 leading-relaxed tracking-wide">
-        <span className="text-2xl text-[#2d7fff]/40 font-serif leading-none align-[-6px] mr-0.5">
-          "
-        </span>
-        {review.message}"
-      </p>
+      {/* Dashed ring — left mid */}
+      <img
+        src="/icons/dashed-circle.svg"
+        className="hidden xl:block"
+        style={{
+          position: "absolute",
+          top: "36%",
+          left: "-44px",
+          opacity: 0.1,
+          animation: "floatA 13s ease-in-out infinite reverse",
+        }}
+        width="100"
+        height="100"
+        alt="ring"
+      />
+
+      {/* Small 6-point star — bottom-left */}
+      <img
+        src="/icons/star-cross.svg"
+        className="hidden lg:block"
+        style={{
+          position: "absolute",
+          bottom: "70px",
+          left: "7%",
+          opacity: 0.2,
+          animation: "floatB 9s ease-in-out infinite 1s",
+        }}
+        width="74"
+        height="74"
+        alt="star"
+      />
+
+      {/* Gradient dot cluster — right */}
+      <img
+        src="/icons/dots.svg"
+        className="hidden xl:block"
+        style={{ position: "absolute", top: "25%", right: "1%", opacity: 0.2 }}
+        width="68"
+        height="112"
+      />
     </div>
   );
 }
 
-export default function TestimonialsSection() {
-  const row1 = [...DUMMY_REVIEWS, ...DUMMY_REVIEWS];
-  const row2 = [
-    ...DUMMY_REVIEWS.slice(3),
-    ...DUMMY_REVIEWS.slice(0, 3),
-    ...DUMMY_REVIEWS.slice(3),
-    ...DUMMY_REVIEWS.slice(0, 3),
-  ];
+// ─── Review Card ──────────────────────────────────────────────────────────────
+
+function ReviewCard({ rev }) {
+  const [expanded, setExpanded] = useState(false);
+  const isLong = rev.message.length > 160;
+  const initial = rev.name?.charAt(0).toUpperCase() || "?";
+  const initColor = getInitColor(rev.name);
 
   return (
-    <section className="bg-black py-20 w-full overflow-hidden relative">
-      {/* Background glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(45,127,255,0.08),transparent)] pointer-events-none" />
-
-      {/* Header */}
-      <div className="text-center mb-14 px-4">
-        <p className="font-mono text-[11px] tracking-[0.35em] uppercase text-[#2d7fff] mb-4">
-          // testimonials
-        </p>
-        <h2 className="font-cinzel text-4xl md:text-5xl font-normal text-white mb-4 leading-tight">
-          What <span className="text-[#6062ff]">Clients</span> Say
-        </h2>
-        <p className="font-mono text-xs text-white/35 max-w-md mx-auto leading-relaxed tracking-wide">
-          A selection of kind words from people I've had the pleasure of working
-          with.
-        </p>
-      </div>
-
-      {/* Scrolling Rows */}
-      <div className="flex flex-col gap-6">
-        {/* Row 1 — left scroll */}
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className="flex gap-6 w-max animate-scroll-left hover:[animation-play-state:paused]">
-            {row1.map((r, i) => (
-              <ReviewCard key={`r1-${i}`} review={r} />
-            ))}
-          </div>
-        </div>
-
-        {/* Row 2 — right scroll */}
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <div className="flex gap-6 w-max animate-scroll-right hover:[animation-play-state:paused]">
-            {row2.map((r, i) => (
-              <ReviewCard key={`r2-${i}`} review={r} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Stats Bar */}
-      <div className="flex items-center justify-center gap-12 mt-14 flex-wrap px-4">
-        {[
-          ["50+", "Projects Shipped"],
-          ["5.0", "Avg. Rating"],
-          ["3yr", "Experience"],
-        ].map(([num, label], i) => (
-          <>
-            {i > 0 && (
-              <div key={`div-${i}`} className="w-px h-10 bg-white/10" />
-            )}
-            <div key={label} className="text-center">
-              <div className="font-cinzel text-3xl font-semibold text-[#2d7fff]">
-                {num}
-              </div>
-              <div className="font-mono text-[10px] text-white/35 tracking-[0.12em] uppercase mt-2">
-                {label}
-              </div>
+    <div className="rev-card">
+      {/* Top row */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "14px",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "11px" }}>
+          {/* Avatar */}
+          {rev.profilePic ? (
+            <img
+              src={rev.profilePic}
+              alt={rev.name}
+              style={{
+                width: "44px",
+                height: "44px",
+                borderRadius: "50%",
+                objectFit: "cover",
+                border: "1px solid rgba(45,127,255,0.25)",
+              }}
+              onError={(e) => {
+                e.target.style.display = "none";
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                width: "44px",
+                height: "44px",
+                borderRadius: "50%",
+                flexShrink: 0,
+                background: `linear-gradient(135deg, ${initColor} 0%, #6062ff 100%)`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "16px",
+                fontWeight: 600,
+                color: "#fff",
+              }}
+            >
+              {initial}
             </div>
-          </>
+          )}
+          <div>
+            <p
+              style={{
+                fontSize: "13px",
+                fontWeight: 500,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                color: "#fff",
+                margin: "0 0 2px 0",
+              }}
+            >
+              {rev.name}
+            </p>
+            <p
+              style={{
+                fontSize: "10px",
+                color: "rgba(255,255,255,0.28)",
+                margin: 0,
+              }}
+            >
+              {timeAgo(rev.createdAt)}
+            </p>
+          </div>
+        </div>
+
+        {/* Google icon */}
+        <img
+          src="https://cdn.trustindex.io/assets/platform/Google/icon.svg"
+          alt="Google"
+          style={{ width: "20px", height: "20px", opacity: 0.7 }}
+        />
+      </div>
+
+      {/* Stars */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "2px",
+          marginBottom: "12px",
+        }}
+      >
+        {[0, 1, 2, 3, 4].map((i) => (
+          <img
+            key={i}
+            src={
+              i < rev.rating
+                ? "/icons/star-filled.svg"
+                : "/icons/star-empty.svg"
+            }
+            alt="star"
+            className="w-[14px] h-[14px]"
+          />
         ))}
+        {/* Verified */}
+        <img
+          src="/icons/check-circle-blue.svg"
+          alt="verified"
+          style={{ marginLeft: "6px" }}
+          className="w-[14px] h-[14px]"
+        />
+      </div>
+
+      {/* Thin gradient divider */}
+      <div
+        style={{
+          height: "1px",
+          marginBottom: "12px",
+          background:
+            "linear-gradient(90deg,rgba(45,127,255,0.28),rgba(96,98,255,0.12),transparent)",
+        }}
+      />
+
+      {/* Review text */}
+      <p
+        style={{
+          fontSize: "11.5px",
+          lineHeight: 1.85,
+          color: "rgba(255,255,255,0.42)",
+          letterSpacing: "0.02em",
+          margin: 0,
+          flex: 1,
+        }}
+      >
+        "{expanded || !isLong ? rev.message : rev.message.slice(0, 160) + "…"}"
+      </p>
+
+      {isLong && (
+        <button
+          onClick={() => setExpanded((e) => !e)}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "8px 0 0 0",
+            fontSize: "10px",
+            color: "#2d7fff",
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            transition: "color 0.2s",
+          }}
+        >
+          {expanded ? "Show less ↑" : "Read more ↓"}
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
+
+export default function TestimonialsSection() {
+  const [reviews, setReviews] = useState(DEMO_REVIEWS);
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  // Optional — swap DEMO_REVIEWS with real API:
+  // useEffect(() => {
+  //   setLoading(true);
+  //   axios.get("https://your-api.com/api/reviews/all")
+  //     .then(r => setReviews(r.data.data || []))
+  //     .finally(() => setLoading(false));
+  // }, []);
+
+  const sectionRef = (el) => {
+    if (!el) return;
+    new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.06 },
+    ).observe(el);
+  };
+
+  return (
+    <section
+      id="testimonials"
+      ref={sectionRef}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background: "#000",
+        padding: "clamp(80px,10vw,130px) 0",
+      }}
+    >
+      <FloatingShapes />
+
+      <div
+        style={{
+          position: "relative",
+          maxWidth: "1300px",
+          margin: "0 auto",
+          padding: "0 clamp(20px,5%,60px)",
+        }}
+      >
+        {/* ── Header ── */}
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "clamp(40px,6vw,64px)",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.7s ease 0.05s",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "'Roboto Mono',monospace",
+              fontSize: "11px",
+              letterSpacing: "0.38em",
+              textTransform: "uppercase",
+              color: "#2d7fff",
+              margin: "0 0 10px 0",
+            }}
+          >
+            // testimonials
+          </p>
+          <h2
+            style={{
+              fontFamily: "'Cinzel',serif",
+              fontSize: "clamp(32px,4.5vw,52px)",
+              fontWeight: 400,
+              color: "#fff",
+              margin: "0 0 14px 0",
+              lineHeight: 1.15,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            What{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Clients
+            </span>{" "}
+            Say
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Roboto Mono',monospace",
+              fontSize: "13px",
+              color: "rgba(255,255,255,0.30)",
+              maxWidth: "420px",
+              margin: "0 auto",
+              lineHeight: 1.8,
+              letterSpacing: "0.02em",
+            }}
+          >
+            Real feedback from clients about their experience working with me.
+          </p>
+        </div>
+
+        {/* ── Loading ── */}
+        {loading && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "60px 0",
+            }}
+          >
+            <div
+              style={{
+                width: "36px",
+                height: "36px",
+                borderRadius: "50%",
+                border: "2px solid rgba(45,127,255,0.15)",
+                borderTopColor: "#2d7fff",
+                animation: "spin 0.8s linear infinite",
+              }}
+            />
+          </div>
+        )}
+
+        {/* ── Swiper ── */}
+        {!loading && reviews.length > 0 && (
+          <div
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(24px)",
+              transition: "all 0.8s ease 0.2s",
+            }}
+          >
+            <Swiper
+              effect="coverflow"
+              grabCursor={true}
+              centeredSlides={true}
+              loop={reviews.length > 2}
+              autoplay={{
+                delay: 1000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              pagination={{ clickable: true }}
+              coverflowEffect={{
+                rotate: 0,
+                stretch: 40, // gap effect
+                depth: 120,
+                modifier: 2,
+                slideShadows: false,
+              }}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1.1,
+                  spaceBetween: 20,
+                },
+                640: {
+                  slidesPerView: 1.8,
+                  spaceBetween: 30,
+                },
+                1024: {
+                  slidesPerView: 2.5,
+                  spaceBetween: 40,
+                },
+              }}
+              modules={[EffectCoverflow, Pagination, Autoplay]}
+              className="rev-swiper"
+            >
+              {reviews.map((rev) => (
+                <SwiperSlide key={rev._id} className="rev-slide">
+                  <ReviewCard rev={rev} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        )}
       </div>
     </section>
   );

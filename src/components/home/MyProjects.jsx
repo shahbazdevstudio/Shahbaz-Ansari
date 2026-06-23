@@ -1,173 +1,572 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { HiArrowSmallRight } from "react-icons/hi2";
+import { Link } from "react-router";
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const projects = [
   {
     id: "01",
-    title: "GrowMore Trading",
+    title: "Spike Family",
     description:
-      "Advanced paper trading platform with portfolio tracking, analytics, and real-time market simulation.",
-    image:
-      "https://images.unsplash.com/photo-1642790106117-e829e14a795f?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["React", "Node.js", "MongoDB"],
+      "Corporate business website built with HTML, CSS, Bootstrap, and JavaScript.",
+    image: "/project-1.png",
+    demo: "https://shahbaz-project-1.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-1",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "02",
-    title: "Sellit Marketplace",
+    title: "Health Monitor ",
     description:
-      "Modern marketplace where users can post, manage, and promote classified ads seamlessly.",
-    image:
-      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["React", "Express", "MongoDB"],
+      "A healthcare management platform built with HTML, CSS, JavaScript, and Bootstrap 5.",
+    image: "/project-2.png",
+    demo: "https://shahbaz-project-2.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-2",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "03",
-    title: "Crypto Tracker",
+    title: "HealthCentreApp ",
     description:
-      "Track investments, profits, losses, and monitor your financial growth with interactive dashboards.",
-    image:
-      "https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["Next.js", "Node.js", "Chart.js"],
+      "Healthcare startup website developed with HTML, CSS, JavaScript, and Bootstrap 5.",
+    image: "/project-3.png",
+    demo: "https://github.com/shahbazansari-dev/shahbaz-project-3",
+    github: "https://shahbaz-project-3.vercel.app/",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "04",
-    title: "Portfolio Website",
+    title: "Angel Launchpad Ventures",
     description:
-      "High-end animated developer portfolio with premium UI, smooth transitions, and modern interactions.",
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["React", "Tailwind", "Framer Motion"],
+      "Startup investment platform website developed using HTML, CSS, JavaScript, and Bootstrap 5.",
+    image: "/project-6.png",
+    demo: "https://shahbaz-project-6.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-6",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] },
-  }),
-};
+// ─── Floating Decorative Shapes ───────────────────────────────────────────────
 
-const MyProjects = () => {
+function FloatingShapes() {
   return (
-    <section className="relative overflow-hidden py-24 px-4 md:px-10 bg-[#000000]">
-      {/* Ambient blob */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/10 blur-[180px] rounded-full pointer-events-none" />
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      {/* Top-left blue orb */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-100px",
+          left: "-120px",
+          width: "500px",
+          height: "500px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(45,127,255,0.11) 0%, transparent 62%)",
+          filter: "blur(55px)",
+        }}
+      />
+      {/* Bottom-right indigo orb */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-80px",
+          right: "-100px",
+          width: "460px",
+          height: "460px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(96,98,255,0.11) 0%, transparent 62%)",
+          filter: "blur(50px)",
+        }}
+      />
+      {/* Centre accent */}
+      <div
+        style={{
+          position: "absolute",
+          top: "38%",
+          left: "50%",
+          transform: "translate(-50%,-50%)",
+          width: "700px",
+          height: "260px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(ellipse, rgba(45,127,255,0.15) 0%, transparent 70%)",
+          filter: "blur(60px)",
+        }}
+      />
 
-      {/* Heading */}
-      <div className="text-center mb-16 relative z-10">
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-mono tracking-widest uppercase">
-          ✦ My Work
-        </span>
-        <h2 className="mt-5 text-5xl md:text-7xl font-black font-syne leading-none tracking-tight">
-          Selected <span className="text-primary">Projects</span>
-        </h2>
-        <p className="mt-3 font-mono text-zinc-500 text-xs tracking-widest">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus quo quos a.
-        </p>
+      {/* Grid */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `
+          linear-gradient(rgba(45,127,255,0.022) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(45,127,255,0.022) 1px, transparent 1px)
+        `,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Hexagon — top-right */}
+      <img
+        src="/icons/geometric-shape.svg"
+        className="hidden lg:block"
+        style={{
+          position: "absolute",
+          top: "40px",
+          right: "4.5%",
+          opacity: 0.2,
+          animation: "floatA 8s ease-in-out infinite",
+        }}
+        width="100"
+        height="100"
+        alt="hexagon"
+      />
+
+      {/* Diamond — bottom-left */}
+      <img
+        src="/icons/geometric-shape.svg"
+        className="hidden lg:block"
+        style={{
+          position: "absolute",
+          bottom: "70px",
+          left: "4%",
+          opacity: 0.2,
+          animation: "floatB 10s ease-in-out infinite",
+        }}
+        width="82"
+        height="82"
+        alt="geometric-shape"
+      />
+
+      {/* Dashed ring + dots — left mid */}
+      <img
+        src="/icons/rings.svg"
+        className="hidden xl:block"
+        style={{
+          position: "absolute",
+          top: "36%",
+          left: "-42px",
+          opacity: 0.2,
+          animation: "floatA 12s ease-in-out infinite reverse",
+        }}
+        width="100"
+        height="100"
+      />
+
+      {/* Gradient dot cluster — right */}
+      <img
+        src="/icons/dots.svg"
+        className="hidden xl:block"
+        style={{
+          position: "absolute",
+          top: "26%",
+          right: "0.8%",
+          opacity: 0.2,
+        }}
+        width="68"
+        height="112"
+        alt="dots"
+      />
+    </div>
+  );
+}
+
+// ─── Project Card ─────────────────────────────────────────────────────────────
+
+function ProjectCard({ project, index, sectionVisible }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: "relative",
+        borderRadius: "18px",
+        overflow: "hidden",
+        border: `1px solid ${hovered ? "rgba(45,127,255,0.30)" : "rgba(255,255,255,0.07)"}`,
+        cursor: "pointer",
+        aspectRatio: "3/2",
+        opacity: sectionVisible ? 1 : 0,
+        transform: sectionVisible
+          ? hovered
+            ? "translateY(-8px) scale(1.015)"
+            : "translateY(0) scale(1)"
+          : "translateY(30px)",
+        transition: `opacity 0.6s ease ${0.1 + index * 0.1}s, transform 0.4s cubic-bezier(0.23,1,0.32,1), border-color 0.3s`,
+      }}
+    >
+      {/* Background image */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `url('${project.image}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: hovered
+            ? "brightness(0.15) saturate(0.5)"
+            : "brightness(0.7) saturate(0.65)",
+          transform: hovered ? "scale(1.08)" : "scale(1)",
+          transition: "filter 0.7s ease, transform 0.7s ease",
+        }}
+      />
+
+      {/* Indigo glow on hover */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          background:
+            "radial-gradient(ellipse at 50% 100%, rgba(45,127,255,0.18), transparent 65%)",
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 0.5s ease",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* ID badge — always visible */}
+      <div
+        style={{
+          position: "absolute",
+          top: "14px",
+          left: "14px",
+          zIndex: 3,
+          fontFamily: "'Roboto Mono', monospace",
+          fontSize: "10px",
+          letterSpacing: "0.12em",
+          color: "rgba(255,255,255,0.30)",
+          opacity: hovered ? 0 : 1,
+          transition: "opacity 0.3s ease",
+        }}
+      >
+        {project.id}
       </div>
 
-      {/* 4-card grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-[1400px] mx-auto relative z-10">
-        {projects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            custom={index}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="group relative rounded-[20px] overflow-hidden border border-white/[0.07] bg-[#111116] cursor-pointer"
-            style={{ aspectRatio: "3/2" }}
-            whileHover={{
-              y: -10,
-              scale: 1.02,
-              transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
+      {/* Tech strip — hidden on hover */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 3,
+          padding: "10px 12px",
+          background: "linear-gradient(to top, rgba(0,0,0,0.88), transparent)",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "5px",
+          opacity: hovered ? 0 : 1,
+          transform: hovered ? "translateY(6px)" : "translateY(0)",
+          transition: "opacity 0.35s ease, transform 0.35s ease",
+        }}
+      >
+        {project.tech.map((t) => (
+          <span
+            key={t}
+            style={{
+              fontFamily: "'Roboto Mono', monospace",
+              fontSize: "9px",
+              letterSpacing: "0.08em",
+              color: "rgba(255,255,255,0.60)",
+              padding: "2px 8px",
+              borderRadius: "100px",
+              border: "1px solid rgba(255,255,255,0.10)",
+              background: "rgba(255,255,255,0.05)",
             }}
           >
-            {/* BG Image — darkens on hover */}
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-all duration-700
-                         brightness-[0.55] saturate-[0.7]
-                         group-hover:scale-[1.08] group-hover:brightness-[0.18] group-hover:saturate-[0.2]"
-              style={{ backgroundImage: `url('${project.image}')` }}
-            />
-
-            {/* Indigo ambient glow */}
-            <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_100%,rgba(99,102,241,0.18),transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-            {/* Tech strip (visible when not hovered) */}
-            <div className="absolute bottom-0 left-0 right-0 z-[3] p-3 flex flex-wrap gap-1.5 bg-gradient-to-t from-black/90 to-transparent transition-all duration-400 group-hover:opacity-0 group-hover:translate-y-2">
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  className="px-2 py-0.5 rounded-full border border-white/10 bg-white/[0.07] font-mono text-[9px] text-white/70 tracking-widest"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            {/* Hover Reveal Panel */}
-            <div className="absolute inset-0 z-[4] flex flex-col justify-center p-6 opacity-0 translate-y-4 transition-all duration-[450ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:opacity-100 group-hover:translate-y-0">
-              <h3 className="font-syne font-black text-xl md:text-2xl leading-tight tracking-tight text-white mb-3">
-                {project.title}
-              </h3>
-              <div className="w-8 h-0.5 bg-primary rounded-full mb-3" />
-              <p className="font-mono text-[11px] text-zinc-400 leading-relaxed mb-5">
-                {project.description}
-              </p>
-
-              {/* Buttons */}
-              <div className="flex gap-2">
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex-1 h-10 rounded-full bg-primary flex items-center justify-center gap-1.5 font-syne text-xs font-bold tracking-wider transition-all duration-200 hover:bg-indigo-400 hover:scale-[1.04]"
-                >
-                  <ExternalLink size={13} />
-                  Live Demo
-                </a>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-full border border-white/10 bg-white/[0.06] flex items-center justify-center transition-all duration-200 hover:border-primary hover:bg-primary/15 hover:scale-[1.08]"
-                  aria-label="GitHub"
-                >
-                  <FaGithub size={15} />
-                </a>
-              </div>
-            </div>
-          </motion.div>
+            {t}
+          </span>
         ))}
       </div>
 
-      {/* CTA */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="text-center mt-14 relative z-10"
+      {/* Hover reveal panel */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 4,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "clamp(16px, 4%, 24px)",
+          opacity: hovered ? 1 : 0,
+          transform: hovered ? "translateY(0)" : "translateY(10px)",
+          transition:
+            "opacity 0.45s ease, transform 0.45s cubic-bezier(0.23,1,0.32,1)",
+        }}
       >
-        <button className="inline-flex items-center gap-2.5 px-9 py-4 rounded-full border border-primary/40 text-primary font-syne font-bold text-sm tracking-wider transition-all duration-300 hover:bg-primary/10 hover:border-primary hover:text-white hover:-translate-y-1">
-          View All Projects
-        </button>
-      </motion.div>
+        <h3
+          style={{
+            // fontFamily: "'Cinzel', serif",
+            fontSize: "clamp(14px, 1.6vw, 20px)",
+            fontWeight: 400,
+            color: "#fff",
+            margin: "0 0 3px 0",
+            lineHeight: 1.2,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          {project.title}
+        </h3>
+
+        <p
+          style={{
+            fontSize: "clamp(9px, 1vw, 11px)",
+            color: "rgba(255,255,255,0.45)",
+            lineHeight: 1.75,
+            margin: "0 0 8px 0",
+          }}
+        >
+          {project.description}
+        </p>
+
+        {/* Buttons */}
+        <div style={{ display: "flex", gap: "8px" }}>
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              flex: 1,
+              height: "36px",
+              borderRadius: "100px",
+              background: "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "6px",
+              fontSize: "10px",
+              fontWeight: 500,
+              letterSpacing: "0.09em",
+              textTransform: "uppercase",
+              color: "#fff",
+              textDecoration: "none",
+              boxShadow: "0 4px 16px rgba(45,127,255,0.30)",
+              transition: "transform 0.2s ease, box-shadow 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.04)";
+              e.currentTarget.style.boxShadow =
+                "0 6px 22px rgba(45,127,255,0.45)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.boxShadow =
+                "0 4px 16px rgba(45,127,255,0.30)";
+            }}
+          >
+            <ExternalLink size={11} />
+            Live Demo
+          </a>
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+            style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "100px",
+              border: "1px solid rgba(255,255,255,0.12)",
+              background: "rgba(255,255,255,0.05)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "rgba(255,255,255,0.70)",
+              textDecoration: "none",
+              transition:
+                "border-color 0.25s, background 0.25s, color 0.25s, transform 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(45,127,255,0.50)";
+              e.currentTarget.style.background = "rgba(45,127,255,0.12)";
+              e.currentTarget.style.color = "#fff";
+              e.currentTarget.style.transform = "scale(1.08)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.70)";
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          >
+            <FaGithub size={14} />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
+
+export default function MyProjects() {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.08 },
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <section
+      id="projects"
+      ref={ref}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background: "#000",
+        padding: "clamp(80px, 10vw, 130px) clamp(20px, 5%, 60px)",
+      }}
+    >
+      <FloatingShapes />
+
+      <div
+        style={{ position: "relative", maxWidth: "1400px", margin: "0 auto" }}
+      >
+        {/* ── Section Header ── */}
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "clamp(48px, 6vw, 72px)",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.7s ease 0.05s",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "'Roboto Mono', monospace",
+              fontSize: "11px",
+              letterSpacing: "0.38em",
+              textTransform: "uppercase",
+              color: "#2d7fff",
+              margin: "0 0 10px 0",
+            }}
+          >
+            // my work
+          </p>
+          <h2
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "clamp(32px, 4.5vw, 52px)",
+              fontWeight: 400,
+              color: "#fff",
+              margin: "0 0 16px 0",
+              lineHeight: 1.15,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Featured{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Projects
+            </span>
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Roboto Mono', monospace",
+              fontSize: "13px",
+              color: "rgba(255,255,255,0.30)",
+              maxWidth: "440px",
+              margin: "0 auto",
+              lineHeight: 1.8,
+              letterSpacing: "0.02em",
+            }}
+          >
+            A showcase of web applications built with modern tools and attention
+            to detail.
+          </p>
+        </div>
+
+        {/* ── 4-card Grid ── */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+            gap: "12px",
+          }}
+          className="projects-grid"
+        >
+          {projects.map((project, i) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={i}
+              sectionVisible={visible}
+            />
+          ))}
+        </div>
+
+        {/* ── CTA ── */}
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "clamp(40px, 5vw, 60px)",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(14px)",
+            transition: "all 0.7s ease 0.55s",
+          }}
+        >
+          <Link
+            to="/projects"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "13px 34px",
+              borderRadius: "100px",
+              border: "1px solid rgba(45,127,255,0.35)",
+              background: "rgba(45,127,255,0.04)",
+              color: "#2d7fff",
+              fontSize: "12px",
+              fontWeight: 500,
+              letterSpacing: "0.10em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              backdropFilter: "blur(8px)",
+              transition: "all 0.28s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(45,127,255,0.10)";
+              e.currentTarget.style.borderColor = "rgba(45,127,255,0.60)";
+              e.currentTarget.style.color = "#fff";
+              e.currentTarget.style.transform = "translateY(-2px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(45,127,255,0.04)";
+              e.currentTarget.style.borderColor = "rgba(45,127,255,0.35)";
+              e.currentTarget.style.color = "#2d7fff";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
+          >
+            View All Projects
+            <HiArrowSmallRight />
+          </Link>
+        </div>
+      </div>
     </section>
   );
-};
-
-export default MyProjects;
+}

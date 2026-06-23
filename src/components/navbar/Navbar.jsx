@@ -7,8 +7,8 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Service", path: "/services" },
-  { name: "Resume", path: "/resume" },
   { name: "Project", path: "/projects" },
+  { name: "Testimonials", path: "/testimonials" },
   { name: "Contact", path: "/contact" },
 ];
 
@@ -61,7 +61,7 @@ const Navbar = () => {
               px-5
             "
           >
-            <h1
+            <span
               className="
               font-cinzel
               text-white
@@ -70,7 +70,7 @@ const Navbar = () => {
             "
             >
               Shahbaz
-            </h1>
+            </span>
           </Link>
 
           {/* Right Links */}
@@ -127,7 +127,7 @@ const Navbar = () => {
       >
         {/* Header */}
         <div className="flex items-center justify-between py-6 px-8 border-b border-white/10">
-          <h2 className="font-cinzel text-white text-2xl">SHAHBAZ</h2>
+          <span className="font-cinzel text-white text-2xl">SHAHBAZ</span>
 
           <button
             onClick={() => setMenuOpen(false)}

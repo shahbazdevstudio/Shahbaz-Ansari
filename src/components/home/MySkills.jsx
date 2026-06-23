@@ -1,5 +1,4 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import {
   FaHtml5,
   FaCss3Alt,
@@ -8,13 +7,15 @@ import {
   FaReact,
   FaNodeJs,
 } from "react-icons/fa";
-
+import { HiArrowSmallRight } from "react-icons/hi2";
 import {
   SiTailwindcss,
   SiExpress,
   SiMongodb,
   SiNextdotjs,
 } from "react-icons/si";
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const skills = [
   { name: "HTML", icon: <FaHtml5 />, level: 90 },
@@ -29,121 +30,550 @@ const skills = [
   { name: "Next.js", icon: <SiNextdotjs />, level: 70 },
 ];
 
-const MySkills = () => {
+const stats = [
+  { value: "50+", label: "Projects Done" },
+  { value: "4+", label: "Years Experience" },
+  { value: "100%", label: "Client Satisfaction" },
+  { value: "24/7", label: "Support Available" },
+];
+
+// ─── Floating Decorative Shapes ───────────────────────────────────────────────
+
+function FloatingShapes() {
   return (
-    <section className="relative px-6 md:px-10 py-24 overflow-hidden">
-      {/* Background Blur */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/10 blur-[140px] rounded-full"></div>
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      {/* ── Ambient orbs ── */}
+      {/* Large indigo orb — top-left */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-80px",
+          left: "-100px",
+          width: "550px",
+          height: "550px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(96,98,255,0.11) 0%, transparent 60%)",
+          filter: "blur(55px)",
+        }}
+      />
+      {/* Blue orb — bottom-right */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-60px",
+          right: "-80px",
+          width: "480px",
+          height: "480px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(45,127,255,0.11) 0%, transparent 60%)",
+          filter: "blur(50px)",
+        }}
+      />
+      {/* Small warm accent orb — centre-right */}
+      <div
+        style={{
+          position: "absolute",
+          top: "45%",
+          right: "18%",
+          width: "220px",
+          height: "220px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(96,98,255,0.1) 0%, transparent 70%)",
+          filter: "blur(40px)",
+        }}
+      />
 
-      {/* Heading */}
-      <div className="text-center max-w-4xl mx-auto mb-20 relative z-10">
-        <span className="inline-flex items-center px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary text-sm font-medium">
-          ✦ My Expertise
-        </span>
+      {/* ── Grid overlay ── */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `
+          linear-gradient(rgba(45,127,255,0.022) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(45,127,255,0.022) 1px, transparent 1px)
+        `,
+          backgroundSize: "60px 60px",
+        }}
+      />
 
-        <h2 className="mt-4 text-4xl md:text-6xl font-black">
-          Skills & <span className="text-primary">Experience</span>
-        </h2>
+      {/* ── Gradient-filled hexagon — top-right (unique to Skills) ── */}
+      <img
+        src="/icons/geometric-shape.svg"
+        className="hidden lg:block absolute opacity-[0.13]"
+        style={{ top: "30px", right: "5%" }}
+      />
+      {/* ── Gradient diamond — bottom-left ── */}
+      <img
+        src="/icons/diamond.svg"
+        className="hidden lg:block absolute"
+        style={{ bottom: "60px", left: "3.5%", opacity: 0.15 }}
+      />
 
-        <p className="mt-5 max-w-2xl mx-auto text-zinc-400 text-lg">
-          Crafting modern digital experiences with clean code, scalable
-          architecture, and beautiful user interfaces.
-        </p>
-      </div>
+      {/* ── Glowing circle ring — left mid ── */}
+      <img
+        src="/icons/dashed-circle.svg"
+        className="hidden xl:block absolute opacity-10"
+        style={{ top: "38%", left: "-36px" }}
+        alt="ring"
+      />
+    </div>
+  );
+}
 
-      <div className="grid lg:grid-cols-2 gap-10 relative z-10">
-        {/* Skills */}
-        <div className="grid sm:grid-cols-2 gap-5">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.05,
-              }}
-              viewport={{ once: true }}
-              whileHover={{
-                y: -6,
-              }}
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-5"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/10 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+// ─── Skill Card ───────────────────────────────────────────────────────────────
 
-              <div className="relative flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-2xl">
-                    {skill.icon}
-                  </div>
+function SkillCard({ skill, index, sectionVisible }) {
+  const barRef = useRef(null);
+  const [barFilled, setBarFilled] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
-                  <div>
-                    <h3 className="font-semibold text-lg">{skill.name}</h3>
-                    <p className="text-zinc-500 text-sm">Professional</p>
-                  </div>
-                </div>
+  useEffect(() => {
+    if (!sectionVisible) return;
+    const timer = setTimeout(() => setBarFilled(true), 200 + index * 60);
+    return () => clearTimeout(timer);
+  }, [sectionVisible, index]);
 
-                <span className="font-bold text-primary">{skill.level}%</span>
-              </div>
+  const cardVisible = sectionVisible;
 
-              <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{
-                    width: `${skill.level}%`,
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    ease: "easeOut",
-                  }}
-                  viewport={{ once: true }}
-                  className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        opacity: cardVisible ? 1 : 0,
+        transform: cardVisible
+          ? hovered
+            ? "translateY(-4px)"
+            : "translateY(0)"
+          : "translateY(20px)",
+        transition: `opacity 0.55s ease ${0.1 + index * 0.05}s, transform 0.3s ease`,
+        borderRadius: "16px",
+        border: `1px solid ${hovered ? "rgba(45,127,255,0.28)" : "rgba(255,255,255,0.06)"}`,
+        background: hovered
+          ? "rgba(45,127,255,0.05)"
+          : "rgba(255,255,255,0.025)",
+        padding: "16px",
+        cursor: "default",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Hover inner glow */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse at top left, rgba(45,127,255,0.06) 0%, transparent 60%)",
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 0.4s ease",
+          borderRadius: "inherit",
+          pointerEvents: "none",
+        }}
+      />
 
-        {/* Right Side */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-xl p-8 flex flex-col justify-between"
-        >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "14px",
+          position: "relative",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          {/* Icon box */}
+          <div
+            style={{
+              width: "44px",
+              height: "44px",
+              borderRadius: "12px",
+              background: "rgba(45,127,255,0.08)",
+              border: "1px solid rgba(45,127,255,0.18)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "20px",
+              color: "#2d7fff",
+              transition: "background 0.3s, border-color 0.3s",
+              ...(hovered
+                ? {
+                    background: "rgba(45,127,255,0.14)",
+                    borderColor: "rgba(45,127,255,0.35)",
+                  }
+                : {}),
+            }}
+          >
+            {skill.icon}
+          </div>
           <div>
-            <h3 className="text-3xl md:text-4xl font-black mb-4">
-              Building Fast &
-              <span className="text-primary"> Scalable Products</span>
-            </h3>
-
-            <p className="text-zinc-400 leading-relaxed">
-              I specialize in creating responsive websites and full-stack
-              applications using React, Next.js, Node.js, Express, and MongoDB.
-              My focus is on performance, clean architecture, and exceptional
-              user experience.
+            <p
+              style={{
+                fontSize: "14px",
+                fontWeight: 500,
+                letterSpacing: "0.07em",
+                textTransform: "uppercase",
+                color: "#fff",
+                margin: "0 0 2px 0",
+              }}
+            >
+              {skill.name}
+            </p>
+            <p
+              style={{
+                fontSize: "10px",
+                color: "rgba(255,255,255,0.28)",
+                margin: 0,
+              }}
+            >
+              Professional
             </p>
           </div>
+        </div>
+        <span
+          style={{
+            fontSize: "12px",
+            fontWeight: 600,
+            color: hovered ? "#2d7fff" : "rgba(255,255,255,0.45)",
+            transition: "color 0.3s",
+          }}
+        >
+          {skill.level}%
+        </span>
+      </div>
 
-          <div className="grid grid-cols-2 gap-4 my-10">
-            <div className="rounded-2xl bg-primary/10 border border-primary/20 p-5 text-center">
-              <h4 className="text-4xl font-black text-primary">5+</h4>
-              <p className="text-zinc-400">Years Experience</p>
-            </div>
+      {/* Progress bar */}
+      <div
+        style={{
+          height: "3px",
+          borderRadius: "100px",
+          background: "rgba(255,255,255,0.06)",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          ref={barRef}
+          style={{
+            height: "100%",
+            borderRadius: "100px",
+            background: "linear-gradient(90deg, #2d7fff 0%, #6062ff 100%)",
+            width: barFilled ? `${skill.level}%` : "0%",
+            transition: "width 1.4s cubic-bezier(0.25, 1, 0.5, 1)",
+            boxShadow: hovered ? "0 0 8px rgba(45,127,255,0.5)" : "none",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 
-            <div className="rounded-2xl bg-primary/10 border border-primary/20 p-5 text-center">
-              <h4 className="text-4xl font-black text-primary">100+</h4>
-              <p className="text-zinc-400">Projects Done</p>
-            </div>
+// ─── Main Component ───────────────────────────────────────────────────────────
+
+export default function MySkills() {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.08 },
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <section
+      id="skills"
+      ref={ref}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background: "#000",
+        padding: "clamp(80px, 10vw, 130px) clamp(20px, 5%, 60px)",
+      }}
+    >
+      <FloatingShapes />
+
+      <div
+        style={{ position: "relative", maxWidth: "1140px", margin: "0 auto" }}
+      >
+        {/* ── Section Header ── */}
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "clamp(48px, 6vw, 72px)",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.7s ease 0.05s",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "'Roboto Mono', monospace",
+              fontSize: "11px",
+              letterSpacing: "0.38em",
+              textTransform: "uppercase",
+              color: "#2d7fff",
+              margin: "0 0 10px 0",
+            }}
+          >
+            // my expertise
+          </p>
+          <h2
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "clamp(32px, 4.5vw, 52px)",
+              fontWeight: 400,
+              color: "#fff",
+              margin: "0 0 16px 0",
+              lineHeight: 1.15,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Skills &{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Experience
+            </span>
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Roboto Mono', monospace",
+              fontSize: "13px",
+              color: "rgba(255,255,255,0.32)",
+              maxWidth: "440px",
+              margin: "0 auto",
+              lineHeight: 1.8,
+              letterSpacing: "0.02em",
+            }}
+          >
+            Using modern technologies to create responsive, high-performance,
+            and scalable web applications.
+          </p>
+        </div>
+
+        {/* ── Two Column Grid ── */}
+        <div
+          className="skills-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: "clamp(32px, 5vw, 64px)",
+            alignItems: "start",
+          }}
+        >
+          {/* LEFT — Skill Cards */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "10px",
+            }}
+          >
+            {skills.map((skill, i) => (
+              <SkillCard
+                key={skill.name}
+                skill={skill}
+                index={i}
+                sectionVisible={visible}
+              />
+            ))}
           </div>
 
-          <button className="w-full py-4 rounded-2xl bg-primary text-white font-semibold hover:scale-[1.02] transition-all duration-300">
-            Hire Me →
-          </button>
-        </motion.div>
+          {/* RIGHT — Info Panel */}
+          <div
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateX(0)" : "translateX(28px)",
+              transition: "all 0.8s ease 0.25s",
+            }}
+          >
+            {/* Panel card */}
+            <div
+              style={{
+                borderRadius: "20px",
+                border: "1px solid rgba(255,255,255,0.07)",
+                background: "rgba(255,255,255,0.02)",
+                padding: "clamp(24px, 4vw, 36px)",
+                backdropFilter: "blur(12px)",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              {/* Inner gradient accent */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  width: "260px",
+                  height: "260px",
+                  background:
+                    "radial-gradient(circle at top right, rgba(45,127,255,0.07) 0%, transparent 65%)",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Heading */}
+              <h3
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "clamp(22px, 2.8vw, 34px)",
+                  fontWeight: 400,
+                  color: "#fff",
+                  margin: "0 0 16px 0",
+                  lineHeight: 1.2,
+                  position: "relative",
+                }}
+              >
+                Building Fast & Scalable
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {" "}
+                  Web Applications
+                </span>
+              </h3>
+
+              <p
+                style={{
+                  fontWeight: 300,
+                  fontSize: "15px",
+                  lineHeight: 1.9,
+                  color: "rgba(255,255,255,0.38)",
+                  letterSpacing: "0.025em",
+                  margin: "0 0 32px 0",
+                  position: "relative",
+                }}
+              >
+                I work with modern web technologies to develop fast, responsive,
+                and scalable applications. From frontend UI to backend logic, I
+                make sure everything works smoothly, performs well, and delivers
+                a clean user experience that supports real business goals.
+              </p>
+
+              {/* Stats 2×2 */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "10px",
+                  marginBottom: "28px",
+                  position: "relative",
+                }}
+              >
+                {stats.map((s, i) => (
+                  <StatBox key={i} stat={s} index={i} visible={visible} />
+                ))}
+              </div>
+
+              {/* CTA */}
+              <a
+                href="#contact"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  width: "100%",
+                  padding: "14px 24px",
+                  borderRadius: "100px",
+                  background:
+                    "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",
+                  color: "#fff",
+                  fontSize: "12px",
+                  fontWeight: 500,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  boxShadow: "0 4px 24px rgba(45,127,255,0.28)",
+                  transition: "transform 0.25s ease, box-shadow 0.25s ease",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 32px rgba(45,127,255,0.42)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 24px rgba(45,127,255,0.28)";
+                }}
+              >
+                Hire Me
+                <HiArrowSmallRight size={18} />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
-};
+}
 
-export default MySkills;
+// ─── Stat Box ─────────────────────────────────────────────────────────────────
+
+function StatBox({ stat, index, visible }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        borderRadius: "14px",
+        border: `1px solid ${hovered ? "rgba(45,127,255,0.30)" : "rgba(45,127,255,0.14)"}`,
+        background: hovered ? "rgba(45,127,255,0.08)" : "rgba(45,127,255,0.04)",
+        padding: "18px 14px",
+        textAlign: "center",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(12px)",
+        transition: `opacity 0.55s ease ${0.4 + index * 0.07}s, transform 0.3s ease, border-color 0.3s, background 0.3s`,
+        cursor: "default",
+      }}
+    >
+      <p
+        style={{
+          fontSize: "clamp(22px, 2.5vw, 30px)",
+          fontWeight: 600,
+          background: "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          margin: "0 0 4px 0",
+        }}
+      >
+        {stat.value}
+      </p>
+      <p
+        style={{
+          fontSize: "10px",
+          color: "rgba(255,255,255,0.30)",
+          margin: 0,
+          letterSpacing: "0.04em",
+        }}
+      >
+        {stat.label}
+      </p>
+    </div>
+  );
+}
