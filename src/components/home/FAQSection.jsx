@@ -137,6 +137,7 @@ function FloatingShapes() {
         />
       </svg>
 
+
       {/* ── Question mark outline — bottom-left ── */}
       <svg
         className="hidden lg:block"
