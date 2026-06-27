@@ -5,10 +5,10 @@ import { Link } from "react-router";
 // ── IMAGE POOLS ───────────────────────────────────────────────────────────────
 // Desktop: 4 cols (all arrays used) | Mobile: 2 cols (col1 + col2 only)
 const col1Images = [
-  "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&q=70", // Website Design
-  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=70", // Coding
-  "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&q=70", // Web Development
-  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=70", // Responsive Design
+  "/hero-images/bg-1.jpg",
+  "/hero-images/bg-2.jpg",
+  "/hero-images/bg-3.jpg",
+  "/hero-images/bg-4.jpg",
 ];
 
 const col2Images = [
