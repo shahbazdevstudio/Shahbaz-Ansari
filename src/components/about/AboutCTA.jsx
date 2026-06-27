@@ -1,9 +1,7 @@
-/**
- * AboutCTA.jsx  — Component 3 / 3
- * Services I offer · Final hire-me CTA strip
- */
-
+import { Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { HiArrowSmallRight } from "react-icons/hi2";
+import { Link } from "react-router";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -13,128 +11,42 @@ const SERVICES = [
     title: "Frontend Development",
     desc: "React, Next.js, Tailwind CSS — responsive, accessible, performant. I build interfaces that feel as fast as they look.",
     tags: ["React", "Next.js", "Tailwind", "TypeScript"],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
+    icon: "/icons/code.svg",
   },
   {
     num: "02",
     title: "Backend & APIs",
     desc: "Node.js, Express, MongoDB REST APIs built with auth, validation, and scalability from the start.",
     tags: ["Node.js", "Express", "MongoDB", "JWT"],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <ellipse cx="12" cy="5" rx="9" ry="3" />
-        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-      </svg>
-    ),
+    icon: "/icons/database-accent.svg",
   },
   {
     num: "03",
     title: "UI / UX Design",
     desc: "Figma mockups to browser pixel-perfect. I design systems, component libraries, and interaction flows.",
     tags: ["Figma", "Design Systems", "Framer"],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <circle cx="12" cy="12" r="6" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
+    icon: "/icons/target-accent.svg",
   },
   {
     num: "04",
     title: "Performance Audit",
     desc: "Core Web Vitals, bundle analysis, lazy loading strategies — I'll find the bottlenecks and fix them.",
     tags: ["Lighthouse", "Web Vitals", "SEO"],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-      </svg>
-    ),
+    icon: "/icons/bolt-accent.svg",
   },
   {
     num: "05",
     title: "SaaS / Dashboard",
     desc: "Data-heavy apps, role-based auth, real-time features, and chart-heavy dashboards for B2B products.",
     tags: ["React", "Charts", "Auth", "Real-time"],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-        <path d="M7 8h2m2 0h6M7 12h4m2 0h4" />
-      </svg>
-    ),
+    icon: "/icons/monitor-code.svg",
   },
   {
     num: "06",
     title: "Site Redesign",
     desc: "Audit existing sites and rebuild them to a significantly higher standard of design, speed, and conversion.",
     tags: ["Redesign", "Responsive", "CRO"],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 20h9" />
-        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
-      </svg>
-    ),
+    icon: "/icons/edit-pencil.svg",
   },
 ];
 
@@ -184,77 +96,40 @@ function FloatingShapes() {
       />
 
       {/* Code brackets — top-right */}
-      <svg
+      <img
+        src="/icons/code.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           top: "52px",
           right: "5%",
-          opacity: 0.11,
+          opacity: 0.1,
           animation: "floatA 9s ease-in-out infinite",
         }}
         width="90"
         height="70"
-        viewBox="0 0 90 70"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="acbg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#6062ff" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        <polyline
-          points="32,8 8,35 32,62"
-          stroke="url(#acbg)"
-          strokeWidth="2.5"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <polyline
-          points="58,8 82,35 58,62"
-          stroke="url(#acbg)"
-          strokeWidth="2.5"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+        alt="code"
+      />
 
       {/* Hexagon — bottom-left */}
-      <svg
+      <img
+        src="/icons/geometric-shape.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           bottom: "72px",
           left: "4%",
-          opacity: 0.1,
+          opacity: 0.05,
           animation: "floatB 11s ease-in-out infinite",
         }}
         width="90"
         height="90"
-        viewBox="0 0 90 90"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="achex" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6062ff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#2d7fff" stopOpacity="0.4" />
-          </linearGradient>
-        </defs>
-        <polygon points="45,4 82,25 82,65 45,86 8,65 8,25" fill="url(#achex)" />
-        <polygon
-          points="45,16 72,30.5 72,59.5 45,74 18,59.5 18,30.5"
-          fill="none"
-          stroke="#2d7fff"
-          strokeWidth="0.9"
-          strokeOpacity="0.45"
-        />
-      </svg>
+        alt="geometric-shape"
+      />
 
       {/* Dashed ring — left mid */}
-      <svg
+      <img
+        src="/icons/rings.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
@@ -265,66 +140,22 @@ function FloatingShapes() {
         }}
         width="140"
         height="140"
-        viewBox="0 0 140 140"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="acrg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        <circle
-          cx="70"
-          cy="70"
-          r="66"
-          stroke="url(#acrg)"
-          strokeWidth="1.4"
-          strokeDasharray="8 5"
-        />
-        <circle
-          cx="70"
-          cy="70"
-          r="44"
-          stroke="#2d7fff"
-          strokeWidth="0.7"
-          strokeOpacity="0.30"
-        />
-        <circle cx="70" cy="4" r="4" fill="#2d7fff" />
-        <circle cx="136" cy="70" r="4" fill="#6062ff" />
-      </svg>
+        alt="rings"
+      />
 
       {/* Dot cluster — right */}
-      <svg
+      <img
+        src="/icons/dots.svg"
         className="hidden xl:block"
-        style={{ position: "absolute", top: "22%", right: "1%", opacity: 0.09 }}
+        style={{ position: "absolute", top: "22%", right: "1%", opacity: 0.1 }}
         width="68"
         height="112"
-        viewBox="0 0 68 112"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="acdg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        {[0, 1, 2, 3, 4, 5].map((i) =>
-          [0, 1, 2].map((j) => (
-            <circle
-              key={`${i}-${j}`}
-              cx={j * 22 + 11}
-              cy={i * 22 + 11}
-              r="2.2"
-              fill="url(#acdg)"
-              opacity={1 - i * 0.12}
-            />
-          )),
-        )}
-      </svg>
+        alt="dots"
+      />
 
       {/* Plus — top-left */}
-      <svg
+      <img
+        src="/icons/plus-accent.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
@@ -335,36 +166,24 @@ function FloatingShapes() {
         }}
         width="32"
         height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-      >
-        <rect x="12" y="0" width="8" height="32" rx="4" fill="#2d7fff" />
-        <rect x="0" y="12" width="32" height="8" rx="4" fill="#6062ff" />
-      </svg>
+        alt="plus"
+      />
 
       {/* Triangle — bottom-right */}
-      <svg
+      <img
+        src="/icons/triangle-accent.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           bottom: "10%",
           right: "7%",
-          opacity: 0.08,
+          opacity: 0.18,
           animation: "floatA 10s ease-in-out infinite 2s",
         }}
         width="56"
         height="56"
-        viewBox="0 0 56 56"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="actr" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        <polygon points="28,3 52,50 4,50" fill="url(#actr)" />
-      </svg>
+        alt="triangle"
+      />
     </div>
   );
 }
@@ -454,16 +273,15 @@ function ServiceCard({ svc, index, visible }) {
             position: "relative",
           }}
         >
-          {svc.icon}
+          <img src={svc.icon} alt={svc.title} />
         </span>
       </div>
 
       {/* Title */}
       <p
         style={{
-          fontFamily: "'Oswald',sans-serif",
           fontSize: "clamp(14px,1.6vw,16px)",
-          fontWeight: 500,
+          fontWeight: 400,
           letterSpacing: "0.05em",
           textTransform: "uppercase",
           color: "#fff",
@@ -723,9 +541,8 @@ export default function AboutCTA() {
               </h3>
               <p
                 style={{
-                  fontFamily: "'Oswald',sans-serif",
-                  fontWeight: 300,
-                  fontSize: "15px",
+                  fontWeight: 400,
+                  fontSize: "14px",
                   lineHeight: 1.85,
                   color: "rgba(255,255,255,0.38)",
                   letterSpacing: "0.025em",
@@ -757,7 +574,6 @@ export default function AboutCTA() {
                   background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
                   color: "#fff",
                   textDecoration: "none",
-                  fontFamily: "'Oswald',sans-serif",
                   fontSize: "12px",
                   fontWeight: 500,
                   letterSpacing: "0.10em",
@@ -778,22 +594,10 @@ export default function AboutCTA() {
                 }}
               >
                 Start a Project
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+                <HiArrowSmallRight size={16} />
               </a>
-              <a
-                href="/resume.pdf"
-                download
+              <Link
+                to={"/projects"}
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -804,7 +608,6 @@ export default function AboutCTA() {
                   background: "rgba(255,255,255,0.03)",
                   color: "rgba(255,255,255,0.60)",
                   textDecoration: "none",
-                  fontFamily: "'Oswald',sans-serif",
                   fontSize: "12px",
                   fontWeight: 500,
                   letterSpacing: "0.10em",
@@ -824,34 +627,13 @@ export default function AboutCTA() {
                   e.currentTarget.style.color = "rgba(255,255,255,0.60)";
                 }}
               >
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                Download CV
-              </a>
+                <Play size={14} style={{ color: "#2d7fff" }} />
+                View Portfolio
+              </Link>
             </div>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media(min-width:768px){ .services-grid{ grid-template-columns:repeat(3,1fr) !important; } }
-        @media(max-width:600px){ .services-grid{ grid-template-columns:1fr !important; } }
-        @keyframes floatA{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(4deg)}}
-        @keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(-5deg)}}
-        @media(prefers-reduced-motion:reduce){*{animation:none!important}}
-      `}</style>
     </section>
   );
 }

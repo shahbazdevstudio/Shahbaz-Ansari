@@ -5,32 +5,32 @@ import { HiArrowSmallRight } from "react-icons/hi2";
 
 const FAQS = [
   {
-    q: "What technologies do you work with?",
-    a: "I mainly work with React, Next.js, Node.js, MongoDB, Express, and Tailwind CSS to build modern websites and web applications.",
+    q: "Are these reviews real?",
+    a: "Yes. All reviews are based on feedback from real clients I've worked with on freelance platforms and direct projects.",
+  },  
+  {
+    q: "Where do these reviews come from?",
+    a: "Reviews come from platforms like Fiverr, Upwork, Google, LinkedIn, and direct client collaborations.",
   },
   {
-    q: "Do you take freelance projects?",
-    a: "Yes. I work with businesses, startups, and individuals on both small and large projects.",
+  q: "Do you offer revisions if needed?",
+  a: "Yes. I work closely with clients throughout the project and make revisions when needed to ensure the final result meets their expectations.",
+},
+  {
+    q: "What do clients usually appreciate most?",
+    a: "Clients often mention clear communication, clean code, attention to detail, and on-time delivery.",
   },
   {
-    q: "How long does a project take?",
-    a: "It depends on the project. A simple website can take a few days, while larger web applications may take a few weeks.",
+    q: "Have you worked with international clients?",
+    a: "Yes. I've successfully completed projects for clients from different countries and industries.",
   },
   {
-    q: "Do you work with clients outside Pakistan?",
-    a: "Yes. I work with clients from different countries and communicate through email, WhatsApp, and video calls.",
+    q: "What types of projects are featured in these reviews?",
+    a: "The reviews cover websites, web applications, landing pages, dashboards, and custom development projects.",
   },
   {
-    q: "How do we start working together?",
-    a: "Just send me a message with your project details. We'll discuss your requirements, timeline, and budget before getting started.",
-  },
-  {
-    q: "Do you provide support after launch?",
-    a: "Yes. I provide support after launch to fix issues and make sure everything runs smoothly.",
-  },
-  {
-    q: "Can you improve my existing website?",
-    a: "Absolutely. I can redesign, optimize, or add new features to your current website.",
+    q: "Can I contact you after reading the reviews?",
+    a: "Absolutely. If you'd like to discuss a project, feel free to get in touch anytime.",
   },
 ];
 
@@ -330,7 +330,7 @@ function FAQItem({ item, index, isOpen, onToggle, totalVisible }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function ServicesFAQ() {
+export default function TestimonialFAQ() {
   const [open, setOpen] = useState(null);
   const [visible, setVisible] = useState(false);
   const ref = (el) => {
@@ -487,7 +487,7 @@ export default function ServicesFAQ() {
             }}
           >
             Get in Touch
-            <HiArrowSmallRight size={14}/>
+            <HiArrowSmallRight size={14} />
           </a>
         </div>
       </div>

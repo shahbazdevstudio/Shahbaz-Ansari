@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { HiArrowSmallRight } from "react-icons/hi2";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -97,80 +98,22 @@ function FloatingShapes() {
       />
 
       {/* ── Code bracket < > — top-right (unique: FAQ / Q&A motif) ── */}
-      <svg
-        className="hidden lg:block"
-        style={{
-          position: "absolute",
-          top: "44px",
-          right: "5%",
-          opacity: 0.3,
-          animation: "floatA 9s ease-in-out infinite",
-        }}
-        width="90"
-        height="70"
-        viewBox="0 0 90 70"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="fbg1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#6062ff" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        {/* < bracket */}
-        <polyline
-          points="32,8 8,35 32,62"
-          stroke="url(#fbg1)"
-          strokeWidth="2.5"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        {/* > bracket */}
-        <polyline
-          points="58,8 82,35 58,62"
-          stroke="url(#fbg1)"
-          strokeWidth="2.5"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-
+      <img
+        src="/icons/code-brackets.svg"
+        alt="code-brackets"
+        className="hidden lg:block absolute top-[44px] right-[5%] opacity-30 animate-floatA"
+      />
 
       {/* ── Question mark outline — bottom-left ── */}
-      <svg
-        className="hidden lg:block"
-        style={{
-          position: "absolute",
-          bottom: "64px",
-          left: "4%",
-          opacity: 0.4,
-          animation: "floatB 11s ease-in-out infinite",
-        }}
-        width="52"
-        height="72"
-        viewBox="0 0 52 72"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="fqg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6062ff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#2d7fff" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M14 18 C14 10 38 6 38 20 C38 30 26 30 26 42"
-          stroke="url(#fqg)"
-          strokeWidth="2.5"
-          fill="none"
-          strokeLinecap="round"
-        />
-        <circle cx="26" cy="56" r="3.5" fill="#6062ff" fillOpacity="0.7" />
-      </svg>
+      <img
+        src="/icons/curved-path-node.svg"
+        alt="question-mark"
+        className="hidden lg:block absolute bottom-[64px] left-[4%] opacity-30 animate-floatB"
+      />
 
       {/* ── Dashed ring + 3 orbit dots — left mid ── */}
-      <svg
+      <img
+        src="/icons/rings.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
@@ -181,127 +124,38 @@ function FloatingShapes() {
         }}
         width="148"
         height="148"
-        viewBox="0 0 148 148"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="frg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        <circle
-          cx="74"
-          cy="74"
-          r="70"
-          stroke="url(#frg)"
-          strokeWidth="1.4"
-          strokeDasharray="8 5"
-        />
-        <circle
-          cx="74"
-          cy="74"
-          r="48"
-          stroke="#2d7fff"
-          strokeWidth="0.7"
-          strokeOpacity="0.32"
-        />
-        <circle cx="74" cy="4" r="4" fill="#2d7fff" />
-        <circle cx="144" cy="74" r="4" fill="#6062ff" />
-        <circle cx="74" cy="144" r="3" fill="#2d7fff" fillOpacity="0.5" />
-      </svg>
-
-
-      {/* ── Horizontal lines (FAQ list motif) — right mid ── */}
-      <svg
-        className="hidden xl:block"
-        style={{
-          position: "absolute",
-          top: "30%",
-          right: "2%",
-          opacity: 0.08,
-          animation: "floatA 10s ease-in-out infinite 1s",
-        }}
-        width="72"
-        height="56"
-        viewBox="0 0 72 56"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="fhg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" stopOpacity="0.3" />
-          </linearGradient>
-        </defs>
-        <line
-          x1="0"
-          y1="8"
-          x2="72"
-          y2="8"
-          stroke="url(#fhg)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <line
-          x1="0"
-          y1="22"
-          x2="52"
-          y2="22"
-          stroke="url(#fhg)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <line
-          x1="0"
-          y1="36"
-          x2="62"
-          y2="36"
-          stroke="url(#fhg)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <line
-          x1="0"
-          y1="50"
-          x2="40"
-          y2="50"
-          stroke="url(#fhg)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
+        alt="ring"
+      />
 
       {/* ── Gradient dot cluster — bottom-center-left ── */}
-      <svg
+      <img
+        src="icons/star-cross.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
           bottom: "8%",
-          left: "38%",
+          right: "8%",
           opacity: 0.1,
         }}
         width="88"
         height="22"
-        viewBox="0 0 88 22"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="frdg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        {[0, 1, 2, 3].map((j) => (
-          <circle
-            key={j}
-            cx={j * 22 + 11}
-            cy="11"
-            r="2.2"
-            fill="url(#frdg)"
-            opacity={1 - j * 0.18}
-          />
-        ))}
-      </svg>
+        alt="star"
+      />
+
+      {/* ── Gradient dot cluster — bottom-center-left ── */}
+      <img
+        src="icons/ball.svg"
+        className="hidden xl:block"
+        style={{
+          position: "absolute",
+          top: "8%",
+          left: "8%",
+          opacity: 0.1,
+        }}
+        width="88"
+        height="22"
+        alt="star"
+      />
     </div>
   );
 }
@@ -617,18 +471,7 @@ export default function FAQSection() {
             }}
           >
             Get in Touch
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+          <HiArrowSmallRight size={18}/>
           </a>
         </div>
       </div>

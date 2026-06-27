@@ -1,10 +1,5 @@
-/**
- * ServicesHero.jsx  — Component 1 / 3
- * Full-width hero for the Services page.
- * Theme: black bg · #2d7fff / #6062ff gradient · Cinzel / Oswald / Roboto Mono
- */
-
 import { useEffect, useRef, useState } from "react";
+import { HiArrowSmallRight } from "react-icons/hi2";
 
 // ─── Floating Shapes ──────────────────────────────────────────────────────────
 
@@ -65,225 +60,79 @@ function FloatingShapes() {
         }}
       />
 
-      {/* Gear / cog ring — top-right (services motif) */}
-      <svg
-        className="hidden lg:block"
-        style={{
-          position: "absolute",
-          top: "44px",
-          right: "5.5%",
-          opacity: 0.11,
-          animation: "floatA 12s ease-in-out infinite",
-        }}
-        width="108"
-        height="108"
-        viewBox="0 0 108 108"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="shg1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#6062ff" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        <circle
-          cx="54"
-          cy="54"
-          r="50"
-          stroke="url(#shg1)"
-          strokeWidth="1.5"
-          strokeDasharray="6 4"
-        />
-        <circle
-          cx="54"
-          cy="54"
-          r="34"
-          stroke="#2d7fff"
-          strokeWidth="1"
-          strokeOpacity="0.40"
-        />
-        <circle
-          cx="54"
-          cy="54"
-          r="14"
-          fill="rgba(45,127,255,0.10)"
-          stroke="#6062ff"
-          strokeWidth="1"
-          strokeOpacity="0.50"
-        />
-        {/* Gear teeth stubs */}
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((deg, i) => (
-          <line
-            key={i}
-            x1={54 + 34 * Math.cos((deg * Math.PI) / 180)}
-            y1={54 + 34 * Math.sin((deg * Math.PI) / 180)}
-            x2={54 + 50 * Math.cos((deg * Math.PI) / 180)}
-            y2={54 + 50 * Math.sin((deg * Math.PI) / 180)}
-            stroke="#2d7fff"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeOpacity="0.4"
-          />
-        ))}
-      </svg>
-
       {/* Diamond — bottom-left */}
-      <svg
+      <img
+        src="/icons/diamond.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           bottom: "72px",
           left: "4.5%",
-          opacity: 0.1,
+          opacity: 0.05,
           animation: "floatB 9s ease-in-out infinite",
         }}
         width="84"
         height="84"
-        viewBox="0 0 84 84"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="shd1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6062ff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#2d7fff" stopOpacity="0.4" />
-          </linearGradient>
-        </defs>
-        <rect
-          x="42"
-          y="3"
-          width="56"
-          height="56"
-          rx="6"
-          transform="rotate(45 42 3)"
-          fill="url(#shd1)"
-        />
-        <rect
-          x="42"
-          y="15"
-          width="36"
-          height="36"
-          rx="3"
-          transform="rotate(45 42 15)"
-          fill="none"
-          stroke="#2d7fff"
-          strokeWidth="0.8"
-          strokeOpacity="0.45"
-        />
-      </svg>
+        alt="diamond"
+      />
 
       {/* Dashed ring + orbit dots — left mid */}
-      <svg
+      <img
+        src="/icons/rings.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
           top: "35%",
           left: "-46px",
-          opacity: 0.12,
+          opacity: 0.2,
           animation: "floatA 14s ease-in-out infinite reverse",
         }}
         width="150"
         height="150"
-        viewBox="0 0 150 150"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="shrg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        <circle
-          cx="75"
-          cy="75"
-          r="71"
-          stroke="url(#shrg)"
-          strokeWidth="1.4"
-          strokeDasharray="8 5"
-        />
-        <circle
-          cx="75"
-          cy="75"
-          r="49"
-          stroke="#2d7fff"
-          strokeWidth="0.7"
-          strokeOpacity="0.30"
-        />
-        <circle cx="75" cy="4" r="4" fill="#2d7fff" />
-        <circle cx="146" cy="75" r="4" fill="#6062ff" />
-        <circle cx="75" cy="146" r="3" fill="#2d7fff" fillOpacity="0.5" />
-      </svg>
+        alt="ring"
+      />
 
       {/* Dot cluster — right */}
-      <svg
+      <img
+        src="/icons/dots.svg"
         className="hidden xl:block"
-        style={{ position: "absolute", top: "28%", right: "1%", opacity: 0.09 }}
+        style={{ position: "absolute", top: "28%", right: "1%", opacity: 0.2 }}
         width="68"
         height="112"
-        viewBox="0 0 68 112"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="shdg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        {[0, 1, 2, 3, 4, 5].map((i) =>
-          [0, 1, 2].map((j) => (
-            <circle
-              key={`${i}-${j}`}
-              cx={j * 22 + 11}
-              cy={i * 22 + 11}
-              r="2.2"
-              fill="url(#shdg)"
-              opacity={1 - i * 0.12}
-            />
-          )),
-        )}
-      </svg>
+        alt="dots"
+      />
 
       {/* Plus — top-left area */}
-      <svg
+      <img
+        src="/icons/plus-accent.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           top: "15%",
           left: "10%",
-          opacity: 0.08,
+          opacity: 0.1,
           animation: "floatB 8s ease-in-out infinite 1s",
         }}
         width="34"
         height="34"
-        viewBox="0 0 34 34"
-        fill="none"
-      >
-        <rect x="13" y="0" width="8" height="34" rx="4" fill="#2d7fff" />
-        <rect x="0" y="13" width="34" height="8" rx="4" fill="#6062ff" />
-      </svg>
+        alt="plus"
+      />
 
       {/* Triangle — bottom-right */}
-      <svg
+      <img
+        src="/icons/triangle-accent.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           bottom: "14%",
           right: "8%",
-          opacity: 0.08,
+          opacity: 0.1,
           animation: "floatA 10s ease-in-out infinite 2s",
         }}
         width="56"
         height="56"
-        viewBox="0 0 56 56"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="shtr" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        <polygon points="28,3 53,50 3,50" fill="url(#shtr)" />
-      </svg>
+        alt="triangle"
+      />
     </div>
   );
 }
@@ -311,7 +160,6 @@ function StatBadge({ value, label, delay, visible }) {
     >
       <p
         style={{
-          fontFamily: "'Cinzel',serif",
           fontSize: "clamp(22px,2.8vw,34px)",
           fontWeight: 600,
           background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
@@ -384,6 +232,7 @@ export default function ServicesHeroSection() {
           }}
         >
           <p
+            className="!mt-10 md:!mt-0"
             style={{
               fontFamily: "'Roboto Mono',monospace",
               fontSize: "11px",
@@ -427,9 +276,8 @@ export default function ServicesHeroSection() {
 
           <p
             style={{
-              fontFamily: "'Oswald',sans-serif",
               fontWeight: 300,
-              fontSize: "clamp(15px,1.8vw,17px)",
+              fontSize: "clamp(15px,1.5vw,13px)",
               lineHeight: 1.9,
               color: "rgba(255,255,255,0.40)",
               letterSpacing: "0.025em",
@@ -437,9 +285,9 @@ export default function ServicesHeroSection() {
               maxWidth: "560px",
             }}
           >
-            From a pixel-perfect landing page to a full-scale web application —
-            I deliver fast, scalable, and beautifully crafted digital solutions
-            tailored to your business.
+            From landing pages to full-stack web applications, I build fast,
+            scalable, and user-focused digital products that help businesses
+            grow online.
           </p>
 
           {/* CTA row */}
@@ -462,7 +310,6 @@ export default function ServicesHeroSection() {
                 background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
                 color: "#fff",
                 textDecoration: "none",
-                fontFamily: "'Oswald',sans-serif",
                 fontSize: "12px",
                 fontWeight: 500,
                 letterSpacing: "0.10em",
@@ -482,18 +329,7 @@ export default function ServicesHeroSection() {
               }}
             >
               Explore Services
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              <HiArrowSmallRight size={18} />
             </a>
             <a
               href="#contact"
@@ -507,7 +343,6 @@ export default function ServicesHeroSection() {
                 background: "rgba(255,255,255,0.03)",
                 color: "rgba(255,255,255,0.65)",
                 textDecoration: "none",
-                fontFamily: "'Oswald',sans-serif",
                 fontSize: "12px",
                 fontWeight: 500,
                 letterSpacing: "0.10em",
@@ -554,10 +389,10 @@ export default function ServicesHeroSection() {
           <p
             style={{
               fontFamily: "'Roboto Mono',monospace",
-              fontSize: "10px",
+              fontSize: "12px",
               letterSpacing: "0.22em",
               textTransform: "uppercase",
-              color: "rgba(45,127,255,0.50)",
+              color: "rgba(45, 125, 255, 0.65)",
               margin: 0,
               whiteSpace: "nowrap",
             }}
@@ -585,19 +420,19 @@ export default function ServicesHeroSection() {
           }}
         >
           <StatBadge
-            value="40+"
-            label="Projects Delivered"
-            delay={0.55}
-            visible={visible}
-          />
-          <StatBadge
             value="5+"
             label="Years Experience"
             delay={0.62}
             visible={visible}
           />
           <StatBadge
-            value="15+"
+            value="50+"
+            label="Projects Delivered"
+            delay={0.55}
+            visible={visible}
+          />
+          <StatBadge
+            value="35+"
             label="Happy Clients"
             delay={0.69}
             visible={visible}
@@ -610,12 +445,6 @@ export default function ServicesHeroSection() {
           />
         </div>
       </div>
-
-      <style>{`
-        @keyframes floatA{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(4deg)}}
-        @keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(-5deg)}}
-        @media(prefers-reduced-motion:reduce){*{animation:none!important}}
-      `}</style>
     </section>
   );
 }

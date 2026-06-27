@@ -7,6 +7,7 @@ import TestimonialsGrid from '../components/testimonials/TestimonialsGrid'
 import VideoTestimonials from '../components/testimonials/VideoTestimonials'
 import ContactHeroSection from '../components/contact/HeroSection'
 import ContactSection from '../components/home/Contact'
+import TestimonialFAQ from '../components/testimonials/TestimonialFAQ'
 
 const TestimonialsPage = () => {
   return (
@@ -14,8 +15,8 @@ const TestimonialsPage = () => {
       <Navbar/>
       <TestimonialsHeroSection />
       <TestimonialSwiper/>
-      <TestimonialsGrid />
       <ContactSection />
+      <TestimonialFAQ/>
       <Footer />
     </>
   )

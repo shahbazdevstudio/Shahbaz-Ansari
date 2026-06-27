@@ -1,35 +1,40 @@
 import { useState } from "react";
+import { HiArrowSmallRight } from "react-icons/hi2";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const FAQS = [
   {
-    q: "What technologies do you specialize in?",
-    a: "I primarily work with React, Next.js, Node.js, Express, MongoDB, and Tailwind CSS. For animations I use Framer Motion, and I'm comfortable working across the full stack — from database design to polished UI.",
+    q: "How did you get started in web development?",
+    a: "I started learning web development in 2021 with HTML, CSS, and JavaScript. Over time, I moved into React, Node.js, and full-stack development by building real projects and working with clients.",
   },
   {
-    q: "Are you available for freelance projects?",
-    a: "Yes, I'm currently open to freelance work. Whether it's a short-term feature build, a full website from scratch, or an ongoing retainer — I'm happy to discuss what fits your needs and timeline.",
+    q: "What kind of projects do you work on?",
+    a: "I build modern websites, business platforms, dashboards, landing pages, and full-stack web applications tailored to client needs.",
   },
   {
-    q: "How long does a typical project take?",
-    a: "It depends on scope. A landing page takes 3–5 days. A full web app typically takes 2–4 weeks. After our initial call I'll give you a detailed timeline with milestones.",
+    q: "What technologies do you use most?",
+    a: "My core stack includes React, Next.js, TypeScript, Node.js, Express, MongoDB, and Tailwind CSS.",
   },
   {
-    q: "Do you work with international clients?",
-    a: "Absolutely. I work with clients worldwide via async communication and scheduled video calls. Time zones are never a blocker.",
-  },
-  {
-    q: "What does your development process look like?",
-    a: "Discovery → Design → Development → Delivery. I share iterative builds throughout, so you're never left waiting to see progress.",
-  },
-  {
-    q: "Do you provide post-launch support?",
-    a: "Yes. I offer a 2-week post-launch bug-fix window at no extra charge. For ongoing work we can set up a monthly retainer or per-task arrangement.",
+    q: "Do you work with clients worldwide?",
+    a: "Yes. I work with clients from different countries and communicate through email, chat, and video calls when needed.",
   },
   {
     q: "Can you redesign an existing website?",
-    a: "Definitely. I can audit your current site, identify bottlenecks or design issues, and rebuild it to a significantly higher standard.",
+    a: "Absolutely. I can improve the design, performance, responsiveness, and overall user experience of existing websites.",
+  },
+  {
+    q: "Do you only build frontend websites?",
+    a: "No. I work across the full stack, including frontend development, backend APIs, databases, authentication, and deployment.",
+  },
+  {
+    q: "What is most important to you in a project?",
+    a: "Clean code, strong performance, clear communication, and building something that delivers real value to the client.",
+  },
+  {
+    q: "Are you available for freelance work?",
+    a: "Yes. I'm currently open to freelance projects, long-term collaborations, and full-time opportunities.",
   },
 ];
 
@@ -94,48 +99,24 @@ function FloatingShapes() {
       />
 
       {/* ── Code bracket < > — top-right (unique: FAQ / Q&A motif) ── */}
-      <svg
+      <img
+      src="/icons/code.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           top: "44px",
           right: "5%",
-          opacity: 0.3,
+          opacity: 0.1,
           animation: "floatA 9s ease-in-out infinite",
         }}
         width="90"
         height="70"
-        viewBox="0 0 90 70"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="fbg1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#6062ff" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        {/* < bracket */}
-        <polyline
-          points="32,8 8,35 32,62"
-          stroke="url(#fbg1)"
-          strokeWidth="2.5"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        {/* > bracket */}
-        <polyline
-          points="58,8 82,35 58,62"
-          stroke="url(#fbg1)"
-          strokeWidth="2.5"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+        alt="code"
+      />
 
       {/* ── Question mark outline — bottom-left ── */}
-      <svg
+      <img
+        src="/icons/curved-path-node.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
@@ -146,27 +127,12 @@ function FloatingShapes() {
         }}
         width="52"
         height="72"
-        viewBox="0 0 52 72"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="fqg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6062ff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#2d7fff" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M14 18 C14 10 38 6 38 20 C38 30 26 30 26 42"
-          stroke="url(#fqg)"
-          strokeWidth="2.5"
-          fill="none"
-          strokeLinecap="round"
-        />
-        <circle cx="26" cy="56" r="3.5" fill="#6062ff" fillOpacity="0.7" />
-      </svg>
+        alt="abstract"
+      />
 
       {/* ── Dashed ring + 3 orbit dots — left mid ── */}
-      <svg
+      <img
+        src="icons/rings.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
@@ -179,125 +145,39 @@ function FloatingShapes() {
         height="148"
         viewBox="0 0 148 148"
         fill="none"
-      >
-        <defs>
-          <linearGradient id="frg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        <circle
-          cx="74"
-          cy="74"
-          r="70"
-          stroke="url(#frg)"
-          strokeWidth="1.4"
-          strokeDasharray="8 5"
-        />
-        <circle
-          cx="74"
-          cy="74"
-          r="48"
-          stroke="#2d7fff"
-          strokeWidth="0.7"
-          strokeOpacity="0.32"
-        />
-        <circle cx="74" cy="4" r="4" fill="#2d7fff" />
-        <circle cx="144" cy="74" r="4" fill="#6062ff" />
-        <circle cx="74" cy="144" r="3" fill="#2d7fff" fillOpacity="0.5" />
-      </svg>
-
+        alt="rings"
+      />
 
       {/* ── Horizontal lines (FAQ list motif) — right mid ── */}
-      <svg
+      <img
+        src="/icons/abstract-duo.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
-          top: "30%",
-          right: "2%",
-          opacity: 0.08,
+          top: "15%",
+          left: "2%",
+          opacity: 0.15,
           animation: "floatA 10s ease-in-out infinite 1s",
         }}
         width="72"
         height="56"
-        viewBox="0 0 72 56"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="fhg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" stopOpacity="0.3" />
-          </linearGradient>
-        </defs>
-        <line
-          x1="0"
-          y1="8"
-          x2="72"
-          y2="8"
-          stroke="url(#fhg)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <line
-          x1="0"
-          y1="22"
-          x2="52"
-          y2="22"
-          stroke="url(#fhg)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <line
-          x1="0"
-          y1="36"
-          x2="62"
-          y2="36"
-          stroke="url(#fhg)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <line
-          x1="0"
-          y1="50"
-          x2="40"
-          y2="50"
-          stroke="url(#fhg)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
+        alt="abstract"
+      />
 
       {/* ── Gradient dot cluster — bottom-center-left ── */}
-      <svg
+      <img
+        src="/icons/dots.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
-          bottom: "8%",
-          left: "38%",
+          top: "40%",
+          right: "-2%",
           opacity: 0.1,
         }}
         width="88"
         height="22"
-        viewBox="0 0 88 22"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="frdg" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        {[0, 1, 2, 3].map((j) => (
-          <circle
-            key={j}
-            cx={j * 22 + 11}
-            cy="11"
-            r="2.2"
-            fill="url(#frdg)"
-            opacity={1 - j * 0.18}
-          />
-        ))}
-      </svg>
+        alt="dots"
+      />
     </div>
   );
 }
@@ -613,18 +493,7 @@ export default function AboutFAQSection() {
             }}
           >
             Get in Touch
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            <HiArrowSmallRight size={14}/>
           </a>
         </div>
       </div>

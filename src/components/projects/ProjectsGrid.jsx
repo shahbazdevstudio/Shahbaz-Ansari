@@ -10,123 +10,87 @@ import { FaGithub } from "react-icons/fa";
 
 // ─── Full Projects Data ───────────────────────────────────────────────────────
 
+
 const ALL_PROJECTS = [
   {
     id: "01",
-    title: "GrowMore Trading",
-    category: "Full-Stack",
+    title: "Spike Family",
     description:
-      "Advanced paper trading platform with portfolio tracking, analytics, and real-time market simulation. Users can manage positions, track P&L, and simulate real trades without risk.",
-    image:
-      "https://images.unsplash.com/photo-1642790106117-e829e14a795f?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["React", "Node.js", "MongoDB", "Chart.js", "JWT"],
-    year: "2024",
+      "A modern corporate website designed to showcase business services, company information, and brand credibility through a clean and professional user experience.",
+    image: "/project-1.png",
+    demo: "https://shahbaz-project-1.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-1",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "02",
-    title: "Sellit Marketplace",
-    category: "Full-Stack",
+title: "Health Monitor",
     description:
-      "Modern classified ads marketplace where users can post, manage, and promote listings. Features real-time search, image uploads, and a clean admin dashboard.",
-    image:
-      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["React", "Express", "MongoDB", "Cloudinary"],
-    year: "2024",
+      "A healthcare management platform focused on presenting medical services, health resources, and patient information in a clear and accessible way.",
+    image: "/project-2.png",
+    demo: "https://shahbaz-project-2.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-2",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "03",
-    title: "Crypto Tracker",
-    category: "React",
+    title: "HealthCentreApp",
     description:
-      "Portfolio tracker for crypto assets with live price feeds, interactive charts, profit/loss dashboards, and watchlist management across multiple wallets.",
-    image:
-      "https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["Next.js", "Node.js", "Chart.js", "CoinGecko API"],
-    year: "2023",
+      "A healthcare startup website built to highlight medical solutions, services, and company offerings with a modern and user-friendly design.",
+    image: "/project-3.png",
+    demo: "https://github.com/shahbazansari-dev/shahbaz-project-3",
+    github: "https://shahbaz-project-3.vercel.app/",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "04",
-    title: "Portfolio Website",
-    category: "UI/UX",
+    title: "GYMSTER",
     description:
-      "High-end animated developer portfolio with premium dark UI, smooth CSS transitions, and modular React architecture. Built for performance and design impact.",
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["React", "Tailwind CSS", "Framer Motion"],
-    year: "2024",
+      "A fitness and gym website created to promote training programs, membership plans, and wellness services with an engaging online presence.",
+    image: "/project-4.png",
+    demo: "https://shahbaz-project-4.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-4",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "05",
-    title: "ShopEase E-Commerce",
-    category: "Full-Stack",
+    title: "Angel Launchpad Ventures",
     description:
-      "Feature-complete e-commerce store with Stripe payments, inventory management, product filtering, order tracking, and a custom admin panel for merchants.",
-    image:
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["Next.js", "Stripe", "MongoDB", "Tailwind"],
-    year: "2023",
+      "A startup investment platform that connects entrepreneurs with investors while presenting funding opportunities and venture-related information.",
+    image: "/project-5.png",
+    demo: "https://shahbaz-project-5.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-5",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "06",
-    title: "TaskFlow SaaS",
-    category: "Full-Stack",
+    title: "Angel Launchpad Ventures",
     description:
-      "Project management SaaS with real-time kanban boards, team collaboration, task assignments, time tracking, and Slack notifications via webhooks.",
-    image:
-      "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["React", "Node.js", "Socket.io", "PostgreSQL"],
-    year: "2023",
+      "A startup investment platform that connects entrepreneurs with investors while presenting funding opportunities and venture-related information.",
+    image: "/project-6.png",
+    demo: "https://shahbaz-project-6.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-6",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "07",
-    title: "NexBlog Platform",
-    category: "Next.js",
+    title: "Global CareGivers",
     description:
-      "Full-featured blogging CMS with MDX support, tag filtering, author profiles, newsletter integration, and a clean reading experience optimised for Core Web Vitals.",
-    image:
-      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
-    year: "2022",
+      "A caregiver database platform designed to help users explore caregiver profiles, services, and healthcare support resources efficiently.",
+    image: "/project-7.png",
+    demo: "https://shahbaz-project-7.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-7",
+    tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "08",
-    title: "DevAPI Gateway",
-    category: "API",
+    title: "Fatography",
     description:
-      "RESTful API gateway with rate limiting, OAuth 2.0, Swagger docs, webhook delivery, and a developer dashboard for managing API keys and monitoring usage.",
-    image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["Node.js", "Express", "Redis", "PostgreSQL", "Swagger"],
-    year: "2023",
-  },
-  {
-    id: "09",
-    title: "LandingKit UI",
-    category: "UI/UX",
-    description:
-      "Figma design system and React component library for SaaS landing pages. 40+ components, dark/light themes, and full Storybook documentation.",
-    image:
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=900",
-    demo: "#",
-    github: "#",
-    tech: ["React", "Figma", "Storybook", "Tailwind CSS"],
-    year: "2022",
+      "A photography portfolio website built to showcase creative work, highlight services, and help potential clients connect with the photographer.",
+    image: "/project-8.png",
+    demo: "/https://fatography.co/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-8",
+    tech: ["Rect", "Tailwind", "Express", "MongoDb"],
   },
 ];
 
@@ -502,9 +466,8 @@ function ProjectCard({ project, index, visible }) {
 
         <h3
           style={{
-            fontFamily: "'Cinzel',serif",
             fontSize: "clamp(14px,1.6vw,20px)",
-            fontWeight: 600,
+            fontWeight: 400,
             color: "#fff",
             margin: "0 0 6px 0",
             lineHeight: 1.2,
@@ -528,7 +491,7 @@ function ProjectCard({ project, index, visible }) {
         <p
           style={{
             fontFamily: "'Roboto Mono',monospace",
-            fontSize: "clamp(9px,1vw,10.5px)",
+            fontSize: "clamp(9px,1.2vw,13px)",
             color: "rgba(255,255,255,0.42)",
             lineHeight: 1.75,
             margin: "0 0 16px 0",
@@ -552,7 +515,6 @@ function ProjectCard({ project, index, visible }) {
               alignItems: "center",
               justifyContent: "center",
               gap: "5px",
-              fontFamily: "'Oswald',sans-serif",
               fontSize: "10px",
               fontWeight: 500,
               letterSpacing: "0.09em",
@@ -665,67 +627,63 @@ export default function ProjectsGrid({ activeFilter }) {
       <div
         style={{ position: "relative", maxWidth: "1400px", margin: "0 auto" }}
       >
-        {/* Header */}
+        {/* ── Section Header ── */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "12px",
-            marginBottom: "clamp(32px,4vw,48px)",
+            textAlign: "center",
+            marginBottom: "clamp(48px, 6vw, 72px)",
             opacity: visible ? 1 : 0,
-            transform: visible ? "translateY(0)" : "translateY(16px)",
-            transition: "all 0.6s ease 0.05s",
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.7s ease 0.05s",
           }}
         >
-          <div>
-            <p
-              style={{
-                fontFamily: "'Roboto Mono',monospace",
-                fontSize: "11px",
-                letterSpacing: "0.38em",
-                textTransform: "uppercase",
-                color: "#2d7fff",
-                margin: "0 0 6px 0",
-              }}
-            >
-              // projects
-            </p>
-            <h2
-              style={{
-                fontFamily: "'Cinzel',serif",
-                fontSize: "clamp(26px,3.5vw,40px)",
-                fontWeight: 400,
-                color: "#fff",
-                margin: 0,
-                lineHeight: 1.15,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              {activeFilter === "All"
-                ? "All Projects"
-                : `${activeFilter} Projects`}{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                ({displayed.length})
-              </span>
-            </h2>
-          </div>
           <p
             style={{
-              fontFamily: "'Roboto Mono',monospace",
+              fontFamily: "'Roboto Mono', monospace",
               fontSize: "11px",
-              color: "rgba(255,255,255,0.25)",
-              letterSpacing: "0.06em",
+              letterSpacing: "0.38em",
+              textTransform: "uppercase",
+              color: "#2d7fff",
+              margin: "0 0 10px 0",
             }}
           >
-            Hover a card to explore →
+            // my work
+          </p>
+          <h2
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "clamp(32px, 4.5vw, 52px)",
+              fontWeight: 400,
+              color: "#fff",
+              margin: "0 0 16px 0",
+              lineHeight: 1.15,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            My {" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Projects
+            </span>
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Roboto Mono', monospace",
+              fontSize: "13px",
+              color: "rgba(255,255,255,0.30)",
+              maxWidth: "440px",
+              margin: "0 auto",
+              lineHeight: 1.8,
+              letterSpacing: "0.02em",
+            }}
+          >
+            A showcase of web applications built with modern tools and attention
+            to detail.
           </p>
         </div>
 

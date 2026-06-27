@@ -32,3 +32,45 @@ body{
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Text Selection */
+::selection {
+  background: #2d7fff;
+  color: #c7c7c7;
+}
+
+::-moz-selection {
+  background: #2d7fff;
+  color: #c7c7c7;
+}
+
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0b0b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2d7fff, #6062ff);
+  border-radius: 999px;
+  border: 2px solid #0b0b0b;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4d91ff, #7a7cff);
+}
+
+::-webkit-scrollbar-corner {
+  background: #0b0b0b;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2d7fff #0b0b0b;
+}

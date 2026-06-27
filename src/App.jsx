@@ -16,31 +16,31 @@ function App() {
       path: "/",
       element: <HomePage />,
     },
-    // {
-    //   path: "/about",
-    //   element: <AboutPage />,
-    // },
-    // {
-    //   path: "/services",
-    //   element: <ServicesPage />,
-    // },
-    // {
-    //   path: "/contact",
-    //   element: <ContactPage />,
-    // },
-    // {
-    //   path: "/projects",
-    //   element: <ProjectsPage />,
-    // },
-    // {
-    //   path: "/testimonials",
-    //   element: <TestimonialsPage />,
-    // },
+    {
+      path: "/about",
+      element: <AboutPage />,
+    },
+    {
+      path: "/services",
+      element: <ServicesPage />,
+    },
+    {
+      path: "/projects",
+      element: <ProjectsPage />,
+    },
+    {
+      path: "/testimonials",
+      element: <TestimonialsPage />,
+    },
+    {
+      path: "/contact",
+      element: <ContactPage />,
+    },
   ]);
 
   return (
     <>
-      {/* <CustomCursor /> */}
+      <CustomCursor />
       <RouterProvider router={router} />
     </>
   );

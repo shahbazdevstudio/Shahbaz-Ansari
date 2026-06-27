@@ -22,7 +22,7 @@ const HomePage = () => {
       <TestimonialsSection/>
       <ContactSection/>
       <FAQSection/>
-      {/* <Footer/> */}
+      <Footer/>
 </>
   )
 }

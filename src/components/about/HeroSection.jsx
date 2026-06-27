@@ -6,6 +6,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import ProfileCard from "../react-bits/ProfileCard";
+import { Link } from "react-router";
+import { HiArrowSmallRight } from "react-icons/hi2";
+import { PlayIcon } from "lucide-react";
 // ─── Floating Shapes ──────────────────────────────────────────────────────────
 
 function FloatingShapes() {
@@ -66,41 +69,23 @@ function FloatingShapes() {
       />
 
       {/* Hexagon — top-right */}
-      <svg
-        className="hidden lg:block"
+      <img
+        src="icons/geometric-shape.svg"
         style={{
           position: "absolute",
-          top: "60px",
-          right: "6%",
+          top: "120px",
+          right: "3%",
           opacity: 0.12,
           animation: "floatA 9s ease-in-out infinite",
         }}
-        width="110"
-        height="110"
-        viewBox="0 0 110 110"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="ahh1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#6062ff" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        <polygon
-          points="55,5 100,30 100,80 55,105 10,80 10,30"
-          fill="url(#ahh1)"
-        />
-        <polygon
-          points="55,18 88,36 88,74 55,92 22,74 22,36"
-          fill="none"
-          stroke="#6062ff"
-          strokeWidth="1"
-          strokeOpacity="0.5"
-        />
-      </svg>
+        width="60"
+        height="60"
+        alt="geometric-shape"
+      />
 
       {/* Dashed ring — left */}
-      <svg
+      <img
+        src="/icons/rings.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
@@ -111,126 +96,25 @@ function FloatingShapes() {
         }}
         width="160"
         height="160"
-        viewBox="0 0 160 160"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="ahrg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        <circle
-          cx="80"
-          cy="80"
-          r="76"
-          stroke="url(#ahrg)"
-          strokeWidth="1.5"
-          strokeDasharray="8 5"
-        />
-        <circle
-          cx="80"
-          cy="80"
-          r="52"
-          stroke="#2d7fff"
-          strokeWidth="0.7"
-          strokeOpacity="0.30"
-        />
-        <circle cx="80" cy="4" r="4.5" fill="#2d7fff" />
-        <circle cx="156" cy="80" r="4.5" fill="#6062ff" />
-      </svg>
-
-      {/* Diamond — bottom-left */}
-      <svg
-        className="hidden lg:block"
-        style={{
-          position: "absolute",
-          bottom: "80px",
-          left: "5%",
-          opacity: 0.1,
-          animation: "floatB 10s ease-in-out infinite",
-        }}
-        width="82"
-        height="82"
-        viewBox="0 0 82 82"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="ahd1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6062ff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#2d7fff" stopOpacity="0.4" />
-          </linearGradient>
-        </defs>
-        <rect
-          x="41"
-          y="3"
-          width="54"
-          height="54"
-          rx="5"
-          transform="rotate(45 41 3)"
-          fill="url(#ahd1)"
-        />
-        <rect
-          x="41"
-          y="14"
-          width="36"
-          height="36"
-          rx="3"
-          transform="rotate(45 41 14)"
-          fill="none"
-          stroke="#2d7fff"
-          strokeWidth="0.8"
-          strokeOpacity="0.45"
-        />
-      </svg>
+        alt="rings"
+      />
 
       {/* Dot cluster — right */}
-      <svg
+      <img
+        src="/icons/dots.svg"
         className="hidden xl:block"
         style={{ position: "absolute", top: "32%", right: "1%", opacity: 0.09 }}
         width="68"
         height="112"
-        viewBox="0 0 68 112"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="ahdg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        {[0, 1, 2, 3, 4, 5].map((i) =>
-          [0, 1, 2].map((j) => (
-            <circle
-              key={`${i}-${j}`}
-              cx={j * 22 + 11}
-              cy={i * 22 + 11}
-              r="2.2"
-              fill="url(#ahdg)"
-              opacity={1 - i * 0.12}
-            />
-          )),
-        )}
-      </svg>
+        alt="dots"
+      />
 
       {/* Plus — bottom-right */}
-      <svg
-        className="hidden lg:block"
-        style={{
-          position: "absolute",
-          bottom: "18%",
-          right: "9%",
-          opacity: 0.08,
-          animation: "floatB 7s ease-in-out infinite 1s",
-        }}
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-      >
-        <rect x="12" y="0" width="8" height="32" rx="4" fill="#6062ff" />
-        <rect x="0" y="12" width="32" height="8" rx="4" fill="#2d7fff" />
-      </svg>
+      <img
+        src="/icons/plus-accent.svg"
+        alt="plus"
+        className="hidden lg:block absolute bottom-[18%] right-[9%] opacity-[0.08] animate-floatB"
+      />
     </div>
   );
 }
@@ -260,7 +144,6 @@ function StatCard({ value, label, delay, visible }) {
     >
       <p
         style={{
-          fontFamily: "'Cinzel',serif",
           fontSize: "clamp(24px,3vw,36px)",
           fontWeight: 600,
           background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
@@ -274,7 +157,7 @@ function StatCard({ value, label, delay, visible }) {
       <p
         style={{
           fontFamily: "'Roboto Mono',monospace",
-          fontSize: "10px",
+          fontSize: "12px",
           color: "rgba(255,255,255,0.28)",
           margin: 0,
           letterSpacing: "0.06em",
@@ -338,7 +221,7 @@ export default function AboutHeroSection() {
               transition: "all 0.8s ease 0.1s",
             }}
           >
-            <p
+            <p className="!mt-10 md:!mt-0"
               style={{
                 fontFamily: "'Roboto Mono',monospace",
                 fontSize: "11px",
@@ -362,12 +245,12 @@ export default function AboutHeroSection() {
                 letterSpacing: "-0.01em",
               }}
             >
-              I Build Things
+              Shahbaz Ansari
             </h1>
             <h1
               style={{
                 fontFamily: "'Cinzel',serif",
-                fontSize: "clamp(34px,5vw,64px)",
+                fontSize: "clamp(34px,5vw,40px)",
                 fontWeight: 400,
                 margin: "0 0 28px 0",
                 lineHeight: 1.1,
@@ -377,12 +260,12 @@ export default function AboutHeroSection() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              For the Web.
+              Full-Stack Developer
             </h1>
 
             <p
               style={{
-                fontFamily: "'Oswald',sans-serif",
+                // fontFamily: "'Oswald',sans-serif",
                 fontWeight: 300,
                 fontSize: "clamp(14px,1.6vw,16px)",
                 lineHeight: 1.9,
@@ -392,35 +275,18 @@ export default function AboutHeroSection() {
                 maxWidth: "520px",
               }}
             >
-              Hey, I'm{" "}
+              Hi, I'm{" "}
               <strong
-                style={{ color: "rgba(255,255,255,0.75)", fontWeight: 400 }}
+                style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}
               >
                 Shahbaz Ansari
-              </strong>{" "}
-              — a full-stack web developer from Sahiwal, Pakistan, building
-              under the brand{" "}
-              <strong style={{ color: "#2d7fff", fontWeight: 400 }}>
-                Shahbaz Dev Studio
               </strong>
-              . I specialise in React, Next.js, Node.js, and crafting UI that
-              feels as good as it performs.
-            </p>
-            <p
-              style={{
-                fontFamily: "'Oswald',sans-serif",
-                fontWeight: 300,
-                fontSize: "clamp(14px,1.6vw,16px)",
-                lineHeight: 1.9,
-                color: "rgba(255,255,255,0.26)",
-                letterSpacing: "0.025em",
-                margin: "0 0 40px 0",
-                maxWidth: "520px",
-              }}
-            >
-              I treat every project as a product — not just a deliverable. Clean
-              architecture, accessible markup, and interaction design that
-              respects the user's time.
+              , a Full-Stack{" "}
+              <strong style={{ color: "#2d7fff", fontWeight: 600 }}>
+                Web Developer
+              </strong>{" "}
+              from Gujrat, Pakistan. I build modern websites and web applications that combine clean
+              design, strong performance, and a seamless user experience.
             </p>
 
             {/* CTA row */}
@@ -436,9 +302,8 @@ export default function AboutHeroSection() {
                   background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
                   color: "#fff",
                   textDecoration: "none",
-                  fontFamily: "'Oswald',sans-serif",
                   fontSize: "12px",
-                  fontWeight: 500,
+                  fontWeight: 400,
                   letterSpacing: "0.10em",
                   textTransform: "uppercase",
                   boxShadow: "0 4px 24px rgba(45,127,255,0.28)",
@@ -456,21 +321,10 @@ export default function AboutHeroSection() {
                 }}
               >
                 Hire Me
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+                <HiArrowSmallRight />
               </a>
-              <a
-                href="#projects"
+              <Link
+                to="/projects"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -481,7 +335,6 @@ export default function AboutHeroSection() {
                   background: "rgba(255,255,255,0.03)",
                   color: "rgba(255,255,255,0.65)",
                   textDecoration: "none",
-                  fontFamily: "'Oswald',sans-serif",
                   fontSize: "12px",
                   fontWeight: 500,
                   letterSpacing: "0.10em",
@@ -500,26 +353,14 @@ export default function AboutHeroSection() {
                   e.currentTarget.style.color = "rgba(255,255,255,0.65)";
                 }}
               >
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#2d7fff"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
+                <PlayIcon color="#2d7fff" size={12} />
                 View Work
-              </a>
+              </Link>
             </div>
           </div>
 
           {/* RIGHT — image card */}
-          <div
-            className="ah-img-col"
+          <div className="px-5"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(28px)",
@@ -569,7 +410,7 @@ export default function AboutHeroSection() {
             visible={visible}
           />
           <StatCard
-            value="40+"
+            value="50+"
             label="Projects Delivered"
             delay={0.62}
             visible={visible}
@@ -590,16 +431,7 @@ export default function AboutHeroSection() {
       </div>
 
       <style>{`
-        @media(min-width:1024px){
-          .ah-grid { grid-template-columns: 1fr 1fr !important; }
-        }
-        @media(max-width:1023px){
-          .ah-img-col { max-width: 340px; margin: 0 auto; }
-        }
-        @keyframes floatA{0%,100%{transform:translateY(0px) rotate(0deg)}50%{transform:translateY(-14px) rotate(4deg)}}
-        @keyframes floatB{0%,100%{transform:translateY(0px) rotate(0deg)}50%{transform:translateY(-10px) rotate(-5deg)}}
-        @keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 6px #22c55e}50%{opacity:0.5;box-shadow:0 0 12px #22c55e}}
-        @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
       `}</style>
     </section>
   );

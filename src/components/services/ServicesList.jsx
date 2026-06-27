@@ -21,21 +21,7 @@ const SERVICES = [
       "SEO Optimised",
       "Accessibility",
     ],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
+    icon: "/icons/code.svg",
     accent: "#2d7fff",
   },
   {
@@ -51,22 +37,7 @@ const SERVICES = [
       "File Uploads",
       "Cloud Deploy",
     ],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-      </svg>
-    ),
+    icon: "/icons/ball.svg",
     accent: "#6062ff",
   },
   {
@@ -82,21 +53,7 @@ const SERVICES = [
       "Prototyping",
       "Handoff-Ready",
     ],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85" />
-      </svg>
-    ),
+    icon: "/icons/ball.svg",
     accent: "#2d7fff",
   },
   {
@@ -112,22 +69,7 @@ const SERVICES = [
       "Admin Dashboard",
       "Mobile First",
     ],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="9" cy="21" r="1" />
-        <circle cx="20" cy="21" r="1" />
-        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-      </svg>
-    ),
+    icon: "/icons/ecommerce-cart.svg",
     accent: "#6062ff",
   },
   {
@@ -143,20 +85,7 @@ const SERVICES = [
       "Core Web Vitals",
       "Multi-section",
     ],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-      </svg>
-    ),
+    icon: "/icons/bolt-accent.svg",
     accent: "#2d7fff",
   },
   {
@@ -172,22 +101,7 @@ const SERVICES = [
       "Webhook Support",
       "Postman Collections",
     ],
-    icon: (
-      <svg
-        width="26"
-        height="26"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M18 20V10" />
-        <path d="M12 20V4" />
-        <path d="M6 20v-6" />
-      </svg>
-    ),
+    icon: "/icons/analytics-bars.svg",
     accent: "#6062ff",
   },
 ];
@@ -236,38 +150,24 @@ function FloatingShapes() {
       />
 
       {/* Hexagon — top-right */}
-      <svg
+      <img
+        src="/icons/geometric-shape.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           top: "40px",
           right: "5%",
-          opacity: 0.1,
+          opacity: 0.05,
           animation: "floatA 9s ease-in-out infinite",
         }}
         width="96"
         height="96"
-        viewBox="0 0 96 96"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="slhg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#6062ff" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        <polygon points="48,4 90,26 90,70 48,92 6,70 6,26" fill="url(#slhg)" />
-        <polygon
-          points="48,18 78,34 78,62 48,78 18,62 18,34"
-          fill="none"
-          stroke="#6062ff"
-          strokeWidth="0.9"
-          strokeOpacity="0.45"
-        />
-      </svg>
+        alt="geometric-shape"
+      />
 
       {/* Dashed ring — left */}
-      <svg
+      <img
+        src="/icons/rings.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
@@ -278,98 +178,37 @@ function FloatingShapes() {
         }}
         width="148"
         height="148"
-        viewBox="0 0 148 148"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="slrg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        <circle
-          cx="74"
-          cy="74"
-          r="70"
-          stroke="url(#slrg)"
-          strokeWidth="1.4"
-          strokeDasharray="8 5"
-        />
-        <circle
-          cx="74"
-          cy="74"
-          r="48"
-          stroke="#2d7fff"
-          strokeWidth="0.7"
-          strokeOpacity="0.30"
-        />
-        <circle cx="74" cy="4" r="4" fill="#2d7fff" />
-        <circle cx="144" cy="74" r="4" fill="#6062ff" />
-      </svg>
-
+        alt="ring"
+      />
       {/* Diamond — bottom-right */}
-      <svg
+      <img
+        src="/icons/diamond.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           bottom: "60px",
           right: "6%",
-          opacity: 0.09,
+          opacity: 0.05,
           animation: "floatB 11s ease-in-out infinite",
         }}
         width="74"
         height="74"
-        viewBox="0 0 74 74"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="sldg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6062ff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#2d7fff" stopOpacity="0.4" />
-          </linearGradient>
-        </defs>
-        <rect
-          x="37"
-          y="3"
-          width="50"
-          height="50"
-          rx="5"
-          transform="rotate(45 37 3)"
-          fill="url(#sldg)"
-        />
-      </svg>
+        alt="diamond"
+      />
 
       {/* Dot grid — right */}
-      <svg
+      <img
+        src="/icons/dots.svg"
         className="hidden xl:block"
         style={{ position: "absolute", top: "22%", right: "1%", opacity: 0.09 }}
         width="68"
         height="112"
-        viewBox="0 0 68 112"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="sldtg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        {[0, 1, 2, 3, 4, 5].map((i) =>
-          [0, 1, 2].map((j) => (
-            <circle
-              key={`${i}-${j}`}
-              cx={j * 22 + 11}
-              cy={i * 22 + 11}
-              r="2.2"
-              fill="url(#sldtg)"
-              opacity={1 - i * 0.12}
-            />
-          )),
-        )}
-      </svg>
+        alt="dots"
+      />
 
       {/* Plus — top-left */}
-      <svg
+      <img
+        src="/icons/plus-accent.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
@@ -380,12 +219,8 @@ function FloatingShapes() {
         }}
         width="32"
         height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-      >
-        <rect x="12" y="0" width="8" height="32" rx="4" fill="#2d7fff" />
-        <rect x="0" y="12" width="32" height="8" rx="4" fill="#6062ff" />
-      </svg>
+        alt="plus"
+      />
     </div>
   );
 }
@@ -478,7 +313,7 @@ function ServiceCard({ svc, index, visible }) {
             transition: "all 0.3s",
           }}
         >
-          {svc.icon}
+          <img src={svc.icon} alt={svc.title} />
         </div>
         {/* ID */}
         <span
@@ -512,7 +347,6 @@ function ServiceCard({ svc, index, visible }) {
       </p>
       <h3
         style={{
-          fontFamily: "'Cinzel',serif",
           fontSize: "clamp(17px,2vw,22px)",
           fontWeight: 400,
           color: "#fff",
@@ -541,11 +375,11 @@ function ServiceCard({ svc, index, visible }) {
       <p
         style={{
           fontFamily: "'Roboto Mono',monospace",
-          fontSize: "11.5px",
+          fontSize: "12px",
           lineHeight: 1.85,
           color: "rgba(255,255,255,0.38)",
           letterSpacing: "0.02em",
-          margin: "0 0 20px 0",
+          margin: "0 0 10px 0",
           position: "relative",
           flex: 1,
         }}

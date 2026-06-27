@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+  <defs>
+    <linearGradient id="ast1" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2d7fff"/>
+      <stop offset="100%" stop-color="#6062ff"/>
+    </linearGradient>
+  </defs>
+
+  <path
+    d="M40 8 L72 64 L8 64 Z"
+    stroke="url(#ast1)"
+    stroke-width="2"
+    stroke-linejoin="round"
+    fill="none"
+  />
+</svg>

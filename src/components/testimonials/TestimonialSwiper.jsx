@@ -16,6 +16,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { LiaStarSolid } from "react-icons/lia";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -25,7 +26,7 @@ const REVIEWS = [
     name: "Sarah Mitchell",
     title: "Product Manager, SaaS Co.",
     profilePic: "https://i.pravatar.cc/150?img=47",
-    rating: 5,
+    rating: 1,
     createdAt: "2025-11-10",
     platform: "google",
     message:
@@ -157,164 +158,78 @@ function FloatingShapes() {
       />
 
       {/* Hexagon — top-right */}
-      <svg
+      <img
+        src="/icons/geometric-shape.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
           top: "44px",
           right: "5%",
-          opacity: 0.1,
+          opacity: 0.05,
           animation: "floatA 9s ease-in-out infinite",
         }}
         width="96"
         height="96"
-        viewBox="0 0 96 96"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="tshg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#6062ff" stopOpacity="0.5" />
-          </linearGradient>
-        </defs>
-        <polygon points="48,4 90,26 90,70 48,92 6,70 6,26" fill="url(#tshg)" />
-        <polygon
-          points="48,17 78,33 78,63 48,79 18,63 18,33"
-          fill="none"
-          stroke="#6062ff"
-          strokeWidth="0.9"
-          strokeOpacity="0.45"
-        />
-      </svg>
+        alt="geometric"
+      />
 
       {/* Concentric rings — left */}
-      <svg
+      <img
+        src="/icons/code-brackets.svg"
         className="hidden xl:block"
         style={{
           position: "absolute",
-          top: "34%",
-          left: "-46px",
-          opacity: 0.11,
+          top: "2%",
+          left: "46px",
+          opacity: 0.4,
           animation: "floatA 13s ease-in-out infinite reverse",
         }}
-        width="148"
-        height="148"
-        viewBox="0 0 148 148"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="tsrg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        <circle
-          cx="74"
-          cy="74"
-          r="70"
-          stroke="url(#tsrg)"
-          strokeWidth="1.4"
-          strokeDasharray="8 5"
-        />
-        <circle
-          cx="74"
-          cy="74"
-          r="50"
-          stroke="#6062ff"
-          strokeWidth="0.8"
-          strokeOpacity="0.28"
-        />
-        <circle
-          cx="74"
-          cy="74"
-          r="30"
-          stroke="#2d7fff"
-          strokeWidth="0.5"
-          strokeOpacity="0.15"
-        />
-        <circle cx="74" cy="4" r="4" fill="#2d7fff" />
-        <circle cx="144" cy="74" r="4" fill="#6062ff" />
-      </svg>
+        width="88"
+        height="88"
+        alt="ring"
+      />
 
       {/* Diamond — bottom-right */}
-      <svg
+      <img
+        src="/icons/diamond.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
-          bottom: "64px",
+          bottom: "134px",
           right: "7%",
-          opacity: 0.09,
+          opacity: 0.05,
           animation: "floatB 10s ease-in-out infinite",
         }}
         width="70"
         height="70"
-        viewBox="0 0 70 70"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="tsdg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6062ff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#2d7fff" stopOpacity="0.4" />
-          </linearGradient>
-        </defs>
-        <rect
-          x="35"
-          y="3"
-          width="46"
-          height="46"
-          rx="5"
-          transform="rotate(45 35 3)"
-          fill="url(#tsdg)"
-        />
-      </svg>
+        alt=""
+      />
 
       {/* Dot cluster — right */}
-      <svg
+      <img
+        src="/icons/dots.svg"
         className="hidden xl:block"
-        style={{ position: "absolute", top: "22%", right: "1%", opacity: 0.09 }}
+        style={{ position: "absolute", top: "18%", left: "1%", opacity: 0.15 }}
         width="68"
         height="112"
-        viewBox="0 0 68 112"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="tsdtg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2d7fff" />
-            <stop offset="100%" stopColor="#6062ff" />
-          </linearGradient>
-        </defs>
-        {[0, 1, 2, 3, 4, 5].map((i) =>
-          [0, 1, 2].map((j) => (
-            <circle
-              key={`${i}-${j}`}
-              cx={j * 22 + 11}
-              cy={i * 22 + 11}
-              r="2.2"
-              fill="url(#tsdtg)"
-              opacity={1 - i * 0.12}
-            />
-          )),
-        )}
-      </svg>
+        alt="dots"
+      />
 
       {/* Plus — bottom-left */}
-      <svg
+      <img
+        src="/icons/plus-accent.svg"
         className="hidden lg:block"
         style={{
           position: "absolute",
-          bottom: "18%",
-          left: "7%",
+          bottom: "35%",
+          right: "7%",
           opacity: 0.08,
           animation: "floatB 7s ease-in-out infinite 1s",
         }}
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-      >
-        <rect x="12" y="0" width="8" height="32" rx="4" fill="#6062ff" />
-        <rect x="0" y="12" width="32" height="8" rx="4" fill="#2d7fff" />
-      </svg>
+        width="52"
+        height="52"
+        alt="Plus"
+      />
     </div>
   );
 }
@@ -425,25 +340,12 @@ function ReviewCard({ rev }) {
         }}
       >
         {[...Array(5)].map((_, i) => (
-          <svg
+          <LiaStarSolid
             key={i}
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill={i < rev.rating ? "#f4b400" : "rgba(255,255,255,0.12)"}
-          >
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-          </svg>
+            size={13}
+            color={i < rev.rating ? "#f4b400" : "rgba(255,255,255,0.12)"}
+          />
         ))}
-        <svg
-          viewBox="0 0 24 24"
-          width="13"
-          height="13"
-          fill="#4285f4"
-          style={{ marginLeft: "6px" }}
-        >
-          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7L6.4 13l1.5-1.5 2.2 2.2 4.8-4.8 1.5 1.5-6.3 6.3z" />
-        </svg>
       </div>
 
       {/* Divider */}
@@ -676,27 +578,19 @@ export default function TestimonialSwiper() {
             />
 
             {/* Large quote SVG */}
-            <svg
+            <img
+              src="/icons/abstract-duo.svg"
               width="52"
               height="42"
               viewBox="0 0 72 58"
               fill="none"
               style={{
                 marginBottom: "20px",
-                opacity: 0.22,
+                opacity: 0.32,
                 position: "relative",
               }}
-            >
-              <path
-                d="M0 36 C0 16 11 4 29 0 L34 9 C22 14 18 20 18 27 L32 27 L32 58 L0 58 Z"
-                fill="#2d7fff"
-              />
-              <path
-                d="M40 36 C40 16 51 4 69 0 L72 9 C60 14 58 20 58 27 L72 27 L72 58 L40 58 Z"
-                fill="#6062ff"
-                fillOpacity="0.6"
-              />
-            </svg>
+              alt="quote"
+            />
 
             <p
               style={{
@@ -774,51 +668,13 @@ export default function TestimonialSwiper() {
               />
               <div style={{ display: "flex", gap: "3px" }}>
                 {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    width="13"
-                    height="13"
-                    viewBox="0 0 24 24"
-                    fill="#f4b400"
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
+                  <LiaStarSolid size={13} color="#f4b400" />
                 ))}
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <style>{`
-        .ts-swiper{ padding:40px 10px 64px !important; width:100%; }
-        .ts-slide{ height:auto; display:flex; }
-        .ts-rev-card{
-          width:100%; display:flex; flex-direction:column;
-          background:rgb(0, 0, 0);
-          border:1px solid rgba(255,255,255,0.07);
-          border-radius:18px;
-          padding:clamp(18px,3%,26px);
-          min-height:260px; box-sizing:border-box;
-          position:relative; overflow:hidden;
-          transition:border-color 0.4s ease,background 0.4s ease,box-shadow 0.4s ease;
-        }
-        .ts-rev-card::before{
-          content:''; position:absolute;
-          top:0; left:20px; right:20px; height:1px;
-          background:linear-gradient(90deg,transparent,rgba(45,127,255,0.35),transparent);
-        }
-        .swiper-slide-active .ts-rev-card{
-          background:rgb(0, 0, 0);
-          border-color:rgba(45,127,255,0.32);
-          box-shadow:0 20px 60px rgba(45,127,255,0.12);
-        }
-        .swiper-pagination-bullet{ background:rgba(255,255,255,0.20)!important; opacity:1!important; transition:all 0.3s; }
-        .swiper-pagination-bullet-active{ background:#2d7fff!important; width:24px!important; border-radius:8px!important; }
-        @keyframes floatA{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(4deg)}}
-        @keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(-5deg)}}
-        @media(prefers-reduced-motion:reduce){*{animation:none!important}}
-      `}</style>
     </section>
   );
 }

@@ -1,9 +1,37 @@
-const NAV_LINKS = ["Home", "About", "Projects", "Skills", "Contact"];
+/**
+ * Footer.jsx — Fully responsive layout
+ *
+ * Mobile: Centered single column (logo, description, badge, nav rows, social, email)
+ * Desktop (≥1024px): Grid layout with brand, pages, services, connect columns
+ *
+ * Dependencies: react-icons (already in project)
+ */
+
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { TbArrowUp } from "react-icons/tb";
+import { MdOutlineEmail } from "react-icons/md";
+import { LuCopyright } from "react-icons/lu";
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+const NAV_LINKS = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  { label: "Services", path: "/services" },
+  { label: "Projects", path: "/projects" },
+  { label: "Testimonials", path: "/testimonials" },
+  { label: "Contact", path: "/contact" },
+];
+
 const SERVICES = [
   "Web Development",
-  "UI / UX Design",
-  "React Apps",
+  "UI/UX Design",
+  "React Development",
   "API Integration",
+  "Responsive Design",
   "Freelance Work",
 ];
 
@@ -11,177 +39,630 @@ const SOCIALS = [
   {
     label: "GitHub",
     href: "https://github.com/shahbaz-ansari",
-    icon: (
-      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-    ),
-    filled: true,
+    Icon: FaGithub,
   },
   {
     label: "LinkedIn",
     href: "https://linkedin.com/in/shahbaz-ansari",
-    icon: (
-      <>
-        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-      </>
-    ),
-    filled: false,
-  },
-  {
-    label: "Twitter",
-    href: "https://x.com/shahbazansari",
-    icon: (
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    ),
-    filled: true,
+    Icon: FaLinkedin,
   },
   {
     label: "Instagram",
     href: "https://instagram.com/shahbazansari",
-    icon: (
-      <>
-        <rect x="2" y="2" width="20" height="20" rx="5" />
-        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-      </>
-    ),
-    filled: false,
+    Icon: FaInstagram,
   },
-  {
-    label: "WhatsApp",
-    href: "https://wa.me/923001234567",
-    icon: (
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-    ),
-    filled: true,
-  },
+  { label: "WhatsApp", href: "https://wa.me/923001234567", Icon: FaWhatsapp },
 ];
 
-export default function Footer() {
+// ─── Scroll-to-top button ──────────────────────────────────────────────────────
+
+function ScrollToTop() {
+  const [show, setShow] = useState(false);
+  const [hov, setHov] = useState(false);
+
+  useEffect(() => {
+    const fn = () => setShow(window.scrollY > 400);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+
   return (
-    <footer className="bg-black border-t border-white/[0.06] pt-16 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1fr] gap-10 mb-12">
-          {/* Brand */}
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      aria-label="Back to top"
+      title="Back to top"
+      style={{
+        width: "40px",
+        height: "40px",
+        borderRadius: "12px",
+        border: `1px solid ${hov ? "rgba(45,127,255,0.60)" : "rgba(45,127,255,0.25)"}`,
+        background: hov
+          ? "linear-gradient(135deg,rgba(45,127,255,0.22) 0%,rgba(96,98,255,0.18) 100%)"
+          : "rgba(45,127,255,0.07)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        flexShrink: 0,
+        opacity: show ? 1 : 0,
+        pointerEvents: show ? "auto" : "none",
+        transform: hov ? "translateY(-3px)" : "translateY(0)",
+        transition: "all 0.30s cubic-bezier(0.34,1.56,0.64,1)",
+        boxShadow: hov ? "0 8px 22px rgba(45,127,255,0.24)" : "none",
+      }}
+    >
+      <TbArrowUp
+        size={18}
+        color={hov ? "#fff" : "rgba(45,127,255,0.85)"}
+        style={{ transition: "color 0.25s" }}
+      />
+    </button>
+  );
+}
+
+// ─── Social icon button ───────────────────────────────────────────────────────
+
+function SocialIcon({ label, href, Icon }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={label}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        width: "40px",
+        height: "40px",
+        borderRadius: "11px",
+        border: `1px solid ${hov ? "rgba(45,127,255,0.38)" : "rgba(255,255,255,0.09)"}`,
+        background: hov ? "rgba(45,127,255,0.10)" : "rgba(255,255,255,0.03)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        textDecoration: "none",
+        color: hov ? "#fff" : "rgba(255,255,255,0.52)",
+        transform: hov ? "translateY(-3px)" : "translateY(0)",
+        transition: "all 0.22s cubic-bezier(0.34,1.56,0.64,1)",
+        boxShadow: hov ? "0 6px 18px rgba(45,127,255,0.18)" : "none",
+      }}
+    >
+      <Icon size={16} />
+    </a>
+  );
+}
+
+// ─── Nav link (with dot prefix) ─────────────────────────────────────────────
+
+function NavLinkWithDot({ label, href = "#" }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <Link
+    to={href}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        fontFamily: "'Roboto Mono',monospace",
+        fontSize: "11px",
+        color: hov ? "#fff" : "rgba(255,255,255,0.45)",
+        textDecoration: "none",
+        transition: "color 0.22s ease",
+        letterSpacing: "0.04em",
+      }}
+    >
+      <span
+        style={{
+          width: "4px",
+          height: "4px",
+          borderRadius: "50%",
+          background: hov ? "#2d7fff" : "rgba(45,127,255,0.40)",
+          transition: "background 0.22s ease",
+          flexShrink: 0,
+        }}
+      />
+      {label}
+    </Link>
+  );
+}
+
+// ─── Nav link (centered, with underline) ─────────────────────────────────────
+
+function NavLinkCentered({ label, to }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <Link
+      to={to}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        fontFamily: "'Roboto Mono',monospace",
+        fontSize: "11px",
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
+        color: hov ? "#fff" : "rgba(255,255,255,0.40)",
+        textDecoration: "none",
+        transition: "color 0.22s ease",
+        position: "relative",
+        paddingBottom: "2px",
+      }}
+    >
+      {label}
+      <span
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          height: "1px",
+          width: hov ? "100%" : "0%",
+          background: "linear-gradient(90deg,#2d7fff,#6062ff)",
+          borderRadius: "100px",
+          transition: "width 0.28s ease",
+        }}
+      />
+    </Link>
+  );
+}
+
+// ─── Divider dot ─────────────────────────────────────────────────────────────
+
+const Dot = () => (
+  <span
+    style={{
+      width: "3px",
+      height: "3px",
+      borderRadius: "50%",
+      background: "rgba(45,127,255,0.40)",
+      display: "inline-block",
+      flexShrink: 0,
+    }}
+  />
+);
+
+// ─── Section title ──────────────────────────────────────────────────────────
+
+function SectionTitle({ children }) {
+  return (
+    <p
+      style={{
+        fontFamily: "'Oswald',sans-serif",
+        fontSize: "14px",
+        fontWeight: 300,
+        letterSpacing: "0.2em",
+        textTransform: "uppercase",
+        color: "rgba(255,255,255,0.35)",
+        marginBottom: "16px",
+      }}
+    >
+      {children}
+    </p>
+  );
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+
+export default function Footer() {
+  const [emailHov, setEmailHov] = useState(false);
+  const firstRow = NAV_LINKS.slice(0, 3);
+const secondRow = NAV_LINKS.slice(3);
+
+  return (
+    <footer
+      style={{
+        background: "#000",
+        borderTop: "1px solid rgba(255,255,255,0.07)",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* ── Top gradient glow line ── */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "700px",
+          height: "1px",
+          background:
+            "linear-gradient(90deg,transparent,rgba(45,127,255,0.40),rgba(96,98,255,0.30),transparent)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: "-80px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "600px",
+          height: "250px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(ellipse,rgba(45,127,255,0.05) 0%,transparent 70%)",
+          filter: "blur(50px)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* ── Main container ── */}
+      <div
+        style={{
+          maxWidth: "1140px",
+          margin: "0 auto",
+          padding: "clamp(52px,7vw,80px) clamp(20px,5%,60px) 0",
+        }}
+      >
+        {/* ─── DESKTOP GRID LAYOUT (≥1024px) ─── */}
+        <div
+          className="desktop-footer-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1.8fr 1fr 1fr 1fr",
+            gap: "40px",
+            marginBottom: "48px",
+          }}
+        >
+          {/* Brand Column */}
           <div>
-            <div className="font-cinzel text-xl font-semibold text-white tracking-widest mb-3">
-              Shahbaz<span className="text-[#6062ff]">.</span>
-            </div>
-            <p className="font-mono text-[11px] text-white/30 leading-relaxed tracking-wide max-w-[240px] mb-5">
-              Full-stack developer crafting premium digital experiences with
-              React, Node.js, and a sharp eye for design.
-            </p>
             <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg
-              bg-[#2d7fff]/[0.07] border border-[#2d7fff]/18
-              font-mono text-[10px] text-[#2d7fff] tracking-widest uppercase"
+              style={{
+                fontFamily: "'Cinzel',serif",
+                fontSize: "clamp(26px,3vw,32px)",
+                fontWeight: 400,
+                color: "#fff",
+                letterSpacing: "0.06em",
+                lineHeight: 1,
+                marginBottom: "12px",
+              }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2d7fff] animate-pulse" />
-              Available for hire
+              Shahbaz
             </div>
+            <p
+              style={{
+                fontFamily: "'Roboto Mono',monospace",
+                fontSize: "12px",
+                color: "rgba(255,255,255,0.30)",
+                lineHeight: 1.85,
+                letterSpacing: "0.025em",
+                maxWidth: "330px",
+                marginBottom: "20px",
+              }}
+            >
+              I design and develop modern websites and web applications that
+              help businesses grow, attract customers, and increase conversions.
+            </p>
           </div>
 
-          {/* Navigation */}
+          {/* Pages Column */}
           <div>
-            <p className="font-oswald text-[11px] font-light tracking-[0.2em] uppercase text-white/35 mb-4">
-              Navigation
-            </p>
-            <div className="flex flex-col gap-2.5">
-              {NAV_LINKS.map((l) => (
-                <a
-                  key={l}
-                  href="#"
-                  className="flex items-center gap-2 font-mono text-[11px] text-white/45
-                    hover:text-white transition-colors tracking-wide group"
-                >
-                  <span className="w-1 h-1 rounded-full bg-[#2d7fff]/40 group-hover:bg-[#2d7fff] transition-colors" />
-                  {l}
-                </a>
+            <SectionTitle>Pages</SectionTitle>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {NAV_LINKS.map((link) => (
+                <NavLinkWithDot
+                  key={link.path}
+                  label={link.label}
+                  href={link.path}
+                />
               ))}
             </div>
           </div>
 
-          {/* Services */}
+          {/* Services Column */}
           <div>
-            <p className="font-oswald text-[11px] font-light tracking-[0.2em] uppercase text-white/35 mb-4">
-              Services
-            </p>
-            <div className="flex flex-col gap-2.5">
-              {SERVICES.map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="flex items-center gap-2 font-mono text-[11px] text-white/45
-                    hover:text-white transition-colors tracking-wide group"
-                >
-                  <span className="w-1 h-1 rounded-full bg-[#2d7fff]/40 group-hover:bg-[#2d7fff] transition-colors" />
-                  {s}
-                </a>
+            <SectionTitle>Services</SectionTitle>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {SERVICES.map((label) => (
+                <NavLinkWithDot key={label} label={label} href="#" />
               ))}
             </div>
           </div>
 
-          {/* Connect */}
+          {/* Connect Column */}
           <div>
-            <p className="font-oswald text-[11px] font-light tracking-[0.2em] uppercase text-white/35 mb-4">
-              Connect
-            </p>
-            <div className="flex flex-wrap gap-2 mb-5">
-              {SOCIALS.map(({ label, href, icon, filled }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-xl bg-white/[0.03] border border-white/[0.08]
-                    flex items-center justify-center
-                    hover:bg-[#2d7fff]/10 hover:border-[#2d7fff]/30
-                    hover:-translate-y-0.5 transition-all duration-200"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="w-[15px] h-[15px]"
-                    {...(filled
-                      ? { fill: "rgba(255,255,255,0.6)" }
-                      : {
-                          fill: "none",
-                          stroke: "rgba(255,255,255,0.6)",
-                          strokeWidth: 1.8,
-                          strokeLinecap: "round",
-                          strokeLinejoin: "round",
-                        })}
-                  >
-                    {icon}
-                  </svg>
-                </a>
+            <SectionTitle>Connect</SectionTitle>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "8px",
+                marginBottom: "20px",
+              }}
+            >
+              {SOCIALS.map((s) => (
+                <SocialIcon key={s.label} {...s} />
               ))}
             </div>
-            <p className="font-oswald text-[11px] font-light tracking-[0.2em] uppercase text-white/35 mb-2">
+            <p
+              style={{
+                fontFamily: "'Oswald',sans-serif",
+                fontSize: "14px",
+                fontWeight: 300,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.35)",
+                marginBottom: "5px",
+              }}
+            >
               Email
             </p>
             <a
-              href="mailto:shahbaz@example.com"
-              className="font-mono text-[11px] text-white/45 hover:text-[#2d7fff] transition-colors tracking-wide"
+              className="!mt-10"
+              href="mailto:shahbazansari.coder@gmail.com"
+              style={{
+                fontFamily: "'Roboto Mono',monospace",
+                fontSize: "11px",
+                color: "rgba(255,255,255,0.45)",
+                textDecoration: "none",
+                transition: "color 0.22s ease",
+                letterSpacing: "0.04em",
+              }}
+              onMouseEnter={() => setEmailHov(true)}
+              onMouseLeave={() => setEmailHov(false)}
             >
-              shahbaz@example.com
+              <span style={{ color: emailHov ? "#2d7fff" : "inherit" }}>
+                shahbazansari.coder@gmail.com
+              </span>
             </a>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/[0.05] py-6 flex flex-wrap items-center justify-between gap-3">
-          <p className="font-mono text-[10px] text-white/20 tracking-wider">
-            © 2025 <span className="text-[#2d7fff]">Shahbaz Ansari</span>. All
-            rights reserved.
+        {/* ─── MOBILE CENTERED LAYOUT (≤1023px) ─── */}
+        <div
+          className="mobile-footer-content"
+          style={{
+            display: "none",
+            textAlign: "center",
+          }}
+        >
+          {/* Logo */}
+          <div
+            style={{
+              fontFamily: "'Cinzel',serif",
+              fontSize: "clamp(26px,3.5vw,36px)",
+              fontWeight: 400,
+              color: "#fff",
+              letterSpacing: "0.06em",
+              lineHeight: 1,
+              marginBottom: "14px",
+            }}
+          >
+            Shahbaz
+          </div>
+
+          {/* Description */}
+          <p
+            style={{
+              fontFamily: "'Roboto Mono',monospace",
+              fontSize: "11.5px",
+              color: "rgba(255,255,255,0.30)",
+              lineHeight: 1.85,
+              letterSpacing: "0.025em",
+              maxWidth: "380px",
+              margin: "0 auto 22px",
+            }}
+          >
+            I design and develop modern websites and web applications that help
+            businesses grow, attract customers, and increase conversions.
           </p>
-          <p className="font-mono text-[10px] text-white/18 tracking-wide">
-            Built with <span className="text-[#6062ff]/70">♥</span> using React
-            & Tailwind CSS
-          </p>
+
+          {/* Availability badge */}
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "9px 18px",
+              borderRadius: "100px",
+              border: "1px solid rgba(34,197,94,0.20)",
+              background: "rgba(34,197,94,0.04)",
+              marginBottom: "32px",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(90deg,transparent 0%,rgba(34,197,94,0.06) 50%,transparent 100%)",
+                animation: "badgeSweep 3s ease-in-out infinite",
+                pointerEvents: "none",
+              }}
+            />
+            <span style={{ position: "relative", flexShrink: 0 }}>
+              <span
+                style={{
+                  display: "block",
+                  width: "7px",
+                  height: "7px",
+                  borderRadius: "50%",
+                  background: "#22c55e",
+                  boxShadow: "0 0 0 0 rgba(34,197,94,0.6)",
+                  animation: "ripple 2s ease-out infinite",
+                }}
+              />
+            </span>
+            <span
+              style={{
+                fontFamily: "'Roboto Mono',monospace",
+                fontSize: "10px",
+                letterSpacing: "0.10em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.55)",
+                position: "relative",
+              }}
+            >
+              Available for Projects
+            </span>
+            <span
+              style={{
+                width: "5px",
+                height: "5px",
+                borderRadius: "50%",
+                background: "rgba(34,197,94,0.50)",
+                flexShrink: 0,
+                position: "relative",
+              }}
+            />
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "16px",
+              flexWrap: "wrap",
+              marginBottom: "12px",
+            }}
+          >
+            {firstRow.map((link, index) => (
+              <React.Fragment key={link.path}>
+                <NavLinkCentered label={link.label} to={link.path} />
+                {index !== firstRow.length - 1 && <Dot />}
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* Nav row 2 */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "16px",
+              flexWrap: "wrap",
+              marginBottom: "32px",
+            }}
+          >
+            {secondRow.map((link, index) => (
+              <React.Fragment key={link.path}>
+                <NavLinkCentered label={link.label} to={link.path} />
+                {index !== secondRow.length - 1 && <Dot />}
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* Social icons */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+              flexWrap: "wrap",
+              marginBottom: "18px",
+            }}
+          >
+            {SOCIALS.map((s) => (
+              <SocialIcon key={s.label} {...s} />
+            ))}
+          </div>
+
+          {/* Email */}
+          <div style={{ marginBottom: "clamp(36px,5vw,52px)" }}>
+            <a
+              href="mailto:shahbazansari.coder@gmail.com"
+              onMouseEnter={() => setEmailHov(true)}
+              onMouseLeave={() => setEmailHov(false)}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "7px",
+                fontFamily: "'Roboto Mono',monospace",
+                fontSize: "12px",
+                color: emailHov ? "#2d7fff" : "rgba(255,255,255,0.38)",
+                letterSpacing: "0.04em",
+                textDecoration: "none",
+                transition: "color 0.22s ease",
+              }}
+            >
+              <MdOutlineEmail
+                size={15}
+                color={emailHov ? "#2d7fff" : "rgba(255,255,255,0.35)"}
+                style={{ transition: "color 0.22s", flexShrink: 0 }}
+              />
+              shahbazansari.coder@gmail.com
+            </a>
+          </div>
         </div>
       </div>
+
+      {/* ─── Bottom Bar ─── */}
+      {/* ─── Bottom Bar ─── */}
+      <div className="mx-auto flex max-w-[1140px] items-center justify-between gap-4 border-t border-white/10 px-5 py-4 sm:px-8 lg:px-[60px]">
+        <p className="flex flex-1 items-center gap-2 text-sm font-mono tracking-wide text-white/50">
+          <LuCopyright className="h-4 w-4 shrink-0" />
+
+          <span className="whitespace-nowrap">{new Date().getFullYear()}</span>
+
+          <span className="font-semibold text-primary whitespace-nowrap">
+            Shahbaz Ansari.
+          </span>
+
+          <span className="text-white/40">All Rights Reserved.</span>
+        </p>
+
+        <div className="shrink-0">
+          <ScrollToTop />
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes ripple {
+          0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.55); }
+          70%  { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+          100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+        }
+        @keyframes badgeSweep {
+          0%   { transform: translateX(-100%); }
+          50%  { transform: translateX(100%); }
+          100% { transform: translateX(100%); }
+        }
+
+        /* ── Desktop: show grid, hide mobile ── */
+        @media (min-width: 1024px) {
+          .desktop-footer-grid {
+            display: grid !important;
+          }
+          .mobile-footer-content {
+            display: none !important;
+          }
+        }
+
+        /* ── Tablet/Mobile: show mobile, hide desktop grid ── */
+        @media (max-width: 1023px) {
+          .desktop-footer-grid {
+            display: none !important;
+          }
+          .mobile-footer-content {
+            display: block !important;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .mobile-footer-content div[style*="gap: 16px"] { gap: 10px !important; }
+        }
+      `}</style>
     </footer>
   );
 }

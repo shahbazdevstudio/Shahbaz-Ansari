@@ -315,10 +315,21 @@ export default function AboutMe() {
                 margin: "0 0 12px 0",
               }}
             >
-              I’m a full-stack web developer focused on creating fast,
-              responsive, and user-friendly web applications. I combine
-              development and design to build websites that not only work
-              perfectly but also feel smooth and modern.
+              Hi, I'm Shahbaz Ansari, a Full-Stack Web Developer from Gujrat,
+              Pakistan.
+            </p>
+            <p
+              style={{
+                fontWeight: 300,
+                fontSize: "15px",
+                lineHeight: 1.9,
+                color: "rgba(255,255,255,0.42)",
+                letterSpacing: "0.025em",
+                margin: "0 0 12px 0",
+              }}
+            >
+              I help businesses, startups, and individuals turn their ideas into
+              modern, high-performing websites and web applications.
             </p>
             <p
               className="lg:text-[rgba(255,255,255,0.26)] text-[rgba(255,255,255,0.42)]"
@@ -330,8 +341,10 @@ export default function AboutMe() {
                 margin: "0 0 36px 0",
               }}
             >
-              From landing pages to full-scale web applications, I turn ideas
-              into real, scalable solutions using clean and efficient code.
+              I work across both frontend and backend development, ensuring
+              every project looks professional, performs smoothly, and scales as
+              your needs grow. Whether it's a landing page, business website,
+              portfolio, or a complete web application
             </p>
 
             {/* Highlights Grid */}

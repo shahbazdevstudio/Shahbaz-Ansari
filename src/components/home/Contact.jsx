@@ -1,12 +1,14 @@
 import { Send } from "lucide-react";
 import { useState } from "react";
 import { BsWhatsapp } from "react-icons/bs";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { FiInstagram } from "react-icons/fi";
 import {
   MdLocationPin,
   MdOutlineAccessTime,
   MdOutlineEmail,
+  MdOutlineSupportAgent,
+  MdOutlineWorkOutline,
 } from "react-icons/md";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -44,18 +46,30 @@ const CONTACT_INFO = [
     icon: <MdOutlineEmail size={18} />,
   },
   {
-    label: "Based in",
+    label: "WhatsApp",
+    value: "Let's discuss your project.",
+    link: "https://wa.me/923XXXXXXXXX",
+    icon: <FaWhatsapp size={18} />,
+  },
+  {
+    label: "Location",
     value: "Gujrat, Pakistan",
     icon: <MdLocationPin size={18} />,
   },
   {
-    label: "Response time",
-    value: "Within 24 hours",
-    icon: <MdOutlineAccessTime size={18} />,
+    label: "Availability",
+    value: "Open for New Projects",
+    icon: <MdOutlineWorkOutline size={18} />,
   },
 ];
 
-const INITIAL_FORM = { name: "", email: "", subject: "", message: "" };
+const INITIAL_FORM = {
+  name: "",
+  phone: "",
+  website: "",
+  budget: "",
+  message: "",
+};
 
 // ─── Floating Shapes ──────────────────────────────────────────────────────────
 
@@ -197,7 +211,7 @@ function SocialBtn({ label, href, icon }) {
 
 // ─── Form Field Wrapper ───────────────────────────────────────────────────────
 
-function Field({ label, children }) {
+function Field({ label, children, error, fieldError }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
       <label
@@ -206,12 +220,29 @@ function Field({ label, children }) {
           fontSize: "10px",
           letterSpacing: "0.18em",
           textTransform: "uppercase",
-          color: "rgba(255,255,255,0.35)",
+          color: error ? "rgba(239,68,68,0.80)" : "rgba(255,255,255,0.35)",
         }}
       >
         {label}
+        {error && (
+          <span style={{ color: "rgba(239,68,68,0.80)", marginLeft: "6px" }}>
+            *required
+          </span>
+        )}
       </label>
       {children}
+      {fieldError && (
+        <span
+          style={{
+            fontFamily: "'Roboto Mono', monospace",
+            fontSize: "10px",
+            color: "rgba(239,68,68,0.80)",
+            marginTop: "4px",
+          }}
+        >
+          {fieldError}
+        </span>
+      )}
     </div>
   );
 }
@@ -221,7 +252,7 @@ function Field({ label, children }) {
 const inputStyle = (hasError) => ({
   width: "100%",
   boxSizing: "border-box",
-  background: "rgba(255,255,255,0.035)",
+  background: hasError ? "rgba(239,68,68,0.03)" : "rgba(255,255,255,0.035)",
   border: `1px solid ${hasError ? "rgba(239,68,68,0.50)" : "rgba(255,255,255,0.09)"}`,
   borderRadius: "12px",
   padding: "11px 14px",
@@ -271,11 +302,13 @@ export default function ContactSection() {
   const [form, setForm] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
+  const [fieldErrors, setFieldErrors] = useState({});
 
   // Field change handler
   const handleChange = (key) => (e) => {
     setForm((prev) => ({ ...prev, [key]: e.target.value }));
     setErrors((prev) => ({ ...prev, [key]: false }));
+    setFieldErrors((prev) => ({ ...prev, [key]: "" }));
   };
 
   // Focus / blur styling for inputs
@@ -294,15 +327,38 @@ export default function ContactSection() {
     e.target.style.background = "rgba(255,255,255,0.035)";
   };
 
+  const validatePhone = (phone) => {
+    const cleaned = phone.replace(/[\s\-()]/g, "");
+    if (!cleaned) return true;
+    return /^[+]?[0-9]{7,15}$/.test(cleaned);
+  };
+
   // Form submission → Formspree
   const handleSubmit = async () => {
     // Client-side validation
     const newErrors = {};
-    Object.entries(form).forEach(([key, val]) => {
-      if (!val.trim()) newErrors[key] = true;
+    const newFieldErrors = {};
+    let hasError = false;
+
+    const requiredFields = ["name", "phone", "website", "message"];
+    requiredFields.forEach((key) => {
+      if (!form[key]?.trim()) {
+        newErrors[key] = true;
+        newFieldErrors[key] = "This field is required";
+        hasError = true;
+      }
     });
-    if (Object.keys(newErrors).length) {
+
+    // Validate phone format
+    if (form.phone && !validatePhone(form.phone)) {
+      newErrors.phone = true;
+      newFieldErrors.phone = "Please enter a valid phone number";
+      hasError = true;
+    }
+
+    if (hasError) {
       setErrors(newErrors);
+      setFieldErrors(newFieldErrors);
       return;
     }
 
@@ -317,8 +373,9 @@ export default function ContactSection() {
         },
         body: JSON.stringify({
           name: form.name,
-          email: form.email,
-          subject: form.subject,
+          phone: form.phone,
+          website: form.website,
+          budget: form.budget,
           message: form.message,
         }),
       });
@@ -326,6 +383,8 @@ export default function ContactSection() {
       if (res.ok) {
         setStatus("success");
         setForm(INITIAL_FORM);
+        setErrors({});
+        setFieldErrors({});
       } else {
         setStatus("error");
       }
@@ -333,6 +392,16 @@ export default function ContactSection() {
       setStatus("error");
     }
   };
+
+const BUDGETS = [
+  "Under 10,000 PKR",
+  "10,000 – 20,000 PKR",
+  "20,000 – 30,000 PKR",
+  "30,000 – 40,000 PKR",
+  "40,000+ PKR",
+  "Let's Discuss",
+];
+
 
   return (
     <section
@@ -607,13 +676,17 @@ export default function ContactSection() {
                       color: "rgba(239,68,68,0.85)",
                       marginBottom: "16px",
                       textAlign: "center",
+                      padding: "10px",
+                      borderRadius: "8px",
+                      background: "rgba(239,68,68,0.08)",
+                      border: "1px solid rgba(239,68,68,0.20)",
                     }}
                   >
                     Something went wrong. Please try again.
                   </p>
                 )}
 
-                {/* ── Name + Email row ── */}
+                {/* ── Name + Phone row ── */}
                 <div
                   className="form-row"
                   style={{
@@ -623,7 +696,11 @@ export default function ContactSection() {
                     marginBottom: "12px",
                   }}
                 >
-                  <Field label="Name">
+                  <Field
+                    label="Full Name"
+                    error={errors.name}
+                    fieldError={fieldErrors.name}
+                  >
                     <input
                       style={inputStyle(errors.name)}
                       placeholder="Your full name"
@@ -633,44 +710,95 @@ export default function ContactSection() {
                       onBlur={(e) => onBlur(e, errors.name)}
                     />
                   </Field>
-                  <Field label="Email">
+                  <Field
+                    label="Phone Number"
+                    error={errors.phone}
+                    fieldError={fieldErrors.phone}
+                  >
                     <input
-                      type="email"
-                      style={inputStyle(errors.email)}
-                      placeholder="your@email.com"
-                      value={form.email}
-                      onChange={handleChange("email")}
+                      type="tel"
+                      style={inputStyle(errors.phone)}
+                      placeholder="Your phone number"
+                      value={form.phone}
+                      onChange={handleChange("phone")}
                       onFocus={(e) => onFocus(e, false)}
-                      onBlur={(e) => onBlur(e, errors.email)}
+                      onBlur={(e) => onBlur(e, errors.phone)}
                     />
                   </Field>
                 </div>
 
-                {/* ── Subject ── */}
-                <div style={{ marginBottom: "12px" }}>
-                  <Field label="Subject">
+                {/* ── Website + Budget ── */}
+                <div
+                  className="form-row mt-5"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "12px",
+                    marginBottom: "12px",
+                  }}
+                >
+                  <Field
+                    label="Website Type"
+                    error={errors.website}
+                    fieldError={fieldErrors.website}
+                  >
                     <input
-                      style={inputStyle(errors.subject)}
-                      placeholder="Project inquiry, collaboration..."
-                      value={form.subject}
-                      onChange={handleChange("subject")}
+                      style={inputStyle(errors.website)}
+                      placeholder="Your website type"
+                      value={form.website}
+                      onChange={handleChange("website")}
                       onFocus={(e) => onFocus(e, false)}
-                      onBlur={(e) => onBlur(e, errors.subject)}
+                      onBlur={(e) => onBlur(e, errors.website)}
                     />
+                  </Field>
+                  <Field
+                    label="Budget (PKR)"
+                    error={errors.budget}
+                    fieldError={fieldErrors.budget}
+                  >
+                    <select
+                      style={{
+                        ...inputStyle(errors.budget),
+                        appearance: "none",
+                        cursor: "pointer",
+                        paddingRight: "36px",
+                      }}
+                      value={form.budget}
+                      onChange={handleChange("budget")}
+                      onFocus={(e) => onFocus(e, false)}
+                      onBlur={(e) => onBlur(e, errors.budget)}
+                    >
+                      <option value="" style={{ background: "#0a0a0a" }}>
+                        Select Budget Range
+                      </option>
+                      {BUDGETS.map((b) => (
+                        <option
+                          key={b}
+                          value={b}
+                          style={{ background: "#0a0a0a" }}
+                        >
+                          {b}
+                        </option>
+                      ))}
+                    </select>
                   </Field>
                 </div>
 
                 {/* ── Message ── */}
-                <div style={{ marginBottom: "20px" }}>
-                  <Field label="Message">
-                    <textarea
+                <div style={{ marginBottom: "20px" }} className="mt-5">
+                  <Field
+                    label="Message"
+                    error={errors.message}
+                    fieldError={fieldErrors.message}
+                  >
+                    <textarea className="!resize-none"
                       style={{
                         ...inputStyle(errors.message),
-                        minHeight: "110px",
+                        minHeight: "130px",
                         resize: "vertical",
                         lineHeight: 1.7,
                       }}
-                      placeholder="Tell me about your project or just say hi..."
+                      placeholder="Tell me about your project.."
                       value={form.message}
                       onChange={handleChange("message")}
                       onFocus={(e) => onFocus(e, false)}
@@ -688,7 +816,9 @@ export default function ContactSection() {
                     padding: "13px 24px",
                     borderRadius: "12px",
                     background:
-                      "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",
+                      status === "submitting"
+                        ? "rgba(45,127,255,0.40)"
+                        : "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",
                     border: "none",
                     color: "#fff",
                     cursor: status === "submitting" ? "not-allowed" : "pointer",
@@ -702,7 +832,10 @@ export default function ContactSection() {
                     alignItems: "center",
                     justifyContent: "center",
                     gap: "8px",
-                    boxShadow: "0 4px 22px rgba(45,127,255,0.28)",
+                    boxShadow:
+                      status === "submitting"
+                        ? "none"
+                        : "0 4px 22px rgba(45,127,255,0.28)",
                     transition: "transform 0.22s ease, box-shadow 0.22s ease",
                   }}
                   onMouseEnter={(e) => {
