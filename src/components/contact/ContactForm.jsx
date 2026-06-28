@@ -1055,7 +1055,7 @@ const BUDGETS = [
               </p>
 
               <a
-                href="https://wa.me/923001234567"
+                href="https://wa.me/923074963450"
                 target="_blank"
                 rel="noreferrer"
                 style={{

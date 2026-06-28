@@ -216,112 +216,6 @@ function FloatingShapes() {
   );
 }
 
-// ─── Step Card ────────────────────────────────────────────────────────────────
-
-function StepCard({ step, index, visible, isLast }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <div
-      style={{
-        display: "flex",
-        gap: "20px",
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateX(0)" : "translateX(-22px)",
-        transition: `opacity 0.65s ease ${0.12 + index * 0.09}s, transform 0.65s ease ${0.12 + index * 0.09}s`,
-      }}
-    >
-      {/* Left: icon + line */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          flexShrink: 0,
-        }}
-      >
-        <div
-          onMouseEnter={() => setHov(true)}
-          onMouseLeave={() => setHov(false)}
-          style={{
-            width: "44px",
-            height: "44px",
-            borderRadius: "12px",
-            flexShrink: 0,
-            background: hov ? "rgba(45,127,255,0.14)" : "rgba(45,127,255,0.07)",
-            border: `1px solid ${hov ? "rgba(45,127,255,0.42)" : "rgba(45,127,255,0.18)"}`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#2d7fff",
-            transition: "all 0.3s",
-          }}
-        >
-          {step.icon}
-        </div>
-        {!isLast && (
-          <div
-            style={{
-              width: "1px",
-              flex: 1,
-              minHeight: "28px",
-              marginTop: "6px",
-              background:
-                "linear-gradient(to bottom,rgba(45,127,255,0.22),transparent)",
-            }}
-          />
-        )}
-      </div>
-
-      {/* Right: text */}
-      <div style={{ paddingBottom: isLast ? "0" : "28px" }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            marginTop: "10px",
-            marginBottom: "5px",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "'Roboto Mono',monospace",
-              fontSize: "10px",
-              color: "rgba(45,127,255,0.55)",
-              letterSpacing: "0.12em",
-            }}
-          >
-            {step.num}
-          </span>
-          <p
-            style={{
-              fontFamily: "'Oswald',sans-serif",
-              fontSize: "15px",
-              fontWeight: 500,
-              letterSpacing: "0.04em",
-              color: "#fff",
-              margin: 0,
-            }}
-          >
-            {step.title}
-          </p>
-        </div>
-        <p
-          style={{
-            fontFamily: "'Roboto Mono',monospace",
-            fontSize: "11.5px",
-            lineHeight: 1.8,
-            color: "rgba(255,255,255,0.36)",
-            margin: 0,
-          }}
-        >
-          {step.desc}
-        </p>
-      </div>
-    </div>
-  );
-}
-
 // ─── Pricing Card ─────────────────────────────────────────────────────────────
 
 function PricingCard({ plan, index, visible }) {
@@ -538,7 +432,7 @@ function PricingCard({ plan, index, visible }) {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function ServicesProcess() {
+export default function PricingSection() {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -561,7 +455,6 @@ export default function ServicesProcess() {
         position: "relative",
         overflow: "hidden",
         background: "#000",
-        padding: "clamp(80px,10vw,120px) clamp(20px,5%,60px)",
       }}
     >
       <FloatingShapes />
@@ -569,87 +462,6 @@ export default function ServicesProcess() {
       <div
         style={{ position: "relative", maxWidth: "1140px", margin: "0 auto" }}
       >
-        {/* ── Process section ── */}
-        <div style={{ marginBottom: "clamp(72px,9vw,110px)" }}>
-          <div
-            style={{
-              textAlign: "center",
-              marginBottom: "clamp(40px,5vw,60px)",
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(20px)",
-              transition: "all 0.7s ease 0.05s",
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "'Roboto Mono',monospace",
-                fontSize: "11px",
-                letterSpacing: "0.38em",
-                textTransform: "uppercase",
-                color: "#2d7fff",
-                margin: "0 0 10px 0",
-              }}
-            >
-              // how i work
-            </p>
-            <h2
-              style={{
-                fontFamily: "'Cinzel',serif",
-                fontSize: "clamp(30px,4vw,48px)",
-                fontWeight: 400,
-                color: "#fff",
-                margin: "0 0 14px 0",
-                lineHeight: 1.15,
-                letterSpacing: "-0.01em",
-              }}
-            >
-              The{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Process
-              </span>
-            </h2>
-            <p
-              style={{
-                fontFamily: "'Roboto Mono',monospace",
-                fontSize: "13px",
-                color: "rgba(255,255,255,0.28)",
-                maxWidth: "380px",
-                margin: "0 auto",
-                lineHeight: 1.8,
-                letterSpacing: "0.02em",
-              }}
-            >
-              A simple, proven five-step flow from first conversation to live
-              product.
-            </p>
-          </div>
-
-          {/* Steps — two-column on desktop */}
-          <div
-            className="sp-steps-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: "0 60px",
-            }}
-          >
-            {STEPS.map((step, i) => (
-              <StepCard
-                key={i}
-                step={step}
-                index={i}
-                visible={visible}
-                isLast={i === STEPS.length - 1}
-              />
-            ))}
-          </div>
-        </div>
 
         {/* ── Pricing section ── */}
         <div id="pricing">
@@ -726,127 +538,6 @@ export default function ServicesProcess() {
             {PLANS.map((plan, i) => (
               <PricingCard key={i} plan={plan} index={i} visible={visible} />
             ))}
-          </div>
-
-          {/* Final CTA banner */}
-          <div
-            style={{
-              borderRadius: "20px",
-              overflow: "hidden",
-              position: "relative",
-              border: "1px solid rgba(45,127,255,0.22)",
-              background: "rgba(45,127,255,0.04)",
-              padding: "clamp(32px,5%,52px) clamp(24px,4%,48px)",
-              textAlign: "center",
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(20px)",
-              transition: "all 0.7s ease 0.55s",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: "20%",
-                right: "20%",
-                height: "1px",
-                background:
-                  "linear-gradient(90deg,transparent,rgba(45,127,255,0.50),transparent)",
-              }}
-            />
-            {/* Glow */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                pointerEvents: "none",
-                background:
-                  "radial-gradient(ellipse at 50% 0%, rgba(45,127,255,0.08) 0%, transparent 60%)",
-              }}
-            />
-
-            <p
-              style={{
-                fontFamily: "'Roboto Mono',monospace",
-                fontSize: "11px",
-                letterSpacing: "0.30em",
-                textTransform: "uppercase",
-                color: "#2d7fff",
-                margin: "0 0 12px 0",
-                position: "relative",
-              }}
-            >
-              // not sure which plan fits?
-            </p>
-            <h3
-              style={{
-                fontFamily: "'Cinzel',serif",
-                fontSize: "clamp(22px,3vw,36px)",
-                fontWeight: 400,
-                color: "#fff",
-                margin: "0 0 12px 0",
-                lineHeight: 1.2,
-                position: "relative",
-              }}
-            >
-              Let's figure it out{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                together.
-              </span>
-            </h3>
-            <p
-              style={{
-                fontFamily: "'Roboto Mono',monospace",
-                fontSize: "13px",
-                color: "rgba(255,255,255,0.30)",
-                maxWidth: "400px",
-                margin: "0 auto 28px",
-                lineHeight: 1.8,
-                position: "relative",
-              }}
-            >
-              A 20-minute call costs nothing. Most projects are scoped and
-              quoted within 48 hours.
-            </p>
-            <a
-              href="#contact"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "14px 36px",
-                borderRadius: "100px",
-                background: "linear-gradient(135deg,#2d7fff 0%,#6062ff 100%)",
-                color: "#fff",
-                textDecoration: "none",
-                fontSize: "12px",
-                fontWeight: 500,
-                letterSpacing: "0.10em",
-                textTransform: "uppercase",
-                boxShadow: "0 4px 24px rgba(45,127,255,0.28)",
-                position: "relative",
-                transition: "transform 0.25s, box-shadow 0.25s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow =
-                  "0 8px 32px rgba(45,127,255,0.42)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 24px rgba(45,127,255,0.28)";
-              }}
-            >
-              Book a Free Call
-              <HiArrowSmallRight size={18} />
-            </a>
           </div>
         </div>
       </div>

@@ -20,62 +20,104 @@ import "swiper/css/pagination";
 
 // ─── Demo data (replace with API call) ────────────────────────────────────────
 
-const DEMO_REVIEWS = [
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const REVIEWS = [
   {
     _id: "1",
-    name: "Sarah Mitchell",
-    profilePic: "https://i.pravatar.cc/150?img=47",
+    name: "Ahmed Raza",
+    title: "Startup Founder",
+    profilePic: "/reviews-pfp/person-1.png",
     rating: 5,
     createdAt: "2025-11-10",
+    platform: "fiverr",
     message:
-      "Shahbaz built our entire SaaS dashboard from scratch — clean code, pixel-perfect UI, delivered ahead of schedule. Genuinely one of the best developers I've hired.",
+      "Found Shahbaz on Fiverr and ordered the Professional package. Great communication, clean React website, and delivered on time. Very happy with the result.",
   },
   {
     _id: "2",
-    name: "Arjun Mehta",
-    profilePic: "https://i.pravatar.cc/150?img=68",
+    name: "Faraz Ali ",
+    title: "E-commerce Store Owner",
+    profilePic: "/reviews-pfp/person-2.png",
     rating: 5,
     createdAt: "2025-09-22",
+    platform: "google",
     message:
-      "Outstanding attention to detail. The landing page he built converted at 3× our previous rate. He understood our brand immediately and translated it into a stunning UI.",
+      "We only needed a e-commerce so we went with the Starter package. Clean design, fast loading and looks great on mobile. Small changes were done quickly. Definitely recommended.",
   },
   {
     _id: "3",
-    name: "Emily Torres",
-    profilePic: "https://i.pravatar.cc/150?img=32",
+    name: "Muskan Zahid",
+    title: "Marketplace Founder",
+    profilePic: "/reviews-pfp/person-3.png",
     rating: 5,
     createdAt: "2025-08-05",
+    platform: "upwork",
     message:
-      "Responsive, professional, and incredibly fast. Shahbaz redesigned our marketplace in under two weeks and the result looks like it cost 10×. Highly recommended.",
+      "Worked with Shahbaz through Upwork for our dashboard project. He finished the frontend before the deadline and the code was easy for our backend developer to continue working with.",
   },
   {
     _id: "4",
-    name: "Daniel Park",
-    profilePic: "",
+    name: "Daniel Khan",
+    title: "Small Business Owner",
+    profilePic: "/reviews-pfp/person-4.png",
     rating: 5,
     createdAt: "2025-06-18",
+    platform: "google",
     message:
-      "Top-tier full-stack work. He built our REST API, integrated payments, and polished the React frontend — all with zero major bugs at launch. Will hire again.",
+      "Our old website looked outdated. Shahbaz redesigned everything and also improved the speed. Visitors have already started spending more time on the site. Good experience overall.",
   },
   {
     _id: "5",
-    name: "Nadia Al-Hassan",
-    profilePic: "https://i.pravatar.cc/150?img=25",
+    name: "Hassan Sardar",
+    title: "Agency Director",
+    profilePic: "/reviews-pfp/person-5.png",
     rating: 5,
     createdAt: "2025-04-30",
+    platform: "linkedin",
     message:
-      "Shahbaz has a rare combination of strong engineering skills and great design taste. Our app looks and feels premium now. Communication was excellent throughout.",
+      "We've worked with many freelancers before, but Shahbaz was one of the easiest to work with. Quick replies, understood feedback, and delivered a professional website for our client.",
   },
   {
     _id: "6",
-    name: "Lucas Brennan",
-    profilePic: "https://i.pravatar.cc/150?img=51",
+    name: "Jack Carter",
+    title: "Fitness Coach",
+    profilePic: "/reviews-pfp/person-6.png",
     rating: 5,
     createdAt: "2025-02-14",
+    platform: "fiverr",
     message:
-      "Delivered a complex multi-step form flow with animations and mobile-first layout in record time. Code quality was excellent — well-structured and easy to maintain.",
+      "Booked the Starter package on Fiverr for my business website. Everything was delivered on time and the contact form works perfectly. I'll come back for future updates.",
+  },
+  {
+    _id: "7",
+    name: "Andrew Collins",
+    title: "SaaS Founder",
+    profilePic: "/reviews-pfp/person-7.png",
+    rating: 5,
+    createdAt: "2025-01-08",
+    platform: "upwork",
+    message:
+      "Hired Shahbaz for the Professional package. Login system, admin panel and API integration were all completed without any issues. Really satisfied with the quality.",
+  },
+  {
+    _id: "8",
+    name: "Priya Sharma",
+    title: "Marketing Consultant",
+    profilePic: "/reviews-pfp/person-8.png",
+    rating: 5,
+    createdAt: "2024-12-17",
+    platform: "google",
+    message:
+      "I mainly cared about design and responsiveness. The website looks premium on both desktop and mobile. Clients have already complimented the new design.",
   },
 ];
+
+const PLATFORM_ICONS = {
+  google: "https://cdn.trustindex.io/assets/platform/Google/icon.svg",
+  fiverr: "https://cdn.worldvectorlogo.com/logos/fiverr-1.svg",
+  upwork: "https://cdn.worldvectorlogo.com/logos/upwork-2.svg",
+  linkedin: "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
+};
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -220,7 +262,7 @@ function FloatingShapes() {
 
 function ReviewCard({ rev }) {
   const [expanded, setExpanded] = useState(false);
-  const isLong = rev.message.length > 160;
+  const isLong = rev.message.length > 180;
   const initial = rev.name?.charAt(0).toUpperCase() || "?";
   const initColor = getInitColor(rev.name);
 
@@ -263,6 +305,7 @@ function ReviewCard({ rev }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                fontFamily: "'Cinzel', serif",
                 fontSize: "16px",
                 fontWeight: 600,
                 color: "#fff",
@@ -271,6 +314,7 @@ function ReviewCard({ rev }) {
               {initial}
             </div>
           )}
+
           <div>
             <p
               style={{
@@ -284,24 +328,34 @@ function ReviewCard({ rev }) {
             >
               {rev.name}
             </p>
+
             <p
               style={{
+                fontFamily: "'Roboto Mono', monospace",
                 fontSize: "10px",
                 color: "rgba(255,255,255,0.28)",
                 margin: 0,
               }}
             >
-              {timeAgo(rev.createdAt)}
+              {rev.title} · {timeAgo(rev.createdAt)}
             </p>
           </div>
         </div>
 
-        {/* Google icon */}
-        <img
-          src="https://cdn.trustindex.io/assets/platform/Google/icon.svg"
-          alt="Google"
-          style={{ width: "20px", height: "20px", opacity: 0.7 }}
-        />
+        {/* Platform icon */}
+        {PLATFORM_ICONS[rev.platform] && (
+          <img
+            src={PLATFORM_ICONS[rev.platform]}
+            alt={rev.platform}
+            style={{
+              width: "20px",
+              height: "20px",
+              opacity: 0.7,
+              flexShrink: 0,
+            }}
+            onError={(e) => (e.target.style.display = "none")}
+          />
+        )}
       </div>
 
       {/* Stars */}
@@ -322,31 +376,36 @@ function ReviewCard({ rev }) {
                 : "/icons/star-empty.svg"
             }
             alt="star"
-            className="w-[14px] h-[14px]"
+            style={{ width: "14px", height: "14px" }}
           />
         ))}
+
         {/* Verified */}
         <img
           src="/icons/check-circle-blue.svg"
           alt="verified"
-          style={{ marginLeft: "6px" }}
-          className="w-[14px] h-[14px]"
+          style={{
+            width: "14px",
+            height: "14px",
+            marginLeft: "6px",
+          }}
         />
       </div>
 
-      {/* Thin gradient divider */}
+      {/* Divider */}
       <div
         style={{
           height: "1px",
           marginBottom: "12px",
           background:
-            "linear-gradient(90deg,rgba(45,127,255,0.28),rgba(96,98,255,0.12),transparent)",
+            "linear-gradient(90deg, rgba(45,127,255,0.28), rgba(96,98,255,0.12), transparent)",
         }}
       />
 
-      {/* Review text */}
+      {/* Review */}
       <p
         style={{
+          fontFamily: "'Roboto Mono', monospace",
           fontSize: "11.5px",
           lineHeight: 1.85,
           color: "rgba(255,255,255,0.42)",
@@ -355,7 +414,7 @@ function ReviewCard({ rev }) {
           flex: 1,
         }}
       >
-        "{expanded || !isLong ? rev.message : rev.message.slice(0, 160) + "…"}"
+        "{expanded || !isLong ? rev.message : rev.message.slice(0, 180) + "…"}"
       </p>
 
       {isLong && (
@@ -366,6 +425,7 @@ function ReviewCard({ rev }) {
             border: "none",
             cursor: "pointer",
             padding: "8px 0 0 0",
+            fontFamily: "'Roboto Mono', monospace",
             fontSize: "10px",
             color: "#2d7fff",
             letterSpacing: "0.06em",
@@ -383,7 +443,7 @@ function ReviewCard({ rev }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function TestimonialsSection() {
-  const [reviews, setReviews] = useState(DEMO_REVIEWS);
+  const [reviews, setReviews] = useState(REVIEWS);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
 

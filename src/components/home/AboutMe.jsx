@@ -7,7 +7,7 @@ import { Link } from "react-router";
 const highlights = [
   {
     icon: "/icons/projects.svg",
-    label: "40+ Projects",
+    label: "50+ Projects",
     sub: "Delivered worldwide",
   },
   {
@@ -502,7 +502,7 @@ export default function AboutMe() {
                   handle="javicodes"
                   status="Online"
                   contactText="Contact Me"
-                  avatarUrl="/me.png"
+                  avatarUrl="/shahbaz-ansari.png"
                   showUserInfo={false}
                   enableTilt={true}
                   enableMobileTilt={false}

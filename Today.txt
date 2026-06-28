@@ -1,7 +1,0 @@
-1. Responsive isuess
-2. Reviews
-3. Code Clean
-4. Img optimization
-5. SEO
-6. Testing
-7. Changes

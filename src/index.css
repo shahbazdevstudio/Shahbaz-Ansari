@@ -21,7 +21,6 @@ body{
     background: #000000;
     color: #fff;
     font-family: "Roboto Mono", monospace;
-    scroll-behavior: smooth !important;
 }
 
 .scrollbar-hide::-webkit-scrollbar {

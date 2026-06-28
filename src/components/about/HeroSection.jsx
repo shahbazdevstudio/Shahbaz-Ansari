@@ -377,7 +377,7 @@ export default function AboutHeroSection() {
                 handle="javicodes"
                 status="Online"
                 contactText="Contact Me"
-                avatarUrl="/me.png"
+                avatarUrl="/shahbaz-ansari.png"
                 showUserInfo={false}
                 enableTilt={true}
                 enableMobileTilt={false}

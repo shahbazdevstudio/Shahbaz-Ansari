@@ -19,73 +19,94 @@ import "swiper/css/navigation";
 import { LiaStarSolid } from "react-icons/lia";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-
 const REVIEWS = [
   {
     _id: "1",
-    name: "Sarah Mitchell",
-    title: "Product Manager, SaaS Co.",
-    profilePic: "https://i.pravatar.cc/150?img=47",
-    rating: 1,
+    name: "Ahmed Raza",
+    title: "Startup Founder",
+    profilePic: "/reviews-pfp/person-1.png",
+    rating: 5,
     createdAt: "2025-11-10",
-    platform: "google",
+    platform: "fiverr",
     message:
-      "Shahbaz built our entire SaaS dashboard from scratch — clean code, pixel-perfect UI, delivered ahead of schedule. Genuinely one of the best developers I've hired. The attention to detail on every interaction was remarkable.",
+      "Found Shahbaz on Fiverr and ordered the Professional package. Great communication, clean React website, and delivered on time. Very happy with the result.",
   },
   {
     _id: "2",
-    name: "Arjun Mehta",
-    title: "Founder, E-Commerce Brand",
-    profilePic: "https://i.pravatar.cc/150?img=68",
+    name: "Faraz Ali ",
+    title: "E-commerce Store Owner",
+    profilePic: "/reviews-pfp/person-2.png",
     rating: 5,
     createdAt: "2025-09-22",
     platform: "google",
     message:
-      "Outstanding attention to detail. The landing page he built converted at 3× our previous rate. He understood our brand immediately and translated it into a stunning UI. Will work with him again for sure.",
+      "We only needed a e-commerce so we went with the Starter package. Clean design, fast loading and looks great on mobile. Small changes were done quickly. Definitely recommended.",
   },
   {
     _id: "3",
-    name: "Emily Torres",
-    title: "CEO, Marketplace Startup",
-    profilePic: "https://i.pravatar.cc/150?img=32",
+    name: "Muskan Zahid",
+    title: "Marketplace Founder",
+    profilePic: "/reviews-pfp/person-3.png",
     rating: 5,
     createdAt: "2025-08-05",
-    platform: "fiverr",
+    platform: "upwork",
     message:
-      "Responsive, professional, and incredibly fast. Shahbaz redesigned our marketplace in under two weeks and the result looks like it cost 10×. Highly recommended to anyone serious about quality.",
+      "Worked with Shahbaz through Upwork for our dashboard project. He finished the frontend before the deadline and the code was easy for our backend developer to continue working with.",
   },
   {
     _id: "4",
-    name: "Daniel Park",
-    title: "CTO, FinTech Startup",
-    profilePic: "",
+    name: "Daniel Khan",
+    title: "Small Business Owner",
+    profilePic: "/reviews-pfp/person-4.png",
     rating: 5,
     createdAt: "2025-06-18",
-    platform: "upwork",
+    platform: "google",
     message:
-      "Top-tier full-stack work. He built our REST API, integrated payments, and polished the React frontend — all with zero major bugs at launch. Code was clean, well-documented, and scalable. Will hire again.",
+      "Our old website looked outdated. Shahbaz redesigned everything and also improved the speed. Visitors have already started spending more time on the site. Good experience overall.",
   },
   {
     _id: "5",
-    name: "Nadia Al-Hassan",
-    title: "Director, Digital Agency",
-    profilePic: "https://i.pravatar.cc/150?img=25",
+    name: "Hassan Sardar",
+    title: "Agency Director",
+    profilePic: "/reviews-pfp/person-5.png",
     rating: 5,
     createdAt: "2025-04-30",
     platform: "linkedin",
     message:
-      "Shahbaz has a rare combination of strong engineering skills and great design taste. Our app looks and feels premium now. Communication was excellent throughout the project.",
+      "We've worked with many freelancers before, but Shahbaz was one of the easiest to work with. Quick replies, understood feedback, and delivered a professional website for our client.",
   },
   {
     _id: "6",
-    name: "Lucas Brennan",
-    title: "Freelance Client",
-    profilePic: "https://i.pravatar.cc/150?img=51",
+    name: "Jack Carter",
+    title: "Fitness Coach",
+    profilePic: "/reviews-pfp/person-6.png",
     rating: 5,
     createdAt: "2025-02-14",
     platform: "fiverr",
     message:
-      "Delivered a complex multi-step form flow with animations and mobile-first layout in record time. Code quality was excellent — well-structured and easy to maintain going forward.",
+      "Booked the Starter package on Fiverr for my business website. Everything was delivered on time and the contact form works perfectly. I'll come back for future updates.",
+  },
+  {
+    _id: "7",
+    name: "Andrew Collins",
+    title: "SaaS Founder",
+    profilePic: "/reviews-pfp/person-7.png",
+    rating: 5,
+    createdAt: "2025-01-08",
+    platform: "upwork",
+    message:
+      "Hired Shahbaz for the Professional package. Login system, admin panel and API integration were all completed without any issues. Really satisfied with the quality.",
+  },
+  {
+    _id: "8",
+    name: "Priya Sharma",
+    title: "Marketing Consultant",
+    profilePic: "/reviews-pfp/person-8.png",
+    rating: 5,
+    createdAt: "2024-12-17",
+    platform: "google",
+    message:
+      "I mainly cared about design and responsiveness. The website looks premium on both desktop and mobile. Clients have already complimented the new design.",
   },
 ];
 
@@ -292,7 +313,6 @@ function ReviewCard({ rev }) {
           <div>
             <p
               style={{
-                fontFamily: "'Oswald',sans-serif",
                 fontSize: "13px",
                 fontWeight: 500,
                 letterSpacing: "0.06em",
@@ -603,14 +623,11 @@ export default function TestimonialSwiper() {
                 margin: "0 0 24px 0",
                 fontStyle: "italic",
                 position: "relative",
-                maxWidth: "800px",
               }}
             >
-              "Shahbaz delivered our entire platform — API, frontend, and
-              deployment — in three weeks. The code is clean, the UI is
-              stunning, and he was a joy to work with throughout. If you need a
-              developer who actually cares about your product, he's your
-              person."
+              "Found Shahbaz on Fiverr and ordered the Professional package.
+              Great communication, clean React website, and delivered on time.
+              Very happy with the result."
             </p>
 
             <div
@@ -622,8 +639,8 @@ export default function TestimonialSwiper() {
               }}
             >
               <img
-                src="https://i.pravatar.cc/150?img=47"
-                alt="Sarah Mitchell"
+                src="/reviews-pfp/person-1.png"
+                alt="Ahmed Raza"
                 style={{
                   width: "44px",
                   height: "44px",
@@ -636,16 +653,15 @@ export default function TestimonialSwiper() {
               <div>
                 <p
                   style={{
-                    fontFamily: "'Oswald',sans-serif",
-                    fontSize: "13px",
-                    fontWeight: 500,
+                    fontSize: "14px",
+                    fontWeight: 400,
                     letterSpacing: "0.06em",
                     textTransform: "uppercase",
                     color: "#fff",
                     margin: "0 0 2px 0",
                   }}
                 >
-                  Sarah Mitchell
+                  Ahmed Raza
                 </p>
                 <p
                   style={{
@@ -655,7 +671,7 @@ export default function TestimonialSwiper() {
                     margin: 0,
                   }}
                 >
-                  Product Manager, SaaS Co.
+                  Startup Founder
                 </p>
               </div>
               <div
@@ -666,9 +682,9 @@ export default function TestimonialSwiper() {
                   margin: "0 4px",
                 }}
               />
-              <div style={{ display: "flex", gap: "3px" }}>
+              <div style={{ display: "flex", gap: "5px" }}>
                 {[...Array(5)].map((_, i) => (
-                  <LiaStarSolid size={13} color="#f4b400" />
+                  <LiaStarSolid size={16} color="#f4b400" />
                 ))}
               </div>
             </div>

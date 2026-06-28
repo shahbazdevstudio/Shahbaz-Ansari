@@ -19,7 +19,7 @@ import { LuCopyright } from "react-icons/lu";
 
 const NAV_LINKS = [
   { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
+  { label: "About", path: "/about-me" },
   { label: "Services", path: "/services" },
   { label: "Projects", path: "/projects" },
   { label: "Testimonials", path: "/testimonials" },
@@ -38,20 +38,20 @@ const SERVICES = [
 const SOCIALS = [
   {
     label: "GitHub",
-    href: "https://github.com/shahbaz-ansari",
+    href: "https://github.com/shahbazansari-dev",
     Icon: FaGithub,
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/shahbaz-ansari",
+    href: "https://www.linkedin.com/in/shahbaz-web-developer",
     Icon: FaLinkedin,
   },
   {
     label: "Instagram",
-    href: "https://instagram.com/shahbazansari",
+    href: "https://www.instagram.com/shahbaz_ansari_dev/",
     Icon: FaInstagram,
   },
-  { label: "WhatsApp", href: "https://wa.me/923001234567", Icon: FaWhatsapp },
+  { label: "WhatsApp", href: "https://wa.me/923074963450", Icon: FaWhatsapp },
 ];
 
 // ─── Scroll-to-top button ──────────────────────────────────────────────────────
@@ -608,18 +608,15 @@ const secondRow = NAV_LINKS.slice(3);
       </div>
 
       {/* ─── Bottom Bar ─── */}
-      {/* ─── Bottom Bar ─── */}
       <div className="mx-auto flex max-w-[1140px] items-center justify-between gap-4 border-t border-white/10 px-5 py-4 sm:px-8 lg:px-[60px]">
         <p className="flex flex-1 items-center gap-2 text-sm font-mono tracking-wide text-white/50">
           <LuCopyright className="h-4 w-4 shrink-0" />
 
-          <span className="whitespace-nowrap">{new Date().getFullYear()}</span>
+         {new Date().getFullYear()} {" "}
 
-          <span className="font-semibold text-primary whitespace-nowrap">
             Shahbaz Ansari.
-          </span>
 
-          <span className="text-white/40">All Rights Reserved.</span>
+         All Rights Reserved.
         </p>
 
         <div className="shrink-0">

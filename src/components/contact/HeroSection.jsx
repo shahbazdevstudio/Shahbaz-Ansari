@@ -15,19 +15,19 @@ const INFO_CARDS = [
   {
     icon: <MdEmail size={22} />,
     label: "Email",
-    value: "shahbaz@example.com",
-    link: "mailto:shahbaz@example.com",
+    value: "shahbazansari.coder@..",
+    link: "mailto:shahbazansari.coder@gmail.com",
   },
   {
     icon: <FaWhatsapp size={22} />,
     label: "WhatsApp",
-    value: "+92 300 123 4567",
-    link: "https://wa.me/923001234567",
+    value: "+92 3074963450",
+    link: "https://wa.me/923074963450",
   },
   {
     icon: <HiLocationMarker size={22} />,
     label: "Location",
-    value: "Sahiwal, Punjab, Pakistan",
+    value: "Gujrat, Punjab, Pakistan",
     link: null,
   },
   {
@@ -41,22 +41,22 @@ const INFO_CARDS = [
 const SOCIALS = [
   {
     label: "GitHub",
-    href: "https://github.com/shahbaz-ansari",
+    href: "https://github.com/shahbazansari-dev",
     icon: <FaGithub />,
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/shahbaz-ansari",
+    href: "https://www.linkedin.com/in/shahbaz-web-developer",
     icon: <FaLinkedin />,
   },
   {
     label: "Instagram",
-    href: "https://instagram.com/shahbazansari",
+    href: "https://www.instagram.com/shahbaz_ansari_dev/",
     icon: <FiInstagram />,
   },
   {
     label: "WhatsApp",
-    href: "https://wa.me/923001234567",
+    href: "https://wa.me/923074963450",
     icon: <BsWhatsapp />,
   },
 ];

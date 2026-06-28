@@ -17,17 +17,17 @@ const ALL_PROJECTS = [
     title: "Spike Family",
     description:
       "A modern corporate website designed to showcase business services, company information, and brand credibility through a clean and professional user experience.",
-    image: "/project-1.png",
+    image: "/project-thumnails/project-1.png",
     demo: "https://shahbaz-project-1.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-1",
     tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
     id: "02",
-title: "Health Monitor",
+    title: "Health Monitor",
     description:
       "A healthcare management platform focused on presenting medical services, health resources, and patient information in a clear and accessible way.",
-    image: "/project-2.png",
+    image: "/project-thumnails/project-2.png",
     demo: "https://shahbaz-project-2.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-2",
     tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
@@ -37,7 +37,7 @@ title: "Health Monitor",
     title: "HealthCentreApp",
     description:
       "A healthcare startup website built to highlight medical solutions, services, and company offerings with a modern and user-friendly design.",
-    image: "/project-3.png",
+    image: "/project-thumnails/project-3.png",
     demo: "https://github.com/shahbazansari-dev/shahbaz-project-3",
     github: "https://shahbaz-project-3.vercel.app/",
     tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
@@ -47,7 +47,7 @@ title: "Health Monitor",
     title: "GYMSTER",
     description:
       "A fitness and gym website created to promote training programs, membership plans, and wellness services with an engaging online presence.",
-    image: "/project-4.png",
+    image: "/project-thumnails/project-4.png",
     demo: "https://shahbaz-project-4.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-4",
     tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
@@ -57,7 +57,7 @@ title: "Health Monitor",
     title: "Angel Launchpad Ventures",
     description:
       "A startup investment platform that connects entrepreneurs with investors while presenting funding opportunities and venture-related information.",
-    image: "/project-5.png",
+    image: "/project-thumnails/project-5.png",
     demo: "https://shahbaz-project-5.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-5",
     tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
@@ -67,7 +67,7 @@ title: "Health Monitor",
     title: "Angel Launchpad Ventures",
     description:
       "A startup investment platform that connects entrepreneurs with investors while presenting funding opportunities and venture-related information.",
-    image: "/project-6.png",
+    image: "/project-thumnails/project-6.png",
     demo: "https://shahbaz-project-6.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-6",
     tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
@@ -77,7 +77,7 @@ title: "Health Monitor",
     title: "Global CareGivers",
     description:
       "A caregiver database platform designed to help users explore caregiver profiles, services, and healthcare support resources efficiently.",
-    image: "/project-7.png",
+    image: "/project-thumnails/project-7.png",
     demo: "https://shahbaz-project-7.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-7",
     tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
@@ -87,7 +87,7 @@ title: "Health Monitor",
     title: "Fatography",
     description:
       "A photography portfolio website built to showcase creative work, highlight services, and help potential clients connect with the photographer.",
-    image: "/project-8.png",
+    image: "/project-thumnails/project-8.png",
     demo: "/https://fatography.co/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-8",
     tech: ["Rect", "Tailwind", "Express", "MongoDb"],
@@ -660,7 +660,7 @@ export default function ProjectsGrid({ activeFilter }) {
               letterSpacing: "-0.01em",
             }}
           >
-            My {" "}
+            All {" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #2d7fff 0%, #6062ff 100%)",

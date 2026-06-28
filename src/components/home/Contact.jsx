@@ -18,22 +18,22 @@ const FORMSPREE_URL = "https://formspree.io/f/xbdvllgb";
 const SOCIALS = [
   {
     label: "GitHub",
-    href: "https://github.com/shahbaz-ansari",
+    href: "https://github.com/shahbazansari-dev",
     icon: <FaGithub />,
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/shahbaz-ansari",
+    href: "https://www.linkedin.com/in/shahbaz-web-developer",
     icon: <FaLinkedin />,
   },
   {
     label: "Instagram",
-    href: "https://instagram.com/shahbazansari",
+    href: "https://www.instagram.com/shahbaz_ansari_dev/",
     icon: <FiInstagram />,
   },
   {
     label: "WhatsApp",
-    href: "https://wa.me/923001234567",
+    href: "https://wa.me/923074963450",
     icon: <BsWhatsapp />,
   },
 ];

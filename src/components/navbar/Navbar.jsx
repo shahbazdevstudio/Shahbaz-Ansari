@@ -5,7 +5,7 @@ import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
+  { name: "About", path: "/about-me" },
   { name: "Service", path: "/services" },
   { name: "Project", path: "/projects" },
   { name: "Testimonials", path: "/testimonials" },
