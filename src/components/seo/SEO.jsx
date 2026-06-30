@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 
 const SITE = {
   name: "Shahbaz Ansari",
-  url: "https://shahbazansari.pro",
+  url: "https://www.shahbazansari.pro",
   image: "https://shahbazansari.pro/og-image.png",
   author: "Shahbaz Ansari",
   title: "Full Stack Web Developer",
