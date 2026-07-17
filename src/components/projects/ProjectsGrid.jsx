@@ -88,7 +88,7 @@ const ALL_PROJECTS = [
     description:
       "A photography portfolio website built to showcase creative work, highlight services, and help potential clients connect with the photographer.",
     image: "/project-thumnails/project-8.png",
-    demo: "/https://fatography.co/",
+    demo: "https://fatography.co/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-8",
     tech: ["Rect", "Tailwind", "Express", "MongoDb"],
   },
