@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { BsWhatsapp } from "react-icons/bs";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -176,7 +177,7 @@ const Navbar = () => {
 
             <div className="flex gap-3">
               <a
-                href="https://github.com"
+                href="https://github.com/shahbazansari-dev"
                 target="_blank"
                 rel="noreferrer"
                 className="
@@ -196,7 +197,7 @@ const Navbar = () => {
               </a>
 
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/shahbaz-web-developer"
                 target="_blank"
                 rel="noreferrer"
                 className="
@@ -216,7 +217,7 @@ const Navbar = () => {
               </a>
 
               <a
-                href="https://facebook.com"
+                href="https://wa.me/923074963450"
                 target="_blank"
                 rel="noreferrer"
                 className="
@@ -232,11 +233,11 @@ const Navbar = () => {
         transition-all duration-300
       "
               >
-                <FaFacebook size={22} />
+                <BsWhatsapp size={22} />
               </a>
 
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/shahbaz_ansari_dev/"
                 target="_blank"
                 rel="noreferrer"
                 className="

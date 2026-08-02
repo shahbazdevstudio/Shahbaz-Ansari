@@ -18,12 +18,12 @@ import { LuCopyright } from "react-icons/lu";
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about-me" },
-  { label: "Services", path: "/services" },
-  { label: "Projects", path: "/projects" },
-  { label: "Testimonials", path: "/testimonials" },
-  { label: "Contact", path: "/contact" },
+  { label: "Home", path: "/" , underline: true},
+  { label: "About", path: "/about-me", underline: true },
+  { label: "Services", path: "/services", underline: true },
+  { label: "Projects", path: "/projects", underline: true },
+  { label: "Testimonials", path: "/testimonials", underline: true },
+  { label: "Contact", path: "/contact", underline: true },
 ];
 
 const SERVICES = [
@@ -137,13 +137,14 @@ function SocialIcon({ label, href, Icon }) {
 
 // ─── Nav link (with dot prefix) ─────────────────────────────────────────────
 
-function NavLinkWithDot({ label, href = "#" }) {
+function NavLinkWithDot({ label, href = "#"   , underline = false }) {
   const [hov, setHov] = useState(false);
   return (
     <Link
     to={href}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
+      className={underline ? "!underline" : ""}
       style={{
         display: "flex",
         alignItems: "center",
@@ -351,6 +352,7 @@ const secondRow = NAV_LINKS.slice(3);
             >
               {NAV_LINKS.map((link) => (
                 <NavLinkWithDot
+                underline={link.underline}
                   key={link.path}
                   label={link.label}
                   href={link.path}

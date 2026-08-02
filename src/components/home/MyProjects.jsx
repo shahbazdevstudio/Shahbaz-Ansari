@@ -34,8 +34,8 @@ const ALL_PROJECTS = [
     description:
       "A healthcare startup website built to highlight medical solutions, services, and company offerings with a modern and user-friendly design.",
     image: "/project-thumnails/project-3.png",
-    demo: "https://github.com/shahbazansari-dev/shahbaz-project-3",
-    github: "https://shahbaz-project-3.vercel.app/",
+    demo: "https://shahbaz-project-3.vercel.app/",
+    github: "https://github.com/shahbazansari-dev/shahbaz-project-3",
     tech: ["HTML", "CSS", "Bootstrap", "JavaScript"],
   },
   {
