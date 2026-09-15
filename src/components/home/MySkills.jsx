@@ -1,3 +1,4 @@
+import { label } from "framer-motion/client";
 import { useEffect, useRef, useState } from "react";
 import {
   FaHtml5,
@@ -18,16 +19,46 @@ import {
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const skills = [
-  { name: "HTML", icon: <FaHtml5 />, level: 90 },
-  { name: "CSS", icon: <FaCss3Alt />, level: 75 },
-  { name: "JavaScript", icon: <FaJs />, level: 70 },
-  { name: "Bootstrap", icon: <FaBootstrap />, level: 85 },
-  { name: "React", icon: <FaReact />, level: 80 },
-  { name: "Tailwind", icon: <SiTailwindcss />, level: 80 },
-  { name: "Node.js", icon: <FaNodeJs />, level: 75 },
-  { name: "Express.js", icon: <SiExpress />, level: 85 },
-  { name: "MongoDB", icon: <SiMongodb />, level: 75 },
-  { name: "Next.js", icon: <SiNextdotjs />, level: 70 },
+  { name: "HTML", icon: <FaHtml5 />, level: 90, label: "Strong Foundation" },
+  { name: "CSS", icon: <FaCss3Alt />, level: 75, label: "Responsive Styling" },
+  {
+    name: "JavaScript",
+    icon: <FaJs />,
+    level: 70,
+    label: "Interactive Development",
+  },
+  {
+    name: "Bootstrap",
+    icon: <FaBootstrap />,
+    level: 85,
+    label: "Responsive UI",
+  },
+  { name: "React", icon: <FaReact />, level: 80, label: "Modern Frontend" },
+  { name: "Tailwind", icon: <SiTailwindcss />, level: 80, label: "Custom UI" },
+  {
+    name: "Node.js",
+    icon: <FaNodeJs />,
+    level: 75,
+    label: "Backend Development",
+  },
+  {
+    name: "Express.js",
+    icon: <SiExpress />,
+    level: 85,
+    label: "API Development",
+  },
+  {
+    name: "MongoDB",
+    icon: <SiMongodb />,
+    level: 75,
+    label: "Database Management",
+  },
+  {
+    name: "Next.js",
+    icon: <SiNextdotjs />,
+    level: 70,
+    label: "Modern Web Development",
+  },
 ];
 
 const stats = [
@@ -50,8 +81,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-80px",
-          left: "-100px",
+          top: "-0px",
+          left: "-10px",
           width: "550px",
           height: "550px",
           borderRadius: "50%",
@@ -64,8 +95,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-60px",
-          right: "-80px",
+          bottom: "-20px",
+          right: "-10px",
           width: "480px",
           height: "480px",
           borderRadius: "50%",
@@ -232,7 +263,7 @@ function SkillCard({ skill, index, sectionVisible }) {
                 margin: 0,
               }}
             >
-              Professional
+              {skill.label}
             </p>
           </div>
         </div>
@@ -361,8 +392,8 @@ export default function MySkills() {
               letterSpacing: "0.02em",
             }}
           >
-            Using modern technologies to create responsive, high-performance,
-            and scalable web applications.
+            A practical set of modern technologies used to build responsive
+            websites and reliable web applications.
           </p>
         </div>
 
@@ -441,7 +472,7 @@ export default function MySkills() {
                   position: "relative",
                 }}
               >
-                Building Fast & Scalable
+                From Frontend to
                 <span
                   style={{
                     background:
@@ -451,14 +482,31 @@ export default function MySkills() {
                   }}
                 >
                   {" "}
-                  Web Applications
+                  Backend
                 </span>
               </h3>
 
               <p
+                className="text-sm sm:text-[15px]"
                 style={{
                   fontWeight: 300,
-                  fontSize: "15px",
+                  lineHeight: 1.9,
+                  color: "rgba(255,255,255,0.38)",
+                  letterSpacing: "0.025em",
+                  margin: "0 0 10px 0",
+                  position: "relative",
+                }}
+              >
+                I use modern web technologies to build responsive and functional
+                digital products. My skills cover frontend development, backend
+                development, APIs, and databases, allowing me to work on
+                different parts of a web project.
+              </p>
+
+              <p
+                className="text-sm sm:text-[15px]"
+                style={{
+                  fontWeight: 300,
                   lineHeight: 1.9,
                   color: "rgba(255,255,255,0.38)",
                   letterSpacing: "0.025em",
@@ -466,26 +514,11 @@ export default function MySkills() {
                   position: "relative",
                 }}
               >
-                I work with modern web technologies to develop fast, responsive,
-                and scalable applications. From frontend UI to backend logic, I
-                make sure everything works smoothly, performs well, and delivers
-                a clean user experience that supports real business goals.
+                I focus on writing clean, maintainable code and creating
+                interfaces that work smoothly across desktop, tablet, and mobile
+                devices. The goal is always to build something reliable, easy to
+                use, and ready for future improvements.
               </p>
-
-              {/* Stats 2×2 */}
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "10px",
-                  marginBottom: "28px",
-                  position: "relative",
-                }}
-              >
-                {stats.map((s, i) => (
-                  <StatBox key={i} stat={s} index={i} visible={visible} />
-                ))}
-              </div>
 
               {/* CTA */}
               <a

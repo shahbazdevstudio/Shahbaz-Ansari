@@ -16,7 +16,7 @@ const ALL_PROJECTS = [
     id: "01",
     title: "Spike Family",
     description:
-      "A modern corporate website designed to showcase business services, company information, and brand credibility through a clean and professional user experience.",
+      "A modern business website created to present company information and services through a clean layout, clear content structure, and professional user experience.",
     image: "/project-thumnails/project-1.png",
     demo: "https://shahbaz-project-1.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-1",
@@ -26,7 +26,7 @@ const ALL_PROJECTS = [
     id: "02",
     title: "Health Monitor",
     description:
-      "A healthcare management platform focused on presenting medical services, health resources, and patient information in a clear and accessible way.",
+      "A healthcare-focused website designed to present health services and information in a clear, organised, and easy-to-navigate interface.",
     image: "/project-thumnails/project-2.png",
     demo: "https://shahbaz-project-2.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-2",
@@ -36,7 +36,7 @@ const ALL_PROJECTS = [
     id: "03",
     title: "HealthCentreApp",
     description:
-      "A healthcare startup website built to highlight medical solutions, services, and company offerings with a modern and user-friendly design.",
+      "A modern website for a healthcare startup, designed to showcase its services and solutions with a clean interface and user-friendly experience.",
     image: "/project-thumnails/project-3.png",
     demo: "https://shahbaz-project-3.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-3",
@@ -46,7 +46,7 @@ const ALL_PROJECTS = [
     id: "04",
     title: "GYMSTER",
     description:
-      "A fitness and gym website created to promote training programs, membership plans, and wellness services with an engaging online presence.",
+      "A fitness website built to showcase training programs, membership options, and gym services with an engaging and responsive design.",
     image: "/project-thumnails/project-4.png",
     demo: "https://shahbaz-project-4.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-4",
@@ -54,9 +54,9 @@ const ALL_PROJECTS = [
   },
   {
     id: "05",
-    title: "Angel Launchpad Ventures",
+    title: "CakeZone",
     description:
-      "A startup investment platform that connects entrepreneurs with investors while presenting funding opportunities and venture-related information.",
+      "A modern bakery website designed to showcase cakes, desserts, and bakery services with an attractive layout, clear product presentation, and a smooth user experience.",
     image: "/project-thumnails/project-5.png",
     demo: "https://shahbaz-project-5.vercel.app/",
     github: "https://github.com/shahbazansari-dev/shahbaz-project-5",
@@ -114,8 +114,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-80px",
-          right: "-110px",
+          top: "-20px",
+          left: "-110px",
           width: "460px",
           height: "460px",
           borderRadius: "50%",
@@ -128,7 +128,7 @@ function FloatingShapes() {
         style={{
           position: "absolute",
           bottom: "-60px",
-          left: "-100px",
+          right: "-100px",
           width: "420px",
           height: "420px",
           borderRadius: "50%",

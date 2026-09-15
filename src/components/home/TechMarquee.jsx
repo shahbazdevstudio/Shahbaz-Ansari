@@ -76,7 +76,7 @@ export default function TechMarquee() {
               key={`${skill.name}-${index}`}
               className="flex items-center gap-12"
             >
-              <span
+              <h4
                 className="
                   text-lg md:text-2xl font-extrabold
                   tracking-[0.25em]
@@ -85,7 +85,7 @@ export default function TechMarquee() {
                 "
               >
                 {skill.name}
-              </span>
+              </h4>
 
               <span className="text-2xl text-white md:text-3xl">✦</span>
             </div>

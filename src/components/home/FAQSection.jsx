@@ -49,8 +49,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-80px",
-          left: "-110px",
+          top: "-20px",
+          left: "-10px",
           width: "480px",
           height: "480px",
           borderRadius: "50%",
@@ -62,8 +62,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-70px",
-          right: "-100px",
+          bottom: "-20px",
+          right: "-10px",
           width: "440px",
           height: "440px",
           borderRadius: "50%",

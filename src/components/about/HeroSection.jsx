@@ -34,7 +34,7 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-80px",
+          bottom: "-0px",
           right: "-110px",
           width: "480px",
           height: "480px",
@@ -221,7 +221,8 @@ export default function AboutHeroSection() {
               transition: "all 0.8s ease 0.1s",
             }}
           >
-            <p className="!mt-10 md:!mt-0"
+            <p
+              className="!mt-10 md:!mt-0"
               style={{
                 fontFamily: "'Roboto Mono',monospace",
                 fontSize: "11px",
@@ -285,8 +286,9 @@ export default function AboutHeroSection() {
               <strong style={{ color: "#2d7fff", fontWeight: 600 }}>
                 Web Developer
               </strong>{" "}
-              from Gujrat, Pakistan. I build modern websites and web applications that combine clean
-              design, strong performance, and a seamless user experience.
+              from in Pakistan. I create modern websites and web
+              applications with a focus on clean design, smooth functionality,
+              and a reliable user experience.
             </p>
 
             {/* CTA row */}
@@ -360,7 +362,8 @@ export default function AboutHeroSection() {
           </div>
 
           {/* RIGHT — image card */}
-          <div className="px-5"
+          <div
+            className="px-5"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(28px)",

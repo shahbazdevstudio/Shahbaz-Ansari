@@ -14,19 +14,19 @@ import { HiArrowSmallRight } from "react-icons/hi2";
 const QUICK_FAQS = [
   {
     q: "How fast do you reply?",
-    a: "Within 24 hours on weekdays. Usually same-day.",
+    a: "I respond quickly and try to get back to you as soon as possible.",
   },
   {
     q: "Do you work internationally?",
-    a: "Yes — fully remote. Time zones are never a problem.",
+    a: "Yes — I work with clients worldwide and can work across different time zones.",
   },
   {
     q: "Can I see your work first?",
-    a: "Absolutely. Check the Projects section or ask for a portfolio PDF.",
+    a: "Absolutely. Check the Projects section to see my work.",
   },
   {
     q: "What's your minimum project size?",
-    a: "No minimum. I work on anything from a single page to a full platform.",
+    a: "No minimum. I work on everything from single-page websites to full web applications.",
   },
 ];
 
@@ -42,8 +42,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-80px",
-          right: "-110px",
+          top: "-20px",
+          left: "-110px",
           width: "460px",
           height: "460px",
           borderRadius: "50%",
@@ -55,8 +55,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-60px",
-          left: "-100px",
+          bottom: "-00px",
+          right: "-100px",
           width: "420px",
           height: "420px",
           borderRadius: "50%",
@@ -223,9 +223,11 @@ const baseInput = (err) => ({
 });
 
 // ─── Quick FAQ Item ───────────────────────────────────────────────────────────
+// NOTE: "open" ab is component ka apna local state nahi hai — parent
+// (ContactForm) se aata hai, taake ek waqt me sirf ek hi FAQ khula rahe
+// (accordion behavior). "onToggle" click hone par parent ko batata hai.
 
-function QuickFaq({ item, index, visible }) {
-  const [open, setOpen] = useState(false);
+function QuickFaq({ item, index, visible, open, onToggle }) {
   const [hov, setHov] = useState(false);
 
   return (
@@ -248,7 +250,7 @@ function QuickFaq({ item, index, visible }) {
       }}
     >
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => onToggle(index)}
         style={{
           width: "100%",
           display: "flex",
@@ -347,6 +349,14 @@ export default function ContactForm() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   const [fieldErrors, setFieldErrors] = useState({});
+
+  // Sirf ek FAQ index track karte hain jo khula hai.
+  // null = koi bhi khula nahi. Same index dobara click hone par band ho jata hai.
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  const handleFaqToggle = (index) => {
+    setOpenFaqIndex((prev) => (prev === index ? null : index));
+  };
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -452,14 +462,14 @@ export default function ContactForm() {
     }
   };
 
-const BUDGETS = [
-  "Under 10,000 PKR",
-  "10,000 – 20,000 PKR",
-  "20,000 – 30,000 PKR",
-  "30,000 – 40,000 PKR",
-  "40,000+ PKR",
-  "Let's Discuss",
-];
+  const BUDGETS = [
+    "Under 10,000 PKR",
+    "10,000 – 20,000 PKR",
+    "20,000 – 30,000 PKR",
+    "30,000 – 40,000 PKR",
+    "40,000+ PKR",
+    "Let's Discuss",
+  ];
 
   return (
     <section
@@ -960,7 +970,14 @@ const BUDGETS = [
                 }}
               >
                 {QUICK_FAQS.map((item, i) => (
-                  <QuickFaq key={i} item={item} index={i} visible={visible} />
+                  <QuickFaq
+                    key={i}
+                    item={item}
+                    index={i}
+                    visible={visible}
+                    open={openFaqIndex === i}
+                    onToggle={handleFaqToggle}
+                  />
                 ))}
               </div>
             </div>

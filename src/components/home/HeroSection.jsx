@@ -163,8 +163,8 @@ const HeroSection = () => {
 
         {/* ── Description — SEO: keyword-rich, descriptive ── */}
         <p className="hero-para text-sm mt-7 text-white/45 md:text-base md:text-lg max-w-xl leading-relaxed font-light">
-          I design and develop modern websites and web applications that help
-          businesses grow, attract customers, and increase conversions.
+          I design and build modern websites and web applications that help
+          businesses build a strong online presence and reach more customers.
         </p>
 
         {/* ── CTA Buttons ── */}

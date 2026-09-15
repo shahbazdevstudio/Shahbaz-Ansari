@@ -12,9 +12,9 @@ const AboutPage = () => {
   return (
     <>
       <SEO
-        title="About | Full Stack Web Developer"
-        description="Learn more about Shahbaz Ansari, a Full Stack Web Developer from Pakistan specializing in React, Next.js, MERN Stack, and scalable web applications."
-        keywords="About Shahbaz Ansari, Shahbaz Ansari, Full Stack Web Developer, React Developer, Next.js Developer, MERN Stack Developer, JavaScript Developer, Node.js Developer, MongoDB Developer, Web Developer Pakistan"
+        title="About Me | Shahbaz Ansari | Web Developer"
+        description="A Full-Stack Web Developer from Pakistan specializing in React, Next.js, Node.js, responsive websites, and modern web applications."
+        keywords="About Shahbaz Ansari, Shahbaz Ansari, Full-Stack Web Developer, React Developer, Next.js Developer, Node.js Developer, Web Developer Pakistan"
         path="/about-me"
       />
       <Navbar />

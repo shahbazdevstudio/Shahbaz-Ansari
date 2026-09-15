@@ -33,7 +33,7 @@ const INFO_CARDS = [
   {
     icon: <PiClockFill size={22} />,
     label: "Response Time",
-    value: "Within 24 Hours",
+    value: "Quick Response",
     link: null,
   },
 ];
@@ -73,7 +73,7 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-100px",
+          top: "-20px",
           left: "-130px",
           width: "560px",
           height: "560px",
@@ -86,7 +86,7 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-80px",
+          bottom: "-0px",
           right: "-110px",
           width: "490px",
           height: "490px",
@@ -467,7 +467,8 @@ export default function ContactHeroSection() {
             }}
           >
             Whether you have a project in mind, a question, or need my help —
-            I'm always available. I reply within 24 hours.
+            I'm always available. **I provide fast responses and reliable
+            service.
           </p>
 
           {/* Availability badge */}

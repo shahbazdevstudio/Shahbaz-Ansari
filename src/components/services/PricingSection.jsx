@@ -1,7 +1,3 @@
-/**
- * ServicesProcess.jsx  — Component 3 / 3
- * How I work (process steps) + Pricing tiers + final CTA.
- */
 
 import { Check } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -9,86 +5,57 @@ import { FiCode, FiFileText, FiGlobe, FiMessageCircle, FiPenTool } from "react-i
 import { HiArrowSmallRight } from "react-icons/hi2";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-
-const STEPS = [
-  {
-    num: "01",
-    title: "Let's Talk",
-    desc: "We discuss your goals, requirements, and project idea to understand exactly what you need.",
-    icon: <FiMessageCircle />,
-  },
-  {
-    num: "02",
-    title: "Plan & Proposal",
-    desc: "You'll receive a clear project plan, timeline, and pricing before any work begins.",
-    icon: <FiFileText />,
-  },
-  {
-    num: "03",
-    title: "Design",
-    desc: "I create the layout, structure, and user experience to ensure everything looks clean and professional.",
-    icon: <FiPenTool />,
-  },
-  {
-    num: "04",
-    title: "Development",
-    desc: "Your website or web application is built with regular progress updates and feedback along the way.",
-    icon: <FiCode />,
-  },
-  {
-    num: "05",
-    title: "Launch & Support",
-    desc: "After testing, the project is deployed to your hosting and I provide post-launch support.",
-    icon: <FiGlobe />,
-  },
-];
-
 const PLANS = [
   {
     name: "Starter",
     price: "Rs.20,000",
     period: "one-time",
-    tagline: "Perfect for landing pages",
+    tagline: "For simple websites and landing pages",
     features: [
       "Up to 5 pages",
       "Responsive design",
-      "Contact form",
-      "Basic SEO setup",
+      "Contact form integration",
+      "Basic on-page SEO setup",
+      "Clean and modern layout",
       "2 rounds of revisions",
-      "7-day delivery",
+      "Delivery timeline based on project scope",
     ],
     cta: "Get Started",
     highlight: false,
   },
+
   {
     name: "Professional",
     price: "Rs.40,000",
     period: "one-time",
-    tagline: "Full web app or site",
+    tagline: "For custom websites and web applications",
     features: [
-      "Full-stack application",
-      "Auth + User accounts",
-      "Custom admin panel",
-      "API integration",
+      "Custom website or web application",
+      "Frontend and backend development",
+      "Database integration",
+      "REST API integration",
+      "Authentication functionality when required",
+      "Responsive design for all devices",
       "3 rounds of revisions",
-      "14-day delivery",
-      "2-week post-launch support",
+      "Post-launch support",
     ],
-    cta: "Most Popular",
+    cta: "Get Started",
     highlight: true,
   },
+
   {
-    name: "Retainer",
-    price: "Rs.60,000",
+    name: "Ongoing Support",
+    price: "Rs.30,000",
     period: "/ month",
-    tagline: "Ongoing development",
+    tagline: "For ongoing website development and updates",
     features: [
-      "40 hrs dev per month",
-      "Priority response",
-      "Weekly progress calls",
-      "Unlimited small tasks",
-      "Performance monitoring",
-      "Cancel anytime",
+      "Regular website updates",
+      "New pages and feature improvements",
+      "Bug fixes and maintenance",
+      "Performance improvements",
+      "Priority project support",
+      "Monthly development support",
+      "Flexible scope based on requirements",
     ],
     cta: "Let's Talk",
     highlight: false,
@@ -106,7 +73,7 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-90px",
+          top: "-20px",
           left: "-120px",
           width: "500px",
           height: "500px",
@@ -119,7 +86,7 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-70px",
+          bottom: "-0px",
           right: "-100px",
           width: "450px",
           height: "450px",

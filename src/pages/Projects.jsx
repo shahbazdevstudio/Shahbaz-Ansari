@@ -11,9 +11,9 @@ const ProjectsPage = () => {
   return (
     <>
       <SEO
-        title="Web Development Portfolio"
-        description="Explore the web development portfolio of Shahbaz Ansari, showcasing React, Next.js, MERN Stack, responsive websites, and custom web applications."
-        keywords="Shahbaz Ansari Portfolio, Web Development Portfolio, Full Stack Web Developer, React Developer, Next.js Developer, MERN Stack Developer, JavaScript Projects, Responsive Websites, Custom Web Applications, Web Developer Pakistan"
+        title="Projects | Shahbaz Ansari | Web Developer"
+        description="Explore Shahbaz Ansari's web development projects, including custom web applications built with React, Next.js, Node.js, and modern web technologies."
+        keywords="Shahbaz Ansari Projects, Web Development Portfolio, Full-Stack Web Developer, React Projects, Next.js Projects, Web Developer Pakistan"
         path="/projects"
       />
       <Navbar />

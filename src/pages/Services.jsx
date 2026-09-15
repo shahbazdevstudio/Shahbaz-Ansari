@@ -11,12 +11,12 @@ import SEO from "../components/seo/SEO";
 const ServicesPage = () => {
   return (
     <>
-<SEO
-  title="Web Development Services"
-  description="Explore professional web development services by Shahbaz Ansari, specializing in React, Next.js, MERN Stack, and custom web applications."
-  keywords="Web Development Services, Shahbaz Ansari, React Developer, Next.js Developer, MERN Stack Developer, Full Stack Web Developer, Custom Web Applications, Responsive Website Development, Freelance Web Developer, Web Developer Pakistan"
-  path="/services"
-/>
+      <SEO
+        title="Web Development Services | Shahbaz Ansari | Web Developer"
+        description="Explore Web development services by Shahbaz Ansari, including React, Next.js, Node.js, responsive websites, custom web applications, and website redesign."
+        keywords="Web Development Services, Shahbaz Ansari, Full-Stack Web Developer, React Developer, Next.js Developer, Node.js Developer, Website Development, Web Developer Pakistan"
+        path="/services"
+      />
       <Navbar />
       <ServicesHeroSection />
       <ServicesList />

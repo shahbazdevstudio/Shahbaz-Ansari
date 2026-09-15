@@ -335,8 +335,8 @@ const secondRow = NAV_LINKS.slice(3);
                 marginBottom: "20px",
               }}
             >
-              I design and develop modern websites and web applications that
-              help businesses grow, attract customers, and increase conversions.
+              Let's work together and build a modern website that brings your
+              ideas online and creates a strong digital presence.
             </p>
           </div>
 
@@ -352,7 +352,7 @@ const secondRow = NAV_LINKS.slice(3);
             >
               {NAV_LINKS.map((link) => (
                 <NavLinkWithDot
-                underline={link.underline}
+                  underline={link.underline}
                   key={link.path}
                   label={link.label}
                   href={link.path}
@@ -613,12 +613,7 @@ const secondRow = NAV_LINKS.slice(3);
       <div className="mx-auto flex max-w-[1140px] items-center justify-between gap-4 border-t border-white/10 px-5 py-4 sm:px-8 lg:px-[60px]">
         <p className="flex flex-1 items-center gap-2 text-sm font-mono tracking-wide text-white/50">
           <LuCopyright className="h-4 w-4 shrink-0" />
-
-         {new Date().getFullYear()} {" "}
-
-            Shahbaz Ansari.
-
-         All Rights Reserved.
+          {new Date().getFullYear()} Shahbaz Ansari. All Rights Reserved.
         </p>
 
         <div className="shrink-0">

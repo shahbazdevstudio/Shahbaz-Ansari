@@ -3,30 +3,6 @@ import { ArrowRight, Play } from "lucide-react";
 import ProfileCard from "../react-bits/ProfileCard";
 import { Link } from "react-router";
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const highlights = [
-  {
-    icon: "/icons/projects.svg",
-    label: "50+ Projects",
-    sub: "Delivered worldwide",
-  },
-  {
-    icon: "/icons/lightning.svg",
-    label: "Fast Delivery",
-    sub: "On-time, every time",
-  },
-  {
-    icon: "/icons/ball.svg",
-    label: "Pixel Perfect",
-    sub: "Detail-obsessed design",
-  },
-  {
-    icon: "/icons/code.svg",
-    label: "Clean Code",
-    sub: "Scalable & maintainable",
-  },
-];
-
 // ─── Floating Decorative Shapes ───────────────────────────────────────────────
 
 function FloatingShapes() {
@@ -37,7 +13,7 @@ function FloatingShapes() {
     >
       {/* Large blurred circle — top-left */}
       <div
-        className="absolute -top-[120px] -left-[160px] w-[520px] h-[520px] rounded-full"
+        className="absolute -top-[10px] -left-[10px] w-[520px] h-[520px] rounded-full"
         style={{
           background:
             "radial-gradient(circle, rgba(45,127,255,0.11) 0%, transparent 65%)",
@@ -47,7 +23,7 @@ function FloatingShapes() {
 
       {/* Medium blurred circle — bottom-right */}
       <div
-        className="absolute -bottom-[100px] -right-[120px] w-[440px] h-[440px] rounded-full"
+        className="absolute -bottom-[10px] -right-[10px] w-[440px] h-[440px] rounded-full"
         style={{
           background:
             "radial-gradient(circle, rgba(96,98,255,0.11) 0%, transparent 65%)",
@@ -96,69 +72,6 @@ function FloatingShapes() {
           backgroundSize: "60px 60px",
         }}
       />
-    </div>
-  );
-}
-
-// ─── Highlight Card ───────────────────────────────────────────────────────────
-
-function HighlightCard({ h, index, visible }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible
-          ? hovered
-            ? "translateY(-3px)"
-            : "translateY(0)"
-          : "translateY(16px)",
-        transition: `opacity 0.6s ease ${0.35 + index * 0.07}s, transform 0.3s ease`,
-        borderColor: hovered
-          ? "rgba(45,127,255,0.30)"
-          : "rgba(255,255,255,0.06)",
-        background: hovered
-          ? "rgba(45,127,255,0.06)"
-          : "rgba(255,255,255,0.025)",
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderRadius: "14px",
-        padding: "14px 16px",
-        cursor: "default",
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "12px",
-      }}
-    >
-      <span style={{ color: "#2d7fff", marginTop: "2px", flexShrink: 0 }}>
-        <img src={h.icon} alt="a" />
-      </span>
-      <div>
-        <p
-          style={{
-            fontSize: "12px",
-            fontWeight: 500,
-            letterSpacing: "0.07em",
-            textTransform: "uppercase",
-            color: "#fff",
-            margin: "0 0 3px 0",
-          }}
-        >
-          {h.label}
-        </p>
-        <p
-          style={{
-            fontSize: "10px",
-            color: "rgba(255,255,255,0.30)",
-            margin: 0,
-          }}
-        >
-          {h.sub}
-        </p>
-      </div>
     </div>
   );
 }
@@ -252,8 +165,8 @@ export default function AboutMe() {
               letterSpacing: "0.02em",
             }}
           >
-            I build high-performance websites and web applications that help
-            businesses grow.
+            I focus on building websites that are modern, reliable, and designed
+            around real business needs.
           </p>
         </div>
 
@@ -306,60 +219,48 @@ export default function AboutMe() {
             </h2>
 
             <p
+              className="text-sm sm:text-[15px]"
               style={{
                 fontWeight: 300,
-                fontSize: "15px",
                 lineHeight: 1.9,
                 color: "rgba(255,255,255,0.42)",
                 letterSpacing: "0.025em",
                 margin: "0 0 12px 0",
               }}
             >
-              Hi, I'm Shahbaz Ansari, a Full-Stack Web Developer from Gujrat,
+              Hi, I'm Shahbaz Ansari, a Full-Stack Web Developer based in
               Pakistan.
             </p>
             <p
+              className="text-sm sm:text-[15px]"
               style={{
                 fontWeight: 300,
-                fontSize: "15px",
                 lineHeight: 1.9,
                 color: "rgba(255,255,255,0.42)",
                 letterSpacing: "0.025em",
                 margin: "0 0 12px 0",
               }}
             >
-              I help businesses, startups, and individuals turn their ideas into
-              modern, high-performing websites and web applications.
+              I work with businesses, startups, and individuals to turn ideas
+              into professional websites and web applications. My goal is to
+              create digital experiences that are easy to use, visually
+              polished, and built to perform well.
             </p>
             <p
-              className="lg:text-[rgba(255,255,255,0.26)] text-[rgba(255,255,255,0.42)]"
+              className="lg:text-[rgba(255,255,255,0.26)] text-[rgba(255,255,255,0.42)] text-sm sm:text-[15px]"
               style={{
                 fontWeight: 300,
-                fontSize: "15px",
                 lineHeight: 1.9,
                 letterSpacing: "0.025em",
                 margin: "0 0 36px 0",
               }}
             >
-              I work across both frontend and backend development, ensuring
-              every project looks professional, performs smoothly, and scales as
-              your needs grow. Whether it's a landing page, business website,
-              portfolio, or a complete web application
+              From responsive business websites and landing pages to portfolios
+              and custom web applications, I handle both frontend and backend
+              development. I focus on clean design, smooth functionality, and
+              maintainable code so your website is ready to support your goals
+              as it grows.
             </p>
-
-            {/* Highlights Grid */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "10px",
-                marginBottom: "40px",
-              }}
-            >
-              {highlights.map((h, i) => (
-                <HighlightCard key={i} h={h} index={i} visible={visible} />
-              ))}
-            </div>
 
             {/* ── CTA Buttons ── */}
             <div

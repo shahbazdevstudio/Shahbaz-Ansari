@@ -83,8 +83,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-90px",
-          left: "-130px",
+          top: "-20px",
+          left: "-30px",
           width: "500px",
           height: "500px",
           borderRadius: "50%",
@@ -96,8 +96,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-70px",
-          right: "-110px",
+          bottom: "-20px",
+          right: "-10px",
           width: "440px",
           height: "440px",
           borderRadius: "50%",
@@ -467,7 +467,7 @@ const BUDGETS = [
               letterSpacing: "0.02em",
             }}
           >
-            Available for freelance work, partnerships, and job opportunities.
+            Available for freelance work and new opportunities.
           </p>
         </div>
 
@@ -791,7 +791,8 @@ const BUDGETS = [
                     error={errors.message}
                     fieldError={fieldErrors.message}
                   >
-                    <textarea className="!resize-none"
+                    <textarea
+                      className="!resize-none"
                       style={{
                         ...inputStyle(errors.message),
                         minHeight: "130px",

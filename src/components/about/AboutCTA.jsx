@@ -9,43 +9,48 @@ const SERVICES = [
   {
     num: "01",
     title: "Frontend Development",
-    desc: "React, Next.js, Tailwind CSS — responsive, accessible, performant. I build interfaces that feel as fast as they look.",
-    tags: ["React", "Next.js", "Tailwind", "TypeScript"],
+    desc: "Building responsive and modern user interfaces with React, Next.js, and Tailwind CSS, with a focus on clean design and smooth functionality.",
+    tags: ["React", "Next.js", "Tailwind CSS", "JavaScript"],
     icon: "/icons/code.svg",
   },
+
   {
     num: "02",
-    title: "Backend & APIs",
-    desc: "Node.js, Express, MongoDB REST APIs built with auth, validation, and scalability from the start.",
-    tags: ["Node.js", "Express", "MongoDB", "JWT"],
+    title: "Backend Development",
+    desc: "Developing backend functionality and REST APIs with Node.js, Express, and MongoDB for websites and web applications.",
+    tags: ["Node.js", "Express", "MongoDB", "REST APIs"],
     icon: "/icons/database-accent.svg",
   },
+
   {
     num: "03",
-    title: "UI / UX Design",
-    desc: "Figma mockups to browser pixel-perfect. I design systems, component libraries, and interaction flows.",
-    tags: ["Figma", "Design Systems", "Framer"],
+    title: "Responsive Web Design",
+    desc: "Creating websites that look and work well across desktop, tablet, and mobile devices with clean and user-friendly layouts.",
+    tags: ["HTML", "CSS", "Bootstrap", "Tailwind CSS"],
     icon: "/icons/target-accent.svg",
   },
+
   {
     num: "04",
-    title: "Performance Audit",
-    desc: "Core Web Vitals, bundle analysis, lazy loading strategies — I'll find the bottlenecks and fix them.",
-    tags: ["Lighthouse", "Web Vitals", "SEO"],
+    title: "Website Performance",
+    desc: "Improving website speed, loading performance, and overall user experience through practical optimisation techniques.",
+    tags: ["Performance", "Lighthouse", "SEO", "Optimisation"],
     icon: "/icons/bolt-accent.svg",
   },
+
   {
     num: "05",
-    title: "SaaS / Dashboard",
-    desc: "Data-heavy apps, role-based auth, real-time features, and chart-heavy dashboards for B2B products.",
-    tags: ["React", "Charts", "Auth", "Real-time"],
+    title: "Web Applications",
+    desc: "Building custom web applications with modern frontend and backend technologies based on project requirements.",
+    tags: ["React", "Node.js", "APIs", "MongoDB"],
     icon: "/icons/monitor-code.svg",
   },
+
   {
     num: "06",
-    title: "Site Redesign",
-    desc: "Audit existing sites and rebuild them to a significantly higher standard of design, speed, and conversion.",
-    tags: ["Redesign", "Responsive", "CRO"],
+    title: "Website Redesign",
+    desc: "Redesigning existing websites with a modern layout, improved responsiveness, better performance, and a cleaner user experience.",
+    tags: ["Redesign", "Responsive", "Performance", "Modern UI"],
     icon: "/icons/edit-pencil.svg",
   },
 ];
@@ -61,7 +66,7 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-80px",
+          top: "-20px",
           left: "-100px",
           width: "480px",
           height: "480px",
@@ -74,7 +79,7 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-60px",
+          bottom: "-0px",
           right: "-90px",
           width: "440px",
           height: "440px",

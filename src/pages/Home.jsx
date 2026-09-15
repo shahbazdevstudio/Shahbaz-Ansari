@@ -15,9 +15,9 @@ const HomePage = () => {
   return (
     <>
       <SEO
-        title="Full Stack Web Developer"
-        description="Professional Full Stack Web Developer from Pakistan specializing in React, Next.js, MERN Stack, responsive websites, and custom web applications."
-        keywords="Shahbaz Ansari, Full Stack Web Developer, React Developer, MERN Stack Developer, Portfolio"
+        title="Shahbaz Ansari | Full-Stack Web Developer"
+        description="Full-Stack Web Developer from Pakistan specializing in React, Next.js, Node.js, responsive websites, and custom web applications."
+        keywords="Shahbaz Ansari, Full-Stack Web Developer, React Developer, Next.js Developer, MERN Stack Developer, Web Developer Pakistan"
         path="/"
       />
       <Navbar />

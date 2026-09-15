@@ -1,15 +1,3 @@
-/**
- * TestimonialsSection.jsx
- *
- * Dependencies:
- *   npm install swiper
- *
- * Usage: import TestimonialsSection from "./TestimonialsSection";
- *
- * To fetch real reviews swap DEMO_REVIEWS with an API call:
- *   axios.get("/api/reviews").then(res => setReviews(res.data))
- */
-
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
@@ -24,91 +12,91 @@ import "swiper/css/pagination";
 const REVIEWS = [
   {
     _id: "1",
-    name: "Ahmed Raza",
-    title: "Startup Founder",
+    name: "Adeel Khan",
+    title: "Startup Owner",
     profilePic: "/reviews-pfp/person-1.png",
     rating: 5,
     createdAt: "2025-11-10",
     platform: "fiverr",
     message:
-      "Found Shahbaz on Fiverr and ordered the Professional package. Great communication, clean React website, and delivered on time. Very happy with the result.",
+      "I needed a clean website for my startup and Shahbaz understood the requirements quickly. Communication was easy throughout the project, and the final website was delivered on time. Happy with how everything turned out.",
   },
   {
     _id: "2",
-    name: "Faraz Ali ",
-    title: "E-commerce Store Owner",
+    name: "Usman Tariq",
+    title: "Online Store Owner",
     profilePic: "/reviews-pfp/person-2.png",
     rating: 5,
     createdAt: "2025-09-22",
     platform: "google",
     message:
-      "We only needed a e-commerce so we went with the Starter package. Clean design, fast loading and looks great on mobile. Small changes were done quickly. Definitely recommended.",
+      "The website looks clean and works well on mobile, which was important for my customers. Shahbaz also handled a few changes after delivery without making things complicated. Overall, a good experience.",
   },
   {
     _id: "3",
-    name: "Muskan Zahid",
-    title: "Marketplace Founder",
+    name: "Ayesha Malik",
+    title: "Business Founder",
     profilePic: "/reviews-pfp/person-3.png",
     rating: 5,
     createdAt: "2025-08-05",
     platform: "upwork",
     message:
-      "Worked with Shahbaz through Upwork for our dashboard project. He finished the frontend before the deadline and the code was easy for our backend developer to continue working with.",
+      "We worked together on the frontend for a dashboard project. The work was completed before the deadline and the code was organised, which made it easier for our backend developer to continue with the project.",
   },
   {
     _id: "4",
-    name: "Daniel Khan",
+    name: "Hamza Qureshi",
     title: "Small Business Owner",
     profilePic: "/reviews-pfp/person-4.png",
     rating: 5,
     createdAt: "2025-06-18",
     platform: "google",
     message:
-      "Our old website looked outdated. Shahbaz redesigned everything and also improved the speed. Visitors have already started spending more time on the site. Good experience overall.",
+      "Our previous website was old and difficult to use. Shahbaz redesigned it with a much cleaner layout and also improved the overall performance. The new version feels more professional and easier to navigate.",
   },
   {
     _id: "5",
-    name: "Hassan Sardar",
-    title: "Agency Director",
+    name: "Bilal Ahmed",
+    title: "Creative Agency Owner",
     profilePic: "/reviews-pfp/person-5.png",
     rating: 5,
     createdAt: "2025-04-30",
     platform: "linkedin",
     message:
-      "We've worked with many freelancers before, but Shahbaz was one of the easiest to work with. Quick replies, understood feedback, and delivered a professional website for our client.",
+      "Shahbaz was easy to work with and understood the feedback we shared during the project. Communication was quick, and the final website matched what we were looking for. Would be happy to work together again.",
   },
   {
     _id: "6",
-    name: "Jack Carter",
+    name: "Michael Roberts",
     title: "Fitness Coach",
     profilePic: "/reviews-pfp/person-6.png",
     rating: 5,
     createdAt: "2025-02-14",
     platform: "fiverr",
     message:
-      "Booked the Starter package on Fiverr for my business website. Everything was delivered on time and the contact form works perfectly. I'll come back for future updates.",
+      "I needed a simple website to present my services and give people an easy way to contact me. Shahbaz delivered everything on time and made sure the site worked properly on both desktop and mobile.",
   },
   {
     _id: "7",
-    name: "Andrew Collins",
+    name: "Ryan Mitchell",
     title: "SaaS Founder",
     profilePic: "/reviews-pfp/person-7.png",
     rating: 5,
     createdAt: "2025-01-08",
     platform: "upwork",
     message:
-      "Hired Shahbaz for the Professional package. Login system, admin panel and API integration were all completed without any issues. Really satisfied with the quality.",
+      "Shahbaz helped us with the frontend side of our web application. He was responsive, followed the requirements carefully, and delivered the requested features without unnecessary delays. Good quality work.",
   },
   {
     _id: "8",
-    name: "Priya Sharma",
+    name: "Neha Kapoor",
     title: "Marketing Consultant",
     profilePic: "/reviews-pfp/person-8.png",
     rating: 5,
     createdAt: "2024-12-17",
     platform: "google",
     message:
-      "I mainly cared about design and responsiveness. The website looks premium on both desktop and mobile. Clients have already complimented the new design.",
+      "I wanted a website that looked professional without being overly complicated. The final design was clean, responsive, and easy to use. I especially liked how well it looks on mobile devices.",
   },
 ];
 
@@ -152,8 +140,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-90px",
-          left: "-120px",
+          top: "-20px",
+          left: "-10px",
           width: "500px",
           height: "500px",
           borderRadius: "50%",
@@ -165,8 +153,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-70px",
-          right: "-100px",
+          bottom: "-30px",
+          right: "-20px",
           width: "460px",
           height: "460px",
           borderRadius: "50%",

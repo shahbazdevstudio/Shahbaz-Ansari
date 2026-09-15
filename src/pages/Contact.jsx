@@ -10,9 +10,9 @@ const ContactPage = () => {
   return (
     <>
       <SEO
-        title="Contact | Hire Full Stack Web Developer"
-        description="Contact Shahbaz Ansari, a Full Stack Web Developer from Pakistan specializing in React, Next.js, MERN Stack, custom web applications."
-        keywords="Contact Shahbaz Ansari, Hire Full Stack Web Developer, React Developer, Next.js Developer, MERN Stack Developer, Freelance Web Developer, Web Developer Pakistan, Custom Web Applications, Responsive Website Development"
+        title="Contact | Shahbaz Ansari | Web Developer"
+        description="Get in touch with Shahbaz Ansari, a Full-Stack Web Developer from Pakistan for websites, web applications, and custom development projects."
+        keywords="Contact Shahbaz Ansari, Hire Full-Stack Web Developer, React Developer, Next.js Developer, Freelance Web Developer, Web Developer Pakistan"
         path="/contact"
       />
       <Navbar />

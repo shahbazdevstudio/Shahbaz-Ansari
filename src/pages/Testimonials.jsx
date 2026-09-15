@@ -14,9 +14,9 @@ const TestimonialsPage = () => {
   return (
     <>
       <SEO
-        title="Client Testimonials | Full Stack Web Developer"
-        description="Read client testimonials about Shahbaz Ansari, a Full Stack Web Developer trusted for React, Next.js, MERN Stack, and custom web application development."
-        keywords="Client Testimonials, Shahbaz Ansari Reviews, Full Stack Web Developer, React Developer, Next.js Developer, MERN Stack Developer, Web Development Reviews, Freelance Web Developer, Web Developer Pakistan"
+        title="Client Testimonials | Shahbaz Ansari | Web Developer"
+        description="Read feedback from clients who have worked with Shahbaz Ansari on websites, web applications, and custom web development projects."
+        keywords="Client Testimonials, Shahbaz Ansari Reviews, Web Developer Reviews, Full-Stack Web Developer, Freelance Web Developer, Web Development"
         path="/testimonials"
       />
       <Navbar />

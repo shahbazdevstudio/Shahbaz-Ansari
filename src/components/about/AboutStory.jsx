@@ -12,32 +12,32 @@ const TIMELINE = [
   {
     year: "2021",
     title: "Getting Started",
-    desc: "Started learning HTML, CSS, and JavaScript. Built small static websites and explored how web development works.",
+    desc: "Started learning the fundamentals of web development with HTML, CSS, and JavaScript. Built small practice projects and learned how websites are structured and styled.",
   },
   {
     year: "2022",
-    title: "Learning & Practice",
-    desc: "Improved JavaScript skills and focused on real projects. Built interactive websites and started understanding APIs and DOM deeply.",
+    title: "Learning Through Projects",
+    desc: "Continued improving JavaScript and responsive design skills by building different practice projects and exploring interactive user interfaces.",
   },
   {
     year: "2023",
-    title: "React & Freelance Work",
-    desc: "Moved into React and started building modern UI-based applications. Completed first freelance projects for local clients.",
+    title: "React & Professional Experience",
+    desc: "Started working with React and modern frontend development. Gained professional experience working remotely on websites and web projects.",
   },
   {
     year: "2024",
-    title: "Full-Stack Development",
-    desc: "Learned Node.js, Express, and MongoDB. Built full-stack apps with authentication, dashboards, and APIs.",
+    title: "Freelance & Full-Stack Development",
+    desc: "Began focusing more on freelance projects while expanding into backend development with Node.js, Express, MongoDB, and REST APIs.",
   },
   {
     year: "2025",
-    title: "Professional Experience",
-    desc: "Worked in a professional environment on real-world projects, improving performance, scalability, and clean architecture practices.",
+    title: "Building More Advanced Projects",
+    desc: "Worked on a wider range of websites and web applications, improving skills in frontend development, backend functionality, APIs, and project structure.",
   },
   {
     year: "2026 →",
-    title: "Shahbaz Dev Studio",
-    desc: "Now working with freelance clients and a small team, helping businesses build and grow modern web products with Next.js and TypeScript.",
+    title: "Continuing to Grow",
+    desc: "Currently working with clients and continuing to build modern websites and web applications while expanding my skills with React, Next.js, and full-stack technologies.",
   },
 ];
 
@@ -85,8 +85,8 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          top: "-80px",
-          right: "-110px",
+          top: "-20px",
+          left: "-110px",
           width: "480px",
           height: "480px",
           borderRadius: "50%",
@@ -98,13 +98,13 @@ function FloatingShapes() {
       <div
         style={{
           position: "absolute",
-          bottom: "-60px",
-          left: "-100px",
+          bottom: "-0px",
+          right: "-100px",
           width: "440px",
           height: "440px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle,rgba(45,127,255,0.09) 0%,transparent 62%)",
+            "radial-gradient(circle,rgba(45,127,255,0.10) 0%,transparent 62%)",
           filter: "blur(50px)",
         }}
       />
@@ -381,11 +381,8 @@ export default function AboutStory() {
               letterSpacing: "0.02em",
             }}
           >
-            From first{" "}
-            <code style={{ color: "rgba(45,127,255,0.70)", fontSize: "11px" }}>
-              &lt;div&gt;
-            </code>{" "}
-            to full-stack products — five years of building things for the web.
+            From learning the basics of web development to building complete
+            websites and web applications.
           </p>
         </div>
 
@@ -642,7 +639,6 @@ export default function AboutStory() {
           </div>
         </div>
       </div>
-
     </section>
   );
 }
