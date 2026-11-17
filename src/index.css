@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/* Typography system: Sora for headings, Inter for everything else */
+:root {
+  --font-body: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --section-bg: transparent;
+  --font-display: "Sora Variable", "Sora", "Inter Variable", system-ui, sans-serif;
+}
+
+@theme {
+  --color-primary: #38bdf8;
+  --color-secondary: #0ea5e9;
+
+  --color-bg: #ffffff;
+  --color-text: #111827;
+
+  --color-dark-bg: #121212;
+  --color-dark-card: #111827;
+  --color-dark-text: #E5E7EB;
+
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-cinzel: "Sora Variable", "Sora", "Inter Variable", sans-serif;
+  --font-oswald: "Sora Variable", "Sora", "Inter Variable", sans-serif;
+  --font-mono: "Inter Variable", "Inter", system-ui, sans-serif;
+}
+
+body{
+    background: transparent;
+    color: #fff;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Text Selection */
+::selection {
+  background: #38bdf8;
+  color: #02131c;
+}
+
+::-moz-selection {
+  background: #38bdf8;
+  color: #02131c;
+}
+
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0b0b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38bdf8, #0ea5e9);
+  border-radius: 999px;
+  border: 2px solid #0b0b0b;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7dd3fc, #7dd3fc);
+}
+
+::-webkit-scrollbar-corner {
+  background: #0b0b0b;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #38bdf8 #0b0b0b;
+}
+
+/* ── Global polish ─────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+a, button { -webkit-tap-highlight-color: transparent; }
+
+/* Scroll reveal (uses `translate`, so it never fights existing transforms) */
+.rv {
+  opacity: 0;
+  translate: 0 26px;
+  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    translate 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--rv-delay, 0ms);
+}
+.rv.rv-in { opacity: 1; translate: 0 0; }
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 9999;
+  transform-origin: 0 50%; transform: scaleX(0);
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9 60%, #7dd3fc);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+  pointer-events: none;
+}
+
+/* Back to top */
+.to-top {
+  position: fixed; right: 22px; bottom: 22px; z-index: 9000;
+  width: 44px; height: 44px; border-radius: 999px;
+  display: grid; place-items: center; cursor: pointer;
+  color: #02131c; font-size: 18px; font-weight: 700;
+  background: linear-gradient(135deg, #7dd3fc, #0ea5e9);
+  border: 0; box-shadow: 0 10px 30px rgba(14, 165, 233, 0.35);
+  opacity: 0; pointer-events: none; translate: 0 12px;
+  transition: opacity .3s ease, translate .3s ease, filter .2s ease;
+}
+.to-top.show { opacity: 1; pointer-events: auto; translate: 0 0; }
+.to-top:hover { filter: brightness(1.1); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rv { opacity: 1; translate: 0 0; transition: none; }
+}
+
+
+/* ── One continuous page background ─────────────────────────
+   Every section is transparent and sits on this single backdrop,
+   so there are no seams/lines when scrolling between sections. */
+html {
+  background: #02040a;
+}
+body {
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg,
+      #02040a 0%,
+      #030812 18%,
+      #04101d 38%,
+      #030a14 58%,
+      #04111f 78%,
+      #02060d 100%);
+  position: relative;
+}
+/* soft, fixed glows that never move relative to the screen */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 600px at 10% 8%, rgba(56, 189, 248, 0.10), transparent 65%),
+    radial-gradient(800px 600px at 92% 55%, rgba(14, 165, 233, 0.08), transparent 65%),
+    radial-gradient(900px 500px at 30% 100%, rgba(56, 189, 248, 0.07), transparent 65%);
+}
+
+/* Let glows bleed softly into neighbouring sections instead of being cut off */
+#root > section,
+#root > footer {
+  overflow: visible !important;
+  overflow-x: clip !important;
+  border-top: 0 !important;
+}
+/* the home hero has a photo grid and must stay clipped; fade its bottom edge out */
+#root > section.hero-clip {
+  overflow: hidden !important;
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+}

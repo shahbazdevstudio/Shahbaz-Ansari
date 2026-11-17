@@ -1,0 +1,522 @@
+
+import { Check } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { HiArrowSmallRight } from "react-icons/hi2";
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const PLANS = [
+  {
+    name: "Starter",
+    price: "Rs.20,000",
+    period: "one-time",
+    tagline: "For simple websites and landing pages",
+    features: [
+      "Up to 5 pages",
+      "Responsive design",
+      "Contact form integration",
+      "Basic on-page SEO setup",
+      "Clean and modern layout",
+      "2 rounds of revisions",
+      "Delivery timeline based on project scope",
+    ],
+    cta: "Get Started",
+    highlight: false,
+  },
+
+  {
+    name: "Professional",
+    price: "Rs.40,000",
+    period: "one-time",
+    tagline: "For custom websites and web applications",
+    features: [
+      "Custom website or web application",
+      "Frontend and backend development",
+      "Database integration",
+      "REST API integration",
+      "Authentication functionality when required",
+      "Responsive design for all devices",
+      "3 rounds of revisions",
+      "Post-launch support",
+    ],
+    cta: "Get Started",
+    highlight: true,
+  },
+
+  {
+    name: "Ongoing Support",
+    price: "Rs.30,000",
+    period: "/ month",
+    tagline: "For ongoing website development and updates",
+    features: [
+      "Regular website updates",
+      "New pages and feature improvements",
+      "Bug fixes and maintenance",
+      "Performance improvements",
+      "Priority project support",
+      "Monthly development support",
+      "Flexible scope based on requirements",
+    ],
+    cta: "Let's Talk",
+    highlight: false,
+  },
+];
+
+// ─── Floating Shapes ──────────────────────────────────────────────────────────
+
+function FloatingShapes() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: "-20px",
+          left: "-120px",
+          width: "500px",
+          height: "500px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle,rgba(56,189,248,0.10) 0%,transparent 62%)",
+          filter: "blur(55px)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-0px",
+          right: "-100px",
+          width: "450px",
+          height: "450px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle,rgba(14,165,233,0.09) 0%,transparent 62%)",
+          filter: "blur(50px)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `linear-gradient(rgba(56,189,248,0.020) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.020) 1px,transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* 4-point star — top-right */}
+      <img
+      src="/icons/star-cross.svg"
+        className="hidden lg:block"
+        style={{
+          position: "absolute",
+          top: "50px",
+          right: "5.5%",
+          opacity: 0.2,
+          animation: "floatA 9s ease-in-out infinite",
+        }}
+        width="72"
+        height="72"
+        alt="star"
+      />
+
+      {/* Concentric rings — left */}
+      <img
+      src="/icons/rings.svg"
+        className="hidden xl:block"
+        style={{
+          position: "absolute",
+          top: "35%",
+          left: "-46px",
+          opacity: 0.19,
+          animation: "floatA 13s ease-in-out infinite reverse",
+        }}
+        width="150"
+        height="150"
+        alt="ring"
+      />
+
+      {/* Diamond — bottom-left */}
+      <img
+        src="/icons/diamond.svg"
+        className="hidden lg:block"
+        style={{
+          position: "absolute",
+          bottom: "72px",
+          left: "5%",
+          opacity: 0.08,
+          animation: "floatB 10s ease-in-out infinite",
+        }}
+        width="78"
+        height="78"
+        alt="diamond"
+      />
+
+      {/* Dot cluster — right */}
+      <img
+        src="/icons/dots.svg"
+        className="hidden xl:block"
+        style={{ position: "absolute", top: "20%", right: "1%", opacity: 0.12 }}
+        width="68"
+        height="112"
+        alt="dots"
+      />
+
+      {/* Plus — bottom-right */}
+
+      <img
+        src="/icons/plus-accent.svg"
+        className="hidden lg:block"
+        style={{
+          position: "absolute",
+          bottom: "16%",
+          right: "8%",
+          opacity: 0.08,
+          animation: "floatB 8s ease-in-out infinite 1s",
+        }}
+        width="32"
+        height="32"
+        alt="plus"
+      />
+    </div>
+  );
+}
+
+// ─── Pricing Card ─────────────────────────────────────────────────────────────
+
+function PricingCard({ plan, index, visible }) {
+  const [hov, setHov] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        borderRadius: "20px",
+        overflow: "hidden",
+        position: "relative",
+        border: `1px solid ${plan.highlight ? "rgba(56,189,248,0.40)" : hov ? "rgba(56,189,248,0.22)" : "rgba(255,255,255,0.07)"}`,
+        background: plan.highlight
+          ? "rgba(56,189,248,0.07)"
+          : hov
+            ? "rgba(255,255,255,0.03)"
+            : "rgba(255,255,255,0.02)",
+        padding: "clamp(24px,4%,32px)",
+        display: "flex",
+        flexDirection: "column",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity 0.65s ease ${0.2 + index * 0.1}s, transform 0.4s ease ${0.2 + index * 0.1}s, border-color 0.3s, background 0.3s`,
+        boxShadow: plan.highlight ? "0 0 60px rgba(56,189,248,0.10)" : "none",
+      }}
+    >
+      {/* Top shimmer */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: "18px",
+          right: "18px",
+          height: "1px",
+          background: plan.highlight
+            ? "linear-gradient(90deg,transparent,rgba(56,189,248,0.60),transparent)"
+            : "linear-gradient(90deg,transparent,rgba(56,189,248,0.22),transparent)",
+        }}
+      />
+
+      {/* Popular badge */}
+      {plan.highlight && (
+        <div
+          style={{
+            position: "absolute",
+            top: "16px",
+            right: "16px",
+            padding: "4px 12px",
+            borderRadius: "100px",
+            background: "linear-gradient(135deg,#38bdf8 0%,#0ea5e9 100%)",
+            fontFamily: "var(--font-body)",
+            fontSize: "9px",
+            letterSpacing: "0.10em",
+            textTransform: "uppercase",
+            color: "#fff",
+          }}
+        >
+          Popular
+        </div>
+      )}
+
+      <p
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize: "10px",
+          letterSpacing: "0.22em",
+          textTransform: "uppercase",
+          color: plan.highlight ? "#38bdf8" : "rgba(255,255,255,0.64)",
+          margin: "0 0 10px 0",
+        }}
+      >
+        {plan.name}
+      </p>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          gap: "4px",
+          marginBottom: "6px",
+        }}
+      >
+        <span
+          style={{
+            fontSize: "clamp(32px,3vw,46px)",
+            fontWeight: 600,
+            background: plan.highlight
+              ? "linear-gradient(135deg,#38bdf8 0%,#0ea5e9 100%)"
+              : "linear-gradient(135deg,rgba(255,255,255,0.85) 0%,rgba(255,255,255,0.55) 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          {plan.price}
+        </span>
+        <span
+          style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "11px",
+            color: "rgba(255,255,255,0.80)",
+            letterSpacing: "0.06em",
+          }}
+        >
+          {plan.period}
+        </span>
+      </div>
+
+      <p
+        style={{
+          fontSize: "13px",
+          fontWeight: 400,
+          color: "rgba(255,255,255,0.80)",
+          letterSpacing: "0.04em",
+          margin: "0 0 22px 0",
+        }}
+      >
+        {plan.tagline}
+      </p>
+
+      <div
+        style={{
+          height: "1px",
+          marginBottom: "22px",
+          background:
+            "linear-gradient(90deg,rgba(56,189,248,0.25),rgba(14,165,233,0.10),transparent)",
+        }}
+      />
+
+      {/* Features */}
+      <ul
+        style={{
+          listStyle: "none",
+          margin: "0 0 28px 0",
+          padding: 0,
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          flex: 1,
+        }}
+      >
+        {plan.features.map((f) => (
+          <li
+            key={f}
+            style={{ display: "flex", alignItems: "center", gap: "10px" }}
+          >
+            <Check size={12} color={plan.highlight ? "#38bdf8" : "rgba(56,189,248,0.55)"}/>
+            <span
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "11px",
+                color: "rgba(255,255,255,0.80)",
+                letterSpacing: "0.03em",
+              }} 
+            >
+              {f}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA */}
+      <a
+        href="#contact"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "8px",
+          padding: "13px 24px",
+          borderRadius: "100px",
+          textDecoration: "none",
+          background: plan.highlight
+            ? "linear-gradient(135deg,#38bdf8 0%,#0ea5e9 100%)"
+            : "rgba(255,255,255,0.04)",
+          border: plan.highlight
+            ? "none"
+            : `1px solid ${hov ? "rgba(56,189,248,0.35)" : "rgba(255,255,255,0.10)"}`,
+          color: plan.highlight
+            ? "#fff"
+            : hov
+              ? "#fff"
+              : "rgba(255,255,255,0.60)",
+          fontSize: "12px",
+          fontWeight: 400,
+          letterSpacing: "0.10em",
+          textTransform: "uppercase",
+          boxShadow: plan.highlight
+            ? "0 4px 22px rgba(56,189,248,0.28)"
+            : "none",
+          transition: "all 0.25s",
+        }}
+        onMouseEnter={(e) => {
+          if (plan.highlight) {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow =
+              "0 8px 30px rgba(56,189,248,0.42)";
+          }
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0)";
+          if (plan.highlight)
+            e.currentTarget.style.boxShadow =
+              "0 4px 22px rgba(56,189,248,0.28)";
+        }}
+      >
+        {plan.cta}
+     <HiArrowSmallRight size={16}/>
+      </a>
+    </div>
+  );
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
+export default function PricingSection() {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.06 },
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={ref}
+      id="services-process"
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background: "var(--section-bg)",
+      }}
+    >
+      <FloatingShapes />
+
+      <div
+        style={{ position: "relative", maxWidth: "1140px", margin: "0 auto" }}
+      >
+
+        {/* ── Pricing section ── */}
+        <div id="pricing">
+          <div
+            style={{
+              textAlign: "center",
+              marginBottom: "clamp(40px,5vw,60px)",
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(20px)",
+              transition: "all 0.7s ease 0.25s",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "11px",
+                letterSpacing: "0.38em",
+                textTransform: "uppercase",
+                color: "#38bdf8",
+                margin: "0 0 10px 0",
+              }}
+            >
+              // pricing
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(30px,4vw,48px)",
+                fontWeight: 400,
+                color: "#fff",
+                margin: "0 0 14px 0",
+                lineHeight: 1.15,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Clear,{" "}
+              <span
+                style={{
+                  background: "linear-gradient(135deg,#38bdf8 0%,#0ea5e9 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Transparent
+              </span>{" "}
+              Pricing
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "13px",
+                color: "rgba(255,255,255,0.80)",
+                maxWidth: "380px",
+                margin: "0 auto",
+                lineHeight: 1.8,
+                letterSpacing: "0.02em",
+              }}
+            >
+              No hidden fees. Every project starts with a written quote you
+              approve before work begins.
+            </p>
+          </div>
+
+          {/* Pricing grid */}
+          <div
+            className="sp-price-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gap: "12px",
+              marginBottom: "clamp(48px,6vw,72px)",
+            }}
+          >
+            {PLANS.map((plan, i) => (
+              <PricingCard key={i} plan={plan} index={i} visible={visible} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @media(min-width:768px){
+          .sp-steps-grid{ grid-template-columns:1fr 1fr !important; }
+          .sp-price-grid{ grid-template-columns:repeat(3,1fr) !important; }
+        }
+        @keyframes floatA{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(4deg)}}
+        @keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(-5deg)}}
+        @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+      `}</style>
+    </section>
+  );
+}

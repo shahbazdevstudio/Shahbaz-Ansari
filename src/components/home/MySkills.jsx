@@ -1,0 +1,612 @@
+import { label } from "framer-motion/client";
+import { useEffect, useRef, useState } from "react";
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaBootstrap,
+  FaReact,
+  FaNodeJs,
+} from "react-icons/fa";
+import { HiArrowSmallRight } from "react-icons/hi2";
+import {
+  SiTailwindcss,
+  SiExpress,
+  SiMongodb,
+  SiNextdotjs,
+} from "react-icons/si";
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+const skills = [
+  { name: "HTML", icon: <FaHtml5 />, level: 90, label: "Strong Foundation" },
+  { name: "CSS", icon: <FaCss3Alt />, level: 75, label: "Responsive Styling" },
+  {
+    name: "JavaScript",
+    icon: <FaJs />,
+    level: 70,
+    label: "Interactive Development",
+  },
+  {
+    name: "Bootstrap",
+    icon: <FaBootstrap />,
+    level: 85,
+    label: "Responsive UI",
+  },
+  { name: "React", icon: <FaReact />, level: 80, label: "Modern Frontend" },
+  { name: "Tailwind", icon: <SiTailwindcss />, level: 80, label: "Custom UI" },
+  {
+    name: "Node.js",
+    icon: <FaNodeJs />,
+    level: 75,
+    label: "Backend Development",
+  },
+  {
+    name: "Express.js",
+    icon: <SiExpress />,
+    level: 85,
+    label: "API Development",
+  },
+  {
+    name: "MongoDB",
+    icon: <SiMongodb />,
+    level: 75,
+    label: "Database Management",
+  },
+  {
+    name: "Next.js",
+    icon: <SiNextdotjs />,
+    level: 70,
+    label: "Modern Web Development",
+  },
+];
+
+const stats = [
+  { value: "50+", label: "Projects Done" },
+  { value: "5+", label: "Years Experience" },
+  { value: "100%", label: "Client Satisfaction" },
+  { value: "24/7", label: "Support Available" },
+];
+
+// ─── Floating Decorative Shapes ───────────────────────────────────────────────
+
+function FloatingShapes() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+      aria-hidden="true"
+    >
+      {/* ── Ambient orbs ── */}
+      {/* Large indigo orb — top-left */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-0px",
+          left: "-10px",
+          width: "550px",
+          height: "550px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(14,165,233,0.11) 0%, transparent 60%)",
+          filter: "blur(55px)",
+        }}
+      />
+      {/* Blue orb — bottom-right */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-20px",
+          right: "-10px",
+          width: "480px",
+          height: "480px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(56,189,248,0.11) 0%, transparent 60%)",
+          filter: "blur(50px)",
+        }}
+      />
+      {/* Small warm accent orb — centre-right */}
+      <div
+        style={{
+          position: "absolute",
+          top: "45%",
+          right: "18%",
+          width: "220px",
+          height: "220px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(14,165,233,0.1) 0%, transparent 70%)",
+          filter: "blur(40px)",
+        }}
+      />
+
+      {/* ── Grid overlay ── */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `
+          linear-gradient(rgba(56,189,248,0.022) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(56,189,248,0.022) 1px, transparent 1px)
+        `,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* ── Gradient-filled hexagon — top-right (unique to Skills) ── */}
+      <img
+        src="/icons/geometric-shape.svg"
+        className="hidden lg:block absolute opacity-[0.13]"
+        style={{ top: "30px", right: "5%" }}
+      />
+      {/* ── Gradient diamond — bottom-left ── */}
+      <img
+        src="/icons/diamond.svg"
+        className="hidden lg:block absolute"
+        style={{ bottom: "60px", left: "3.5%", opacity: 0.15 }}
+      />
+
+      {/* ── Glowing circle ring — left mid ── */}
+      <img
+        src="/icons/dashed-circle.svg"
+        className="hidden xl:block absolute opacity-10"
+        style={{ top: "38%", left: "-36px" }}
+        alt="ring"
+      />
+    </div>
+  );
+}
+
+// ─── Skill Card ───────────────────────────────────────────────────────────────
+
+function SkillCard({ skill, index, sectionVisible }) {
+  const barRef = useRef(null);
+  const [barFilled, setBarFilled] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    if (!sectionVisible) return;
+    const timer = setTimeout(() => setBarFilled(true), 200 + index * 60);
+    return () => clearTimeout(timer);
+  }, [sectionVisible, index]);
+
+  const cardVisible = sectionVisible;
+
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        opacity: cardVisible ? 1 : 0,
+        transform: cardVisible
+          ? hovered
+            ? "translateY(-4px)"
+            : "translateY(0)"
+          : "translateY(20px)",
+        transition: `opacity 0.55s ease ${0.1 + index * 0.05}s, transform 0.3s ease`,
+        borderRadius: "16px",
+        border: `1px solid ${hovered ? "rgba(56,189,248,0.28)" : "rgba(255,255,255,0.06)"}`,
+        background: hovered
+          ? "rgba(56,189,248,0.05)"
+          : "rgba(255,255,255,0.025)",
+        padding: "16px",
+        cursor: "default",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Hover inner glow */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse at top left, rgba(56,189,248,0.06) 0%, transparent 60%)",
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 0.4s ease",
+          borderRadius: "inherit",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "14px",
+          position: "relative",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          {/* Icon box */}
+          <div
+            style={{
+              width: "44px",
+              height: "44px",
+              borderRadius: "12px",
+              background: "rgba(56,189,248,0.08)",
+              border: "1px solid rgba(56,189,248,0.18)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "20px",
+              color: "#38bdf8",
+              transition: "background 0.3s, border-color 0.3s",
+              ...(hovered
+                ? {
+                    background: "rgba(56,189,248,0.14)",
+                    borderColor: "rgba(56,189,248,0.35)",
+                  }
+                : {}),
+            }}
+          >
+            {skill.icon}
+          </div>
+          <div>
+            <p
+              style={{
+                fontSize: "14px",
+                fontWeight: 500,
+                letterSpacing: "0.07em",
+                textTransform: "uppercase",
+                color: "#fff",
+                margin: "0 0 2px 0",
+              }}
+            >
+              {skill.name}
+            </p>
+            <p
+              style={{
+                fontSize: "10px",
+                color: "rgba(255,255,255,0.80)",
+                margin: 0,
+              }}
+            >
+              {skill.label}
+            </p>
+          </div>
+        </div>
+        <span
+          style={{
+            fontSize: "12px",
+            fontWeight: 600,
+            color: hovered ? "#38bdf8" : "rgba(255,255,255,0.64)",
+            transition: "color 0.3s",
+          }}
+        >
+          {skill.level}%
+        </span>
+      </div>
+
+      {/* Progress bar */}
+      <div
+        style={{
+          height: "3px",
+          borderRadius: "100px",
+          background: "rgba(255,255,255,0.06)",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          ref={barRef}
+          style={{
+            height: "100%",
+            borderRadius: "100px",
+            background: "linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%)",
+            width: barFilled ? `${skill.level}%` : "0%",
+            transition: "width 1.4s cubic-bezier(0.25, 1, 0.5, 1)",
+            boxShadow: hovered ? "0 0 8px rgba(56,189,248,0.5)" : "none",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
+
+export default function MySkills() {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.08 },
+    );
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <section
+      id="skills"
+      ref={ref}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        background: "var(--section-bg)",
+        padding: "clamp(80px, 10vw, 130px) clamp(20px, 5%, 60px)",
+      }}
+    >
+      <FloatingShapes />
+
+      <div
+        style={{ position: "relative", maxWidth: "1140px", margin: "0 auto" }}
+      >
+        {/* ── Section Header ── */}
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "clamp(48px, 6vw, 72px)",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.7s ease 0.05s",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "11px",
+              letterSpacing: "0.38em",
+              textTransform: "uppercase",
+              color: "#38bdf8",
+              margin: "0 0 10px 0",
+            }}
+          >
+            // my expertise
+          </p>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(32px, 4.5vw, 52px)",
+              fontWeight: 400,
+              color: "#fff",
+              margin: "0 0 16px 0",
+              lineHeight: 1.15,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Skills &{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Experience
+            </span>
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "13px",
+              color: "rgba(255,255,255,0.80)",
+              maxWidth: "440px",
+              margin: "0 auto",
+              lineHeight: 1.8,
+              letterSpacing: "0.02em",
+            }}
+          >
+            A practical set of modern technologies used to build responsive
+            websites and reliable web applications.
+          </p>
+        </div>
+
+        {/* ── Two Column Grid ── */}
+        <div
+          className="skills-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: "clamp(32px, 5vw, 64px)",
+            alignItems: "start",
+          }}
+        >
+          {/* LEFT — Skill Cards */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "10px",
+            }}
+          >
+            {skills.map((skill, i) => (
+              <SkillCard
+                key={skill.name}
+                skill={skill}
+                index={i}
+                sectionVisible={visible}
+              />
+            ))}
+          </div>
+
+          {/* RIGHT — Info Panel */}
+          <div
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateX(0)" : "translateX(28px)",
+              transition: "all 0.8s ease 0.25s",
+            }}
+          >
+            {/* Panel card */}
+            <div
+              style={{
+                borderRadius: "20px",
+                border: "1px solid rgba(255,255,255,0.07)",
+                background: "rgba(255,255,255,0.02)",
+                padding: "clamp(24px, 4vw, 36px)",
+                backdropFilter: "blur(12px)",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              {/* Inner gradient accent */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  width: "260px",
+                  height: "260px",
+                  background:
+                    "radial-gradient(circle at top right, rgba(56,189,248,0.07) 0%, transparent 65%)",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Heading */}
+              <h3
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(22px, 2.8vw, 34px)",
+                  fontWeight: 400,
+                  color: "#fff",
+                  margin: "0 0 16px 0",
+                  lineHeight: 1.2,
+                  position: "relative",
+                }}
+              >
+                From Frontend to
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  {" "}
+                  Backend
+                </span>
+              </h3>
+
+              <p
+                className="text-sm sm:text-[15px]"
+                style={{
+                  fontWeight: 400,
+                  lineHeight: 1.9,
+                  color: "rgba(255,255,255,0.80)",
+                  letterSpacing: "0.025em",
+                  margin: "0 0 10px 0",
+                  position: "relative",
+                }}
+              >
+                I use modern web technologies to build responsive and functional
+                digital products. My skills cover frontend development, backend
+                development, APIs, and databases, allowing me to work on
+                different parts of a web project.
+              </p>
+
+              <p
+                className="text-sm sm:text-[15px]"
+                style={{
+                  fontWeight: 400,
+                  lineHeight: 1.9,
+                  color: "rgba(255,255,255,0.80)",
+                  letterSpacing: "0.025em",
+                  margin: "0 0 32px 0",
+                  position: "relative",
+                }}
+              >
+                I focus on writing clean, maintainable code and creating
+                interfaces that work smoothly across desktop, tablet, and mobile
+                devices. The goal is always to build something reliable, easy to
+                use, and ready for future improvements.
+              </p>
+
+              {/* CTA */}
+              <a
+                href="#contact"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  width: "100%",
+                  padding: "14px 24px",
+                  borderRadius: "100px",
+                  background:
+                    "linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%)",
+                  color: "#fff",
+                  fontSize: "12px",
+                  fontWeight: 500,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  boxShadow: "0 4px 24px rgba(56,189,248,0.28)",
+                  transition: "transform 0.25s ease, box-shadow 0.25s ease",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 32px rgba(56,189,248,0.42)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 24px rgba(56,189,248,0.28)";
+                }}
+              >
+                Hire Me
+                <HiArrowSmallRight size={18} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Stat Box ─────────────────────────────────────────────────────────────────
+
+function StatBox({ stat, index, visible }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        borderRadius: "14px",
+        border: `1px solid ${hovered ? "rgba(56,189,248,0.30)" : "rgba(56,189,248,0.14)"}`,
+        background: hovered ? "rgba(56,189,248,0.08)" : "rgba(56,189,248,0.04)",
+        padding: "18px 14px",
+        textAlign: "center",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(12px)",
+        transition: `opacity 0.55s ease ${0.4 + index * 0.07}s, transform 0.3s ease, border-color 0.3s, background 0.3s`,
+        cursor: "default",
+      }}
+    >
+      <p
+        style={{
+          fontSize: "clamp(22px, 2.5vw, 30px)",
+          fontWeight: 600,
+          background: "linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          margin: "0 0 4px 0",
+        }}
+      >
+        {stat.value}
+      </p>
+      <p
+        style={{
+          fontSize: "10px",
+          color: "rgba(255,255,255,0.80)",
+          margin: 0,
+          letterSpacing: "0.04em",
+        }}
+      >
+        {stat.label}
+      </p>
+    </div>
+  );
+}
