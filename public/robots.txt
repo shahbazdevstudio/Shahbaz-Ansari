@@ -1,0 +1,7 @@
+# robots.txt for https://shahbazansari.pro
+
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://www.shahbazansari.pro/sitemap.xml
