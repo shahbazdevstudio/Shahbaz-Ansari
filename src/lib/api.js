@@ -1,5 +1,5 @@
-// Base URL of the backend. In production set VITE_API_URL in Vercel (e.g. https://your-api.vercel.app)
-export const API_URL = (import.meta.env.VITE_API_URL || "https://shahbaz-ansari-backend-fuvacawf8.vercel.app").replace(/\/$/, "");
+// Base URL of the backend. In production set VITE_API_URL in Vercel (e.g. https://shahbaz-ansari-backend.vercel.app)
+export const API_URL = (import.meta.env.VITE_API_URL || "https://shahbaz-ansari-backend.vercel.app").replace(/\/$/, "");
 
 const cache = new Map();
 
